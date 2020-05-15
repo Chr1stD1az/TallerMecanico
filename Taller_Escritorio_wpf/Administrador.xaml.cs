@@ -81,7 +81,8 @@ namespace Taller_Escritorio_wpf
         {
             InitializeComponent();
             // CargarComboBoxEmpleado();
-            CargarComboBoxCliente();
+            // CargarComboBoxCliente();
+            CargarComboBoxProveedor();
         }
         /// <summary>
         /// Método que Carga de informacion los cmb de la vista
@@ -103,7 +104,7 @@ namespace Taller_Escritorio_wpf
             Cmb_cargo_E.SelectedValuePath = "id_cargo";
 
         }*/
-
+        /*
         public void CargarComboBoxCliente()
         {
             //////////////LISTAR TIPO CLIENTE//////////////////
@@ -112,14 +113,22 @@ namespace Taller_Escritorio_wpf
             Cmb_Tipo_Cliente.DisplayMemberPath = "descr_tipo_cl";
             Cmb_Tipo_Cliente.SelectedValuePath = "id_tipo_cliente";
 
-            ///////////////LISTAR CARGO/////////////////
+            ///////////////LISTAR COMUNA/////////////////
             Comuna_Negocio comunaN = new Comuna_Negocio();
             Cmb_comuna_C.ItemsSource = comunaN.ListarComuna();
             Cmb_comuna_C.DisplayMemberPath = "desc_comuna";
             Cmb_comuna_C.SelectedValuePath = "id_comuna";
+        }*/
+        public void CargarComboBoxProveedor()
+        {
 
-
+            ///////////////LISTAR COMUNA/////////////////
+            Comuna_Negocio comunaN = new Comuna_Negocio();
+            Cmb_comuna_P.ItemsSource = comunaN.ListarComuna();
+            Cmb_comuna_P.DisplayMemberPath = "desc_comuna";
+            Cmb_comuna_P.SelectedValuePath = "id_comuna";
         }
+
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -253,6 +262,16 @@ namespace Taller_Escritorio_wpf
         }
 
         private void btn_Eliminar_C_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_agregar_P_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Eliminar_P_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -1,0 +1,10 @@
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\bin\Debug\Taller_Datos.dll.config
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\bin\Debug\Taller_Datos.dll
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\bin\Debug\Taller_Datos.pdb
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\obj\Debug\Taller_Datos.csprojAssemblyReference.cache
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\obj\Debug\Taller_Datos.csproj.CoreCompileInputs.cache
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\obj\Debug\Taller_Datos.csproj.CopyComplete
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\obj\Debug\Taller_Datos.dll
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\obj\Debug\Taller_Datos.pdb
+C:\Users\Diaz-Olivares\source\repos\Taller_Escritorio_wpf\Taller_Datos\bin\Debug\Oracle.DataAccess.dll

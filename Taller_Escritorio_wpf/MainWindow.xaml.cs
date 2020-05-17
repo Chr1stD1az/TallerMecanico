@@ -64,9 +64,6 @@ namespace Taller_Escritorio_wpf
 
             }
 
-
-
-
         }
 
     }

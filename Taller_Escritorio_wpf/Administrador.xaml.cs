@@ -42,7 +42,9 @@ namespace Taller_Escritorio_wpf
             get
             {
                 return this._PanelSeleccionado == PanelAdministrador.EMPLEADO;
+                
             }
+           
         }
 
         public PanelAdministrador PanelSeleccionado
@@ -57,6 +59,7 @@ namespace Taller_Escritorio_wpf
                 OnPropertyChanged("PanelEmpleadoActivo");
                 OnPropertyChanged("PanelClienteActivo");
                 OnPropertyChanged("PanelProveedorActivo");
+                limpiarEmp();
             }
         }
 
@@ -194,19 +197,42 @@ namespace Taller_Escritorio_wpf
         private void btn_Agregar_E_Click(object sender, RoutedEventArgs e)
         {
             Empleado_Negocio empN = new Empleado_Negocio();
-            bool resultado = false;
-            try
+            if (Txt_Rut_Empleado.Text != "" && Txt_Dv_Empleado.Text != "" && Txt_P_Nombre_E.Text != "" && Txt_S_Nombre_E.Text != "" && Txt_P_Apellido_E.Text != "" &&
+               Txt_S_Apellido_E.Text != "" && Txt_Direccion_E.Text != "" && Txt_numeracion_E.Text != "" && Txt_Fono_E.Text != "" && Txt_Correo_E.Text != "" &&
+               Txt_NombreU_E.Text != "" && Txt_Contrasena_E.Text != "" && Cmb_comuna_E.Text != "" && Txt_id_taller_E.Text != "" && Cmb_cargo_E.Text != "")
             {
-                resultado = empN.crearEmpleado(Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
-                                               Txt_Direccion_E.Text, Txt_numeracion_E.Text, Txt_Depto_E.Text,
-                                               Txt_Fono_E.Text,Txt_Correo_E.Text,Txt_NombreU_E.Text , Txt_Contrasena_E.Text, 
-                                               Cmb_comuna_E.SelectedValue.ToString(), Txt_id_taller_E.Text, Cmb_cargo_E.SelectedValue.ToString());
-            }
-            catch (Exception)
-            {
+                bool resultado = false;
+                try
+                {
+                    resultado = empN.crearEmpleado(Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
+                                                   Txt_Direccion_E.Text, Txt_numeracion_E.Text, Txt_Depto_E.Text,
+                                                   Txt_Fono_E.Text, Txt_Correo_E.Text, Txt_NombreU_E.Text, Txt_Contrasena_E.Text,
+                                                   Cmb_comuna_E.SelectedValue.ToString(), Txt_id_taller_E.Text, Cmb_cargo_E.SelectedValue.ToString());
+                    if (resultado)
+                    {
+                        MessageBox.Show("Cliente creado");
+                        limpiarEmp();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Empleado no pudo ser creado");
+                    }
+                }
+                catch (Exception)
+                {
 
-                throw;
+                    MessageBox.Show("Empleado no pudo ser creado");
+                    throw;
+                    
+                }
+
             }
+            else
+            {
+                MessageBox.Show("Debe completar todos los campos");
+
+            }
+            
 
         }
 
@@ -214,10 +240,29 @@ namespace Taller_Escritorio_wpf
         private void btn_Eliminar_E_Click(object sender, RoutedEventArgs e)
         {
             Empleado_Negocio empN = new Empleado_Negocio();
+            if (Txt_Rut_Empleado.Text !="")
+            {
+                bool retorno = false;
+
+                retorno = empN.EliminarEmp(int.Parse(Txt_id_E.Text));
+                if (retorno)
+                {
+
+                    MessageBox.Show("Cliente Eliminado");
+                    limpiarEmp();
+                }
+                else
+                {
+                    MessageBox.Show("Cliente no pudo ser Eliminado");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar RUT para Eliminar cliente");
+
+            }
+
             
-            bool retorno = false;
-            
-            retorno = empN.EliminarEmp(int.Parse(Txt_id_E.Text));
 
         }
 
@@ -225,35 +270,53 @@ namespace Taller_Escritorio_wpf
         {
             Empleado_Negocio empN = new Empleado_Negocio();
             DataTable resp = new DataTable();
-            try
+            if (Txt_Rut_Empleado.Text != "")
             {
-                resp = empN.ListarEmpleado(Txt_Rut_Empleado.Text);
-
-                foreach (DataRow item in resp.Rows)
+                try
                 {
-                    Txt_id_E.Text = item["ID_EMPLEADO"].ToString();
-                    Txt_Dv_Empleado.Text = item["DV_EMPLEADO"].ToString();
-                    Txt_P_Nombre_E.Text = item["p_nombre_empleado"].ToString();
-                    Txt_S_Nombre_E.Text = item["s_nombre_empleado"].ToString();
-                    Txt_P_Apellido_E.Text = item["p_apellido_empleado"].ToString();
-                    Txt_S_Apellido_E.Text = item["s_apellido_empleado"].ToString();
-                    Txt_Direccion_E.Text = item["direccion_empleado"].ToString();
-                    Txt_numeracion_E.Text = item["numeracion_empleado"].ToString();
-                    Txt_Fono_E.Text = item["fono_empleado"].ToString();
-                    Txt_Depto_E.Text = item["depto_empleado"].ToString();
-                    Txt_Correo_E.Text = item["correo_empleado"].ToString();
-                    Txt_NombreU_E.Text = item["nombre_usu_empleado"].ToString();
-                    Txt_Contrasena_E.Text = item["contrasena_empleado"].ToString();
-                    Cmb_comuna_E.SelectedValue = item["id_comuna"].ToString();
-                    Cmb_cargo_E.SelectedValue = item["id_cargo"].ToString();
-                    Txt_id_taller_E.Text = item["id_taller"].ToString();
+                    resp = empN.ListarEmpleado(Txt_Rut_Empleado.Text);
+                    if (resp.Rows.Count>0)
+                    {
+                        foreach (DataRow item in resp.Rows)
+                        {
+                            Txt_id_E.Text = item["ID_EMPLEADO"].ToString();
+                            Txt_Dv_Empleado.Text = item["DV_EMPLEADO"].ToString();
+                            Txt_P_Nombre_E.Text = item["p_nombre_empleado"].ToString();
+                            Txt_S_Nombre_E.Text = item["s_nombre_empleado"].ToString();
+                            Txt_P_Apellido_E.Text = item["p_apellido_empleado"].ToString();
+                            Txt_S_Apellido_E.Text = item["s_apellido_empleado"].ToString();
+                            Txt_Direccion_E.Text = item["direccion_empleado"].ToString();
+                            Txt_numeracion_E.Text = item["numeracion_empleado"].ToString();
+                            Txt_Fono_E.Text = item["fono_empleado"].ToString();
+                            Txt_Depto_E.Text = item["depto_empleado"].ToString();
+                            Txt_Correo_E.Text = item["correo_empleado"].ToString();
+                            Txt_NombreU_E.Text = item["nombre_usu_empleado"].ToString();
+                            Txt_Contrasena_E.Text = item["contrasena_empleado"].ToString();
+                            Cmb_comuna_E.SelectedValue = item["id_comuna"].ToString();
+                            Cmb_cargo_E.SelectedValue = item["id_cargo"].ToString();
+                            Txt_id_taller_E.Text = item["id_taller"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Rut invalido");
+                        limpiarEmp();
+                    }
+
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Busqueda no arrojó resultados");
+                    throw ex;
                 }
             }
-            catch (Exception ex)
+            else
             {
-
-                throw ex;
+                MessageBox.Show("Debe ingresar un Rut para la busqueda");
             }
+
+
         }
 
         private void btn_Agregar_C_Click(object sender, RoutedEventArgs e)

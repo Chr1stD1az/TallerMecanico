@@ -80,15 +80,15 @@ namespace Taller_Escritorio_wpf
         public  Administrador()
         {
             InitializeComponent();
-            // CargarComboBoxEmpleado();
-            // CargarComboBoxCliente();
+            CargarComboBoxEmpleado();
+            CargarComboBoxCliente();
             CargarComboBoxProveedor();
         }
         /// <summary>
         /// Método que Carga de informacion los cmb de la vista
         /// </summary>
         /// 
-        /*
+        
         public void CargarComboBoxEmpleado()
         {
             //////////////LISTAR COMUNA//////////////////
@@ -103,8 +103,8 @@ namespace Taller_Escritorio_wpf
             Cmb_cargo_E.DisplayMemberPath = "desc_cargo";
             Cmb_cargo_E.SelectedValuePath = "id_cargo";
 
-        }*/
-        /*
+        }
+        
         public void CargarComboBoxCliente()
         {
             //////////////LISTAR TIPO CLIENTE//////////////////
@@ -118,7 +118,7 @@ namespace Taller_Escritorio_wpf
             Cmb_comuna_C.ItemsSource = comunaN.ListarComuna();
             Cmb_comuna_C.DisplayMemberPath = "desc_comuna";
             Cmb_comuna_C.SelectedValuePath = "id_comuna";
-        }*/
+        }
         public void CargarComboBoxProveedor()
         {
 
@@ -169,7 +169,7 @@ namespace Taller_Escritorio_wpf
         {
 
         }
-        /*
+        
         private void limpiarEmp()
         {
             Txt_id_E.Text = string.Empty;
@@ -254,7 +254,7 @@ namespace Taller_Escritorio_wpf
 
                 throw ex;
             }
-        }*/
+        }
 
         private void btn_Agregar_C_Click(object sender, RoutedEventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Taller_Negocio;
 
 namespace Taller_Escritorio_wpf
 {
@@ -34,31 +36,37 @@ namespace Taller_Escritorio_wpf
             Application.Current.Shutdown();
         }
 
+        
         private void BTN_iniciar_Click(object sender, RoutedEventArgs e)
-        {/*
-            var usuario = txt_usuario.Text;
-            //    var contrasenia = txt_contraseña.GetValue;
-            var contrasenia = 9;
-            OracleComand exec = new OracleComand();
-            try
-            {
-                var parametros = new Dictionary<string, string>();
-                DataTable dataTable = new DataTable();
-                parametros.Add("USUARIO", usuario);
-                parametros.Add("CLAVE", contrasenia.ToString());
-                exec.ExecStoredProcedure("SP_CREARCLIENTE", parametros);
-            }
-            catch (Exception ex)
-            {
+        {
+            Empleado_Negocio empN = new Empleado_Negocio();
+            Compartido_Negocio compartido = new Compartido_Negocio();
 
-                throw;
-            }
-               
-            */
+            var item = empN.LoginUsuario(txt_usuario.Text, compartido.Encriptar(txt_contraseña.Password.ToString()));
+            //regEnt = reg.LoginUsuario(usu, passw);
 
-            this.Hide();
-            MenuPrincipal ventana = new MenuPrincipal();
-            ventana.ShowDialog();
+            if (item.Rows.Count > 0)
+            {
+                foreach (DataRow resp in item.Rows)
+                {
+                    Application.Current.Properties["NombreUsuario"] = resp["p_nombre_empleado"].ToString() + " " + resp["p_apellido_empleado"].ToString();
+                }
+
+                this.Hide();
+                MenuPrincipal ventana = new MenuPrincipal();
+                ventana.ShowDialog();
+            }
+            else
+            {
+                txt_contraseña.Password = "";
+                txt_usuario.Text = "";
+                MessageBox.Show("Usuario o Contraseña invalida");
+
+            }
+
+
+
+
         }
 
     }

@@ -47,7 +47,7 @@
             <Button x:Name="Btn_Empleado" Content="EMPLEADO" Click="Btn_Empleado_Click" HorizontalAlignment="Left" Height="105" Margin="5,261,0,0" VerticalAlignment="Top" Width="233" Background="#FF8EC590" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
             <Button x:Name="Btn_Cliente" Click="Btn_Cliente_Click" Content="CLIENTES" HorizontalAlignment="Left" Height="105" Margin="5,385,0,0" VerticalAlignment="Top" Width="233" Background="#FF8EC590" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
             <Button x:Name="Btn_Proveedor" Click="Btn_Proveedor_Click" Content="PROVEEDOR" HorizontalAlignment="Left" Height="105" Margin="5,509,0,0" VerticalAlignment="Top" Width="233" Background="#FF8EC590" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
- <!-- ELIMINAR PARA UTILIZAR
+ <!-- ELIMINAR PARA UTILIZAR -->
             <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Label x:Name="label2" Content="EMPLEADO" Margin="175,0,276.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
 
@@ -106,13 +106,13 @@
             <StackPanel Height="92" Margin="282,509,458,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
 
             </StackPanel>
- ELMIMINAR--> 
+
 
             <!-- 
             <StackPanel HorizontalAlignment="Left" Height="646" Margin="243,10,0,0" VerticalAlignment="Top" Width="947" Background="#FF5F4C4C" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}">
                 
             </StackPanel>  -->  
-<!-- ELIMINAR PARA USAR            
+<!-- ELIMINAR PARA USAR -->           
             <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Label x:Name="label_C" Content="CLIENTE" Margin="332,0,292.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
             </StackPanel>
@@ -182,7 +182,6 @@
             <StackPanel Height="74" Margin="931,580,27,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Button x:Name="btn_Eliminar_C" Content=" ELIMINAR" Height="58" Margin="0,0,-0.4,0" Background="#FFE44E4E" Foreground="#DDFFFFFF" Click="btn_Eliminar_C_Click"/>
             </StackPanel>
- ELIMINAR -->    
 
             <!-- 
             <StackPanel HorizontalAlignment="Left" Height="646" Margin="243,10,0,0" VerticalAlignment="Top" Width="947" Background="LightGray" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}">

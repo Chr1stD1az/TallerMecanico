@@ -22,6 +22,7 @@ namespace Taller_Escritorio_wpf
         public MenuPrincipal()
         {
             InitializeComponent();
+            lblSaludo.Content = "Bienvenid@ " + Application.Current.Properties["NombreUsuario"].ToString();
         }
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

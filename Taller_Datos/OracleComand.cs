@@ -46,7 +46,6 @@ namespace Taller_Datos
                             _cmd.Parameters.Add(item.Key, item.Value);
                         }
                     }
-
                     var _salida = new OracleParameter();
                     _salida.ParameterName = "SALIDA";
                     _salida.OracleDbType = OracleDbType.RefCursor;
@@ -60,9 +59,7 @@ namespace Taller_Datos
                     _da.Fill(Data);
 
                     con.cerrarConexion();
-
                 }
-
                 return Data;
             }
             catch (Exception ex)

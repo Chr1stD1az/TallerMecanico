@@ -60,6 +60,7 @@ namespace Taller_Escritorio_wpf
                 OnPropertyChanged("PanelClienteActivo");
                 OnPropertyChanged("PanelProveedorActivo");
                 limpiarEmp();
+
             }
         }
 
@@ -188,7 +189,7 @@ namespace Taller_Escritorio_wpf
             Txt_Fono_E.Text = string.Empty;
             Txt_Correo_E.Text = string.Empty;
             Txt_NombreU_E.Text = string.Empty;
-            Txt_Contrasena_E.Text = string.Empty;
+            Txt_Contrasena_E.Password = string.Empty;
             Cmb_comuna_E.SelectedValue = null;
             Txt_id_taller_E.Text = string.Empty;
             Cmb_cargo_E.SelectedValue = null;
@@ -199,19 +200,27 @@ namespace Taller_Escritorio_wpf
             Empleado_Negocio empN = new Empleado_Negocio();
             if (Txt_Rut_Empleado.Text != "" && Txt_Dv_Empleado.Text != "" && Txt_P_Nombre_E.Text != "" && Txt_S_Nombre_E.Text != "" && Txt_P_Apellido_E.Text != "" &&
                Txt_S_Apellido_E.Text != "" && Txt_Direccion_E.Text != "" && Txt_numeracion_E.Text != "" && Txt_Fono_E.Text != "" && Txt_Correo_E.Text != "" &&
-               Txt_NombreU_E.Text != "" && Txt_Contrasena_E.Text != "" && Cmb_comuna_E.Text != "" && Txt_id_taller_E.Text != "" && Cmb_cargo_E.Text != "")
+               Txt_NombreU_E.Text != "" && Txt_Contrasena_E.Password != "" && Cmb_comuna_E.Text != "" && Txt_id_taller_E.Text != "" && Cmb_cargo_E.Text != "")
             {
                 bool resultado = false;
                 try
                 {
-                    resultado = empN.crearEmpleado(Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
+                    resultado = empN.crearEmpleado(Txt_id_E.Text ,Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
                                                    Txt_Direccion_E.Text, Txt_numeracion_E.Text, Txt_Depto_E.Text,
-                                                   Txt_Fono_E.Text, Txt_Correo_E.Text, Txt_NombreU_E.Text, Txt_Contrasena_E.Text,
+                                                   Txt_Fono_E.Text, Txt_Correo_E.Text, Txt_NombreU_E.Text, Txt_Contrasena_E.Password,
                                                    Cmb_comuna_E.SelectedValue.ToString(), Txt_id_taller_E.Text, Cmb_cargo_E.SelectedValue.ToString());
                     if (resultado)
                     {
-                        MessageBox.Show("Cliente creado");
-                        limpiarEmp();
+                        if( Txt_id_E.Text != "")
+                        {
+                            MessageBox.Show("Cliente Modificado");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cliente creado");
+                            limpiarEmp();
+                        }
+
                     }
                     else
                     {
@@ -232,7 +241,6 @@ namespace Taller_Escritorio_wpf
                 MessageBox.Show("Debe completar todos los campos");
 
             }
-            
 
         }
 
@@ -270,6 +278,7 @@ namespace Taller_Escritorio_wpf
         {
             Empleado_Negocio empN = new Empleado_Negocio();
             DataTable resp = new DataTable();
+            Compartido_Negocio comp = new Compartido_Negocio();
             if (Txt_Rut_Empleado.Text != "")
             {
                 try
@@ -291,7 +300,7 @@ namespace Taller_Escritorio_wpf
                             Txt_Depto_E.Text = item["depto_empleado"].ToString();
                             Txt_Correo_E.Text = item["correo_empleado"].ToString();
                             Txt_NombreU_E.Text = item["nombre_usu_empleado"].ToString();
-                            Txt_Contrasena_E.Text = item["contrasena_empleado"].ToString();
+                            Txt_Contrasena_E.Password = comp.DecrytedString(item["contrasena_empleado"].ToString());
                             Cmb_comuna_E.SelectedValue = item["id_comuna"].ToString();
                             Cmb_cargo_E.SelectedValue = item["id_cargo"].ToString();
                             Txt_id_taller_E.Text = item["id_taller"].ToString();
@@ -331,12 +340,44 @@ namespace Taller_Escritorio_wpf
 
         private void btn_agregar_P_Click(object sender, RoutedEventArgs e)
         {
+            Proveedor_Negocio provNeg = new Proveedor_Negocio();
+            bool resultado = false;
+            try
+            {
+                resultado = provNeg.CrearProveedor(Txt_Razon_S_.Text, Txt_Giro.Text, Txt_Rut_Proveedor.Text, Txt_Dv_Proveedor.Text, Txt_Direccion_P.Text, Txt_numeracion_P.Text,
+                                               Txt_Fono_P.Text, Txt_Correo_P.Text, Txt_NombreU_P.Text,
+                                               Txt_Contrasena_P.Text, 
+                                               Cmb_comuna_P.SelectedValue.ToString());
+                if (resultado)
+                {
+                    MessageBox.Show("Proveedor creado");
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Proveedor no pudo ser creado");
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Proveedor no pudo ser creado2");
+                throw;
+
+            }
 
         }
 
         private void btn_Eliminar_P_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btn_MenuP_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MenuPrincipal ventana = new MenuPrincipal();
+            ventana.ShowDialog();
         }
     }
 }

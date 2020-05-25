@@ -1,0 +1,79 @@
+﻿<Window x:Class="Taller_Escritorio_wpf.RecepcionPedido"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Taller_Escritorio_wpf"
+        mc:Ignorable="d"
+        Title="RecepcionPedido" Height="800" Width="1200" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Grid>
+                <materialDesign:ColorZone Mode="Accent" Background="#FF004445">
+                    <StackPanel HorizontalAlignment="Right">
+                        <Button Width="30" Height="30" materialDesign:ShadowAssist.ShadowDepth="Depth3" Padding="0" Click="BotonCerrar_Click" OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" >
+                            <materialDesign:PackIcon Kind="WindowClose"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:ColorZone>
+
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="261*"/>
+                <ColumnDefinition Width="99*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone Mode="Accent" Foreground="Black" OpacityMask="Black" BorderBrush="Black" Background="#FF2C7873" Grid.ColumnSpan="3" Height="100">
+                <TextBlock FontSize="35" VerticalAlignment="Bottom" Margin="30 20 0 30" Foreground="White" FontWeight="Bold" Text="Recepcionar Pedido"/>
+            </materialDesign:ColorZone>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="btn_MenuP_Click" Content="  Menu Principal" Width="226" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16"  Margin="0,10,964,594.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
+            <materialDesign:PackIcon Kind="Home" Height="81" Width="63" Margin="10,10,0,0" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button  x:Name="Btn_pedidos" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="GENERAR PEDIDO" Click="Btn_pedidos_Click" Width="241" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16"  Margin="0,409,949,194.2" />
+            <materialDesign:PackIcon Kind="TruckFast" Height="42" Width="44" Margin="10,436,0,0" RenderTransformOrigin="-0.133,-0.033"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Button  x:Name="Btn_recep_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="Btn_recep_p_Click" Content="       RECEPCIONAR PEDIDO" Width="242" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16"  Margin="0,527,948,78.2" />
+            <materialDesign:PackIcon Kind="BasketFill" Height="61" Width="49" Margin="10,547,0,0"/>
+            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="243" Margin="279,291,0,0" VerticalAlignment="Top" Width="629"/>
+        </Grid>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="298,59.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="id Recep" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="437,119.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="fecha" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="595,119.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Proveedor" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="298,119.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="idPedido" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="783,539.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TOTAL COMPRA" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.591,-0.583"/>
+        <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="298,234.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="ID PRODUCTO" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="23" Margin="437,234.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="CANTIDAD" VerticalAlignment="Top" Width="120"/>
+        <Grid Grid.Row="2">
+            <Button  x:Name="Btn_Busca_Ped" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="33" Height="33"  FontWeight="Bold" Background="#FF6CB9DA" FontSize="16"  Margin="0,111,787,559" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
+            <materialDesign:PackIcon Kind="Search" Height="33" Width="33" Margin="380,111,0,0" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button  x:Name="Btn_AgregarCant" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="24" Height="Auto"  FontWeight="Bold" Background="#FF6CB9DA" FontSize="16"  Margin="0,237,595,441.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
+            <materialDesign:PackIcon Kind="Check" Height="19" Width="24" Margin="581,237,0,0" />
+        </Grid>
+        <StackPanel Height="74" Margin="914,224.2,44,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
+            <Button x:Name="Btn_Confirmar_Rec" Content=" CONFIRMAR" Height="54" Margin="0,0,-0.4,0" Background="#FF5AC1CB" Foreground="#DDFFFFFF" />
+        </StackPanel>
+
+
+        <Grid  HorizontalAlignment="Left" Height="30" Margin="0,660.2,0,0" VerticalAlignment="Top" Width="1100" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="18" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="31" Margin="0,-1,-97,0"/>
+        </Grid>
+
+    </Grid>
+</Window>

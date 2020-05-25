@@ -11,6 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Taller_Negocio;
+using Taller_Datos;
+using System.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Taller_Escritorio_wpf
 {
@@ -22,6 +27,7 @@ namespace Taller_Escritorio_wpf
         public ModuloPedido()
         {
             InitializeComponent();
+            CargarComboBoxPedido();
         }
 
 
@@ -33,25 +39,206 @@ namespace Taller_Escritorio_wpf
         {
             Application.Current.Shutdown();
         }
+
+        public void CargarComboBoxPedido()
+        {
+            //////////////LISTAR FAMILIA/////////////////
+            Compartido_Negocio comunaN = new Compartido_Negocio();
+            cmb_Familia_P.ItemsSource = comunaN.ListarFamProd();
+            cmb_Familia_P.DisplayMemberPath = "descr_familia";
+            cmb_Familia_P.SelectedValuePath = "id_familia_prod";
+
+
+            //////////////LISTAR ESTADO/////////////////
+            cmb_Estado_P.ItemsSource = comunaN.ListarEstadoPedido();
+            cmb_Estado_P.DisplayMemberPath = "desc_estado";
+            cmb_Estado_P.SelectedValuePath = "id_estado";
+
+            //////////////LISTAR EMPLEADO/////////////////
+            cmb_Empleado_P.ItemsSource = comunaN.ListarEmpleado();
+            cmb_Empleado_P.DisplayMemberPath = "p_nombre_empleado";
+            cmb_Empleado_P.SelectedValuePath = "id_empleado";
+
+            //////////////LISTAR PROVEEDOR/////////////////
+            cmb_Proveedor_P.ItemsSource = comunaN.ListarProveedor();
+            cmb_Proveedor_P.DisplayMemberPath = "razon_social_prov";
+            cmb_Proveedor_P.SelectedValuePath = "id_proveedor";
+
+
+
+        }
+        private void cmb_Familia_P_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void cmb_Familia_P_DropDownClosed(object sender, EventArgs e)
+        {
+            Compartido_Negocio comp = new Compartido_Negocio();
+            List<Tipo_Producto_dto> respuesta = new List<Tipo_Producto_dto>();
+            int familiaCmb = int.Parse(cmb_Familia_P.SelectedValue.ToString());
+            respuesta = comp.ListarTipoProd(familiaCmb);
+            cmb_Tipo_P.ItemsSource = respuesta;
+            cmb_Tipo_P.DisplayMemberPath = "descr_tipo_prod";
+            cmb_Tipo_P.SelectedValuePath = "id_tipo_prod";
+
+        }
         private void Btn_pedidos_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Btn_recep_p_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
+            RecepcionPedido ventana = new RecepcionPedido();
+            ventana.ShowDialog();
+        }
+
+        private void Btn_Agregar_p_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            Producto_Negocio Prod_Neg = new Producto_Negocio();
+
+            List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
+
+
+            
+            if(txt_Cant_producto.Text == "" || cmb_Producto.Text == "")
+            {
+                if (txt_Cant_producto.Text == "" && cmb_Producto.Text == "")
+                {
+                    MessageBox.Show("Debe seleccionar un producto y su cantidad");
+                }
+                else
+                {
+                    if (cmb_Producto.Text == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un producto");
+
+                    }
+                    if (txt_Cant_producto.Text == "")
+                    {
+                        MessageBox.Show("Debe ingresar cantidad");
+
+                    }
+                }
+                
+            }
+            else
+            {
+               
+                string id_prod = txt_Id_producto.Text;
+                int cantidad_prod = int.Parse(txt_Cant_producto.Text);
+                DataTable respuesta = Prod_Neg.Buscar_Prod_id(id_prod);
+                // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
+                if (Application.Current.Properties["ListadoPedido"] != null)
+                {
+                    // trae lo que esta en la variable de sesion
+                    var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
+
+                    // lo convierte en un array
+                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                    //lo recorre para añadir al listado que luego se mostrará en la grilla
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
+                    {
+                        // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+
+                        Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
+                        entidad.id_producto = int.Parse(item["id_producto"].ToString());
+                        entidad.descr_producto = item["descr_producto"].ToString();
+                        entidad.cantidad = int.Parse(item["cantidad"].ToString());
+                        entidad.precio_prod = decimal.Parse(item["precio_prod"].ToString());
+                        entidad.total_prod = decimal.Parse(item["total_prod"].ToString());
+                        listado_det.Add(entidad);
+                    }
+                }
+
+
+                foreach (DataRow item in respuesta.Rows)
+                {
+                    Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
+                    entidad.id_producto = int.Parse(item["id_producto"].ToString());
+                    entidad.descr_producto = item["descr_producto"].ToString();
+                    entidad.cantidad = cantidad_prod;
+                    entidad.precio_prod = decimal.Parse(item["precio_prod"].ToString());
+                    entidad.total_prod = decimal.Parse(item["precio_prod"].ToString()) * cantidad_prod;
+
+                    listado_det.Add(entidad);
+
+                }
+
+                // actualiza variable de sesion con los datos actuales de la grilla
+                var jsonValueToSave = JsonConvert.SerializeObject(listado_det);
+                Application.Current.Properties["ListadoPedido"] = jsonValueToSave;
+
+
+
+                Dt_G_list_pedido.ItemsSource = listado_det;
+            }
 
         }
 
-        private void btn_Agregar_p_Click(object sender, RoutedEventArgs e)
+        private void Btn_MenuP_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             MenuPrincipal ventana = new MenuPrincipal();
             ventana.ShowDialog();
         }
+
+        private void Btn_Buscar_prod_Click(object sender, RoutedEventArgs e)
+        {
+            Producto_Negocio Prod_Nego = new Producto_Negocio();
+            List<Producto_dto> respuesta = new List<Producto_dto>();
+
+            if (cmb_Tipo_P.Text !="")
+            {
+                string producto_buscar = txt_buscar_prod.Text;
+                int tipo_prod = int.Parse(cmb_Tipo_P.SelectedValue.ToString());
+                respuesta = Prod_Nego.ListarProducto(tipo_prod, producto_buscar);
+                cmb_Producto.ItemsSource = respuesta;
+                cmb_Producto.DisplayMemberPath = "descr_producto";
+                cmb_Producto.SelectedValuePath = "id_producto";
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar tipo de producto");
+            }
+
+        }
+
+        private void cmb_Producto_DropDownClosed(object sender, EventArgs e)
+        {
+            Producto_Negocio prod_neg = new Producto_Negocio();
+            DataTable resp = new DataTable();
+            if( cmb_Producto.Text == "")
+            {
+                MessageBox.Show("Debe seleccionar un producto");
+            }
+            else
+            {
+                int id_prod = int.Parse(cmb_Producto.SelectedValue.ToString());
+
+                resp = prod_neg.Buscar_Prod_id(id_prod.ToString());
+                if (resp.Rows.Count > 0)
+                {
+                    foreach (DataRow item in resp.Rows)
+                    {
+                        txt_Id_producto.Text = item["id_producto"].ToString();
+                        txt_Sku_producto.Text = item["sku_prod"].ToString();
+
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("invalido");
+
+                }
+            }
+
+        }
+
     }
-  
-
-
-
 }

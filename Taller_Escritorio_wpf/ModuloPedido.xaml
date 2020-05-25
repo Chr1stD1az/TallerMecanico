@@ -33,11 +33,15 @@
                 <ColumnDefinition Width="99*"/>
             </Grid.ColumnDefinitions>
             <materialDesign:ColorZone Mode="Accent" Foreground="Black" OpacityMask="Black" BorderBrush="Black" Background="#FF2C7873" Grid.ColumnSpan="3" Height="100">
-                <TextBlock FontSize="35" VerticalAlignment="Bottom" Margin="30 20 0 30" Foreground="White" FontWeight="Bold" Text="Generar Pedido"/>
+                <TextBlock FontSize="35" VerticalAlignment="Bottom" Margin="30 20 0 30" Foreground="White" FontWeight="Bold" Text="Generar Pedido">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </materialDesign:ColorZone>
 
             <TextBox x:Name="txt_Id_Pedido" materialDesign:HintAssist.Hint=" ID Pedido" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="184,100,522.2,-81.6" Height="52" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
-            <TextBox x:Name="txt_Fecha_P" materialDesign:HintAssist.Hint=" Fecha" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="282,100,403.2,-81.6" Height="52" SpellCheck.IsEnabled="True" Grid.Column="1"/>
+            <TextBox x:Name="txt_Fecha_P" materialDesign:HintAssist.Hint=" Fecha" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="282,100,403.2,-81.6" Height="52" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
             <ComboBox x:Name="cmb_Estado_P" materialDesign:HintAssist.Hint=" Estado" materialDesign:HintAssist.IsFloating="True" Margin="399,100,266.2,-81.6" Height="52" Grid.Column="1" />
             <ComboBox x:Name="cmb_Proveedor_P" materialDesign:HintAssist.Hint=" Proveedor" materialDesign:HintAssist.IsFloating="True" Margin="184,157,266.2,-138.6" Height="52" Grid.Column="1" />
             <ComboBox x:Name="cmb_Empleado_P" materialDesign:HintAssist.Hint=" Empleado" materialDesign:HintAssist.IsFloating="True" Margin="541,157,64.2,-138.6" Height="52" Grid.Column="1" />
@@ -49,6 +53,7 @@
             <ComboBox x:Name="cmb_Producto" materialDesign:HintAssist.Hint=" Producto" materialDesign:HintAssist.IsFloating="True" Margin="399,339,204.2,-320.6" Height="52" Grid.Column="1" DropDownClosed="cmb_Producto_DropDownClosed" />
             <TextBox x:Name="txt_Cant_producto" materialDesign:HintAssist.Hint=" Cantidad" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="600,339,123.2,-320.6" Height="52" SpellCheck.IsEnabled="True" Grid.Column="1"/>
             <TextBox x:Name="txt_buscar_prod" materialDesign:HintAssist.Hint=" Buscar Producto" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="482,278,123.2,-259.6" Height="52" SpellCheck.IsEnabled="True" Grid.Column="1"/>
+            <TextBox x:Name="txt_total" materialDesign:HintAssist.Hint="TOTAL" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="196,608,425.2,-586.6" SpellCheck.IsEnabled="True" Grid.Column="1" FontSize="18" FontWeight="Bold" IsEnabled="False"/>
 
         </Grid>
         <Grid Grid.Row="3">
@@ -64,17 +69,25 @@
             <materialDesign:PackIcon Kind="BasketFill" Height="61" Width="49" Margin="10,547,0,0"/>
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF67BFF4" FontSize="16" Click="Btn_Agregar_p_Click" Margin="0,286,366,380.2" RenderTransformOrigin="0.394,0.512" />
-            <materialDesign:PackIcon Kind="Plus" Height="33" Width="33" Margin="801,286,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="#FFE8DCDC"/>
+            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF51B06D" FontSize="16" Click="Btn_Agregar_p_Click" Margin="0,286,366,380.2" RenderTransformOrigin="0.394,0.512" />
+            <materialDesign:PackIcon Kind="Plus" Height="33" Width="33" Margin="801,286,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF19B3F7" FontSize="16"  Margin="0,286,321,380.2" RenderTransformOrigin="0.394,0.512" />
+            <materialDesign:PackIcon Kind="Edit" Height="33" Width="33" Margin="846,286,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFDD6A6A" FontSize="16"  Margin="0,286,276,380.2" RenderTransformOrigin="0.394,0.512" />
+            <materialDesign:PackIcon Kind="Delete" Height="33" Width="33" Margin="891,286,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
         </Grid>
 
-        <DataGrid x:Name="Dt_G_list_pedido" HorizontalAlignment="Left" Height="205" Margin="310,407.2,0,0" VerticalAlignment="Top" Width="790" Grid.Row="2"/>
-        <Grid Grid.Row="2">
+        <DataGrid x:Name="Dt_G_list_pedido" HorizontalAlignment="Left" Height="205" Margin="307,330.2,0,0" VerticalAlignment="Top" Width="620" Grid.Row="2"/>
+        <Grid Grid.Row="2" Margin="-10,0.2,10,0">
             <Button  x:Name="Btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menu Principal" Width="226" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="Btn_MenuP_Click" Margin="0,10,964,594.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
             <materialDesign:PackIcon Kind="Home" Height="81" Width="63" Margin="10,10,0,0" />
         </Grid>
-        <StackPanel Height="74" Margin="858,352.2,100,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
-            <Button x:Name="Btn_Generar_Ped" Content=" ACEPTAR" Height="54" Margin="0,0,-0.4,0" Background="#FF5AC1CB" Foreground="#DDFFFFFF" />
+        <StackPanel Height="62" Margin="678,540.2,273,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
+            <Button x:Name="Btn_Generar_Ped" Content=" ACEPTAR" Height="60" Margin="10,0,-0.8,0" Background="#FF5AC1CB" Foreground="#DDFFFFFF" Click="Btn_Generar_Ped_Click" />
         </StackPanel>
         <Grid  HorizontalAlignment="Left" Height="30" Margin="0,660.2,0,0" VerticalAlignment="Top" Width="1100" Grid.Row="2">
             <Grid.ColumnDefinitions>

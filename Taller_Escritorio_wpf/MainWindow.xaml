@@ -34,32 +34,38 @@
                 <ColumnDefinition Width="99*"/>
             </Grid.ColumnDefinitions>
             <materialDesign:ColorZone Mode="Accent" Foreground="Black" OpacityMask="Black" BorderBrush="Black" Background="#FF2C7873" Grid.ColumnSpan="3" Height="100">
-                <TextBlock Text="Bienvenido!" FontSize="35" VerticalAlignment="Bottom" Margin="30 50 0 10" Foreground="White" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="Bienvenido!" FontSize="35" VerticalAlignment="Bottom" Margin="30 50 0 10" Foreground="White" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </materialDesign:ColorZone>
         </Grid>
 
         <Grid Grid.Row="2">
-            <StackPanel Orientation="Vertical" Margin="40 20 0 0">
+            <StackPanel Orientation="Vertical" Margin="47,85,47,69">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Account" Foreground="{Binding ElementName=txt_usuario, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4" Height="18" Width="22"/>
-                    <TextBox x:Name="txt_usuario" Width="300" materialDesign:HintAssist.Hint=" Usuario" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152"/>
+                    <TextBox x:Name="txt_usuario" Width="300" materialDesign:HintAssist.Hint=" Usuario" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Height="42"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
                     <materialDesign:PackIcon Kind="Key" Foreground="{Binding ElementName=txt_contraseña, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4" Height="19" Width="21"/>
-                    <PasswordBox x:Name="txt_contraseña" Width="300" materialDesign:HintAssist.Hint=" Contraseña" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152"/>
+                    <PasswordBox x:Name="txt_contraseña" Width="300" materialDesign:HintAssist.Hint=" Contraseña" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Height="46"/>
                 </StackPanel>
-                <CheckBox x:Name="chk_RecordarPass" Content="Recordar contraseña" Margin="0 30 0 0" IsEnabled="False"/>
-                <Button x:Name="BTN_iniciar" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="Iniciar" Width="80" HorizontalAlignment="Right" Margin="0 20 40 0" FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_iniciar_Click" />
+                <Button x:Name="BTN_iniciar" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="Iniciar" Width="238" HorizontalAlignment="Right" Margin="0,20,35.6,0" FontWeight="Bold" Background="#FF6FB98F" FontSize="18" Click="BTN_iniciar_Click" Foreground="#DDFFF8F8" Height="45" />
+                <!--              
+               <CheckBox x:Name="chk_RecordarPass" Content="Recordar contraseña" Margin="0 30 0 0" IsEnabled="False"/>
+
                 <materialDesign:Card Margin="0 10 10 10" Padding="15" materialDesign:ShadowAssist.ShadowDepth="Depth3" >
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="Link_OlvidastePass" IsEnabled="False" ><Hyperlink FontSize="11" Foreground="Gray" Style="{StaticResource MaterialDesignBody1Hyperlink}">¿Olvidaste la Contraseña?</Hyperlink></TextBlock>
+                        <TextBlock x:Name="Link_OlvidastePass" IsEnabled="False" ><Hyperlink FontSize="11" Foreground="Gray" Style="{StaticResource MaterialDesignBody1Hyperlink}"><Run Text="¿Olvidaste la Contraseña?"/></Hyperlink></TextBlock>
                     </StackPanel>
-                </materialDesign:Card>
+                </materialDesign:Card>-->
             </StackPanel>
         </Grid>
         <Grid  HorizontalAlignment="Left" Height="31" Margin="0,389,0,0" VerticalAlignment="Top" Width="400" Grid.Row="2">
-            <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="15" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="21"/>
+            <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="15" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="21" Margin="0,0,0,10"/>
         </Grid>
     </Grid>
 </Window>

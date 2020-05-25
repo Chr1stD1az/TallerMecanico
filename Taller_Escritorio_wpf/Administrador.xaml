@@ -38,7 +38,10 @@
                 <ColumnDefinition Width="99*"/>
             </Grid.ColumnDefinitions>
             <materialDesign:ColorZone Mode="Accent" Foreground="Black" OpacityMask="Black" BorderBrush="Black" Background="#FF2C7873" Grid.ColumnSpan="3" Height="100">
-                <TextBlock Text="Administrador" FontSize="35" VerticalAlignment="Bottom" Margin="30 20 0 30" Foreground="White" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="Administrador" FontSize="35" VerticalAlignment="Bottom" Margin="30 20 0 30" Foreground="White" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect></TextBlock>
             </materialDesign:ColorZone>
         </Grid>
         <Grid Grid.Row="2">

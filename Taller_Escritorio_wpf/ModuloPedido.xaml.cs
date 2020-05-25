@@ -28,6 +28,7 @@ namespace Taller_Escritorio_wpf
         {
             InitializeComponent();
             CargarComboBoxPedido();
+            txt_Fecha_P.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
 
@@ -96,8 +97,8 @@ namespace Taller_Escritorio_wpf
 
         private void Btn_Agregar_p_Click(object sender, RoutedEventArgs e)
         {
-            
 
+            decimal total = 0; 
             Producto_Negocio Prod_Neg = new Producto_Negocio();
 
             List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
@@ -146,11 +147,13 @@ namespace Taller_Escritorio_wpf
                         // estos datos vienen de la grilla, creamosla entidad para añadir al listado
 
                         Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
-                        entidad.id_producto = int.Parse(item["id_producto"].ToString());
-                        entidad.descr_producto = item["descr_producto"].ToString();
-                        entidad.cantidad = int.Parse(item["cantidad"].ToString());
-                        entidad.precio_prod = decimal.Parse(item["precio_prod"].ToString());
-                        entidad.total_prod = decimal.Parse(item["total_prod"].ToString());
+                        entidad.Producto = int.Parse(item["Producto"].ToString());
+                        entidad.Descripción = item["Descripción"].ToString();
+                        entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
+                        entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
+                        entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
+                        
+                        total = total + decimal.Parse(entidad.Total);
                         listado_det.Add(entidad);
                     }
                 }
@@ -159,12 +162,13 @@ namespace Taller_Escritorio_wpf
                 foreach (DataRow item in respuesta.Rows)
                 {
                     Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
-                    entidad.id_producto = int.Parse(item["id_producto"].ToString());
-                    entidad.descr_producto = item["descr_producto"].ToString();
-                    entidad.cantidad = cantidad_prod;
-                    entidad.precio_prod = decimal.Parse(item["precio_prod"].ToString());
-                    entidad.total_prod = decimal.Parse(item["precio_prod"].ToString()) * cantidad_prod;
+                    entidad.Producto = int.Parse(item["id_producto"].ToString());
+                    entidad.Descripción = item["descr_producto"].ToString();
+                    entidad.Cantidad = cantidad_prod;
+                    entidad.Precio = decimal.Parse(item["precio_prod"].ToString()).ToString("n2");
+                    entidad.Total = (decimal.Parse(item["precio_prod"].ToString()) * cantidad_prod).ToString("n2");
 
+                    total = total + decimal.Parse(entidad.Total);
                     listado_det.Add(entidad);
 
                 }
@@ -173,9 +177,9 @@ namespace Taller_Escritorio_wpf
                 var jsonValueToSave = JsonConvert.SerializeObject(listado_det);
                 Application.Current.Properties["ListadoPedido"] = jsonValueToSave;
 
-
-
+                txt_total.Text = total.ToString("n2");
                 Dt_G_list_pedido.ItemsSource = listado_det;
+
             }
 
         }
@@ -240,5 +244,33 @@ namespace Taller_Escritorio_wpf
 
         }
 
+        private void Btn_Generar_Ped_Click(object sender, RoutedEventArgs e)
+        {
+            string cabecera = "";
+            Generar_Pedido_Negocio Pedido_Neg = new Generar_Pedido_Negocio();
+
+            cabecera = Pedido_Neg.CrearPedidoHDR(txt_Fecha_P.Text, cmb_Estado_P.SelectedValue.ToString(), cmb_Proveedor_P.SelectedValue.ToString(), cmb_Empleado_P.SelectedValue.ToString());
+
+            if (Application.Current.Properties["ListadoPedido"] != null)
+            {
+                // trae lo que esta en la variable de sesion
+                var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
+
+                // lo convierte en un array
+                JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                //lo recorre para añadir al listado que luego se mostrará en la grilla
+                foreach (JObject item in jsonPreservar.Children<JObject>())
+                {
+
+                    var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".","");
+                    var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
+                    // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+                    var respuesta = Pedido_Neg.CrearPedidoDet(item["Cantidad"].ToString(), precio, total, cabecera, item["Producto"].ToString());
+                    
+                }
+            }
+
+        }
     }
 }

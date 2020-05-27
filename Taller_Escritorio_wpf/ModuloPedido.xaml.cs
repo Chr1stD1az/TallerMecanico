@@ -29,6 +29,7 @@ namespace Taller_Escritorio_wpf
             InitializeComponent();
             CargarComboBoxPedido();
             txt_Fecha_P.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            cmb_Estado_P.SelectedValue = 1;
         }
 
 
@@ -103,7 +104,7 @@ namespace Taller_Escritorio_wpf
 
             List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
 
-
+           
             
             if(txt_Cant_producto.Text == "" || cmb_Producto.Text == "")
             {
@@ -148,6 +149,7 @@ namespace Taller_Escritorio_wpf
 
                         Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
                         entidad.Producto = int.Parse(item["Producto"].ToString());
+                        entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
                         entidad.Descripción = item["Descripción"].ToString();
                         entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
                         entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
@@ -163,6 +165,7 @@ namespace Taller_Escritorio_wpf
                 {
                     Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
                     entidad.Producto = int.Parse(item["id_producto"].ToString());
+                    entidad.SKU = Convert.ToInt64(item["sku_prod"].ToString());
                     entidad.Descripción = item["descr_producto"].ToString();
                     entidad.Cantidad = cantidad_prod;
                     entidad.Precio = decimal.Parse(item["precio_prod"].ToString()).ToString("n2");
@@ -179,7 +182,8 @@ namespace Taller_Escritorio_wpf
 
                 txt_total.Text = total.ToString("n2");
                 Dt_G_list_pedido.ItemsSource = listado_det;
-
+               
+                
             }
 
         }
@@ -231,6 +235,7 @@ namespace Taller_Escritorio_wpf
                     {
                         txt_Id_producto.Text = item["id_producto"].ToString();
                         txt_Sku_producto.Text = item["sku_prod"].ToString();
+                        txt_descr_producto.Text = cmb_Producto.Text;
 
                     }
 
@@ -247,30 +252,85 @@ namespace Taller_Escritorio_wpf
         private void Btn_Generar_Ped_Click(object sender, RoutedEventArgs e)
         {
             string cabecera = "";
+            txt_Id_Pedido.Text = ""; 
             Generar_Pedido_Negocio Pedido_Neg = new Generar_Pedido_Negocio();
-
-            cabecera = Pedido_Neg.CrearPedidoHDR(txt_Fecha_P.Text, cmb_Estado_P.SelectedValue.ToString(), cmb_Proveedor_P.SelectedValue.ToString(), cmb_Empleado_P.SelectedValue.ToString());
-
-            if (Application.Current.Properties["ListadoPedido"] != null)
+            if (cmb_Proveedor_P.Text == "" || cmb_Empleado_P.Text == "")
             {
-                // trae lo que esta en la variable de sesion
-                var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
-
-                // lo convierte en un array
-                JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
-
-                //lo recorre para añadir al listado que luego se mostrará en la grilla
-                foreach (JObject item in jsonPreservar.Children<JObject>())
+                if (cmb_Proveedor_P.Text == "" && cmb_Empleado_P.Text == "")
                 {
-
-                    var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".","");
-                    var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
-                    // estos datos vienen de la grilla, creamosla entidad para añadir al listado
-                    var respuesta = Pedido_Neg.CrearPedidoDet(item["Cantidad"].ToString(), precio, total, cabecera, item["Producto"].ToString());
-                    
+                    MessageBox.Show("Debe seleccionar un proveedor y empleado");
                 }
-            }
+                else
+                {
+                    if (cmb_Proveedor_P.Text == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un proveedor");
 
+                    }
+                    if (cmb_Empleado_P.Text == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un empleado");
+
+                    }
+                }
+
+            }
+            else
+            {
+                if (Application.Current.Properties["ListadoPedido"] == null)
+                {
+                    MessageBox.Show("Debe ingresar al menos un producto");
+                }
+                else
+                {
+                    cabecera = Pedido_Neg.CrearPedidoHDR(txt_Fecha_P.Text, cmb_Estado_P.SelectedValue.ToString(), cmb_Proveedor_P.SelectedValue.ToString(), cmb_Empleado_P.SelectedValue.ToString());
+
+                    if (Application.Current.Properties["ListadoPedido"] != null)
+                    {
+                        // trae lo que esta en la variable de sesion
+                        var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
+
+                        // lo convierte en un array
+                        JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                        //lo recorre para añadir al listado que luego se mostrará en la grilla
+                        foreach (JObject item in jsonPreservar.Children<JObject>())
+                        {
+
+                            var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".", "");
+                            var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
+                            // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+                            var respuesta = Pedido_Neg.CrearPedidoDet(item["Cantidad"].ToString(), precio, total, cabecera, item["Producto"].ToString());
+
+                        }
+                        txt_Id_Pedido.Text = cabecera;
+                    }
+                }
+                
+
+            }
+           
+
+        }
+        //  int posProducto;
+        private void Dt_G_list_pedido_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var sel = Dt_G_list_pedido.SelectedIndex;
+            var i = 0;
+            var SelectProd = Dt_G_list_pedido.ItemsSource;
+            var JsonItemSelect = JsonConvert.SerializeObject(SelectProd);
+            JArray jsonPreservar = JArray.Parse(JsonItemSelect.ToString());
+            foreach (JObject item in jsonPreservar.Children<JObject>())
+            {
+                if (i == sel)
+                {
+                    txt_Id_producto.Text = item["Producto"].ToString();
+                    txt_Sku_producto.Text = item["SKU"].ToString();
+                    txt_descr_producto.Text = item["Descripción"].ToString();
+                    txt_Cant_producto.Text = item["Cantidad"].ToString();
+                }
+                i++;            
+            }
         }
     }
 }

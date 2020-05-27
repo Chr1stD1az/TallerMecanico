@@ -37,6 +37,7 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Taller_Escritorio_wpf.pdb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\MaterialDesignColors.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Taller_Datos.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Taller_Negocio.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Oracle.ManagedDataAccess.dll
@@ -46,11 +47,13 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\MaterialDesignColors.pdb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.csprojAssemblyReference.cache
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Administrador.g.cs
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\MainWindow.g.cs
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\MenuPrincipal.g.cs
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloPedido.g.cs
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\RecepcionPedido.g.cs
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\App.g.cs
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf_MarkupCompile.cache
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf_MarkupCompile.lref
@@ -59,6 +62,7 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\MainWindow.baml
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\MenuPrincipal.baml
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloPedido.baml
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\RecepcionPedido.baml
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.g.resources
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.Properties.Resources.resources
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.csproj.GenerateResource.cache
@@ -66,7 +70,3 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.csproj.CopyComplete
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.exe
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.pdb
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\RecepcionPedido.g.cs
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\RecepcionPedido.baml
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\Newtonsoft.Json.xml

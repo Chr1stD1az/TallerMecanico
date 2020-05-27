@@ -237,7 +237,7 @@
             </StackPanel>
             <Grid Grid.Row="2">
                 <Button  x:Name="Btn_Buscar_p"  Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}"  Width="32" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFFCFCFC" FontSize="16" Margin="0,147,591,520.2" />
-                <materialDesign:PackIcon Kind="Search" Height="32" Width="32" Margin="577,147,0,0" RenderTransformOrigin="-0.189,0.329" />
+               <!-- <materialDesign:PackIcon  Height="32" Width="32" Margin="665,147,0,0" RenderTransformOrigin="-0.189,0.329" />-->
             </Grid>
             <Grid Grid.Row="2">
                 <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menu Principal" Width="226" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="btn_MenuP_Click" Margin="0,20,964,584.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />

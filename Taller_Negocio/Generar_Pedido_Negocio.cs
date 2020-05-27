@@ -18,14 +18,17 @@ namespace Taller_Negocio
             string id ="";
             DataTable respuesta = new DataTable();
             var Parameters = new Dictionary<string, string>();
+            var Parameters2 = new Dictionary<string, string>();
+           
             try
             {
+
                 Parameters.Add("v_FECHA_PEDIDO", fecha_pedido.ToString());
                 Parameters.Add("v_ID_ESTADO", estado_pedido.ToString());
                 Parameters.Add("v_ID_PROVEEDOR", id_prov_pedido.ToString());
                 Parameters.Add("v_ID_EMPLEADO", id_empl_pedido.ToString());
-                exec.ExecStoredProcedure("SP_CREAR_PEDIDO_HDR", respuesta, Parameters);
-
+                exec.ExecStoredProcedure("SP_CREAR_PEDIDO_HDR", Parameters);
+                exec.ExecStoredProcedure("SP_TRAE_ID_PEDIDO_HDR", respuesta, Parameters2);
                 foreach (DataRow item in respuesta.Rows)
                 {
                     id = item["ID_PEDIDO"].ToString();
@@ -39,6 +42,7 @@ namespace Taller_Negocio
             }
             return id;
         }
+       
 
         public bool CrearPedidoDet(string cantidad_pedido_dt, string precio_pedido_dt, string total_pedido, string id_pedido, string id_producto)
         {

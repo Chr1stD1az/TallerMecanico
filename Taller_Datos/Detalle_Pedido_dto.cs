@@ -10,6 +10,7 @@ namespace Taller_Datos
     {
     //    public int id_pedido_dt { get; set; }
         public int Producto { get; set; }
+        public Int64 SKU { get; set; }
         public string Descripción { get; set; }
         public int Cantidad { get; set; }
         public string Precio { get; set; }

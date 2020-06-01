@@ -51,5 +51,7 @@ namespace Taller_Escritorio_wpf
             MenuPrincipal ventana = new MenuPrincipal();
             ventana.ShowDialog();
         }
+
+
     }
 }

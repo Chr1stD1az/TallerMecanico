@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,7 +35,7 @@ namespace Taller_Escritorio_wpf
 
     public partial class Administrador : Window, INotifyPropertyChanged
     {
-        private PanelAdministrador _PanelSeleccionado = PanelAdministrador.NINGUNO;
+        private PanelAdministrador _PanelSeleccionado = PanelAdministrador.EMPLEADO;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool PanelEmpleadoActivo
@@ -197,27 +198,118 @@ namespace Taller_Escritorio_wpf
 
         private void btn_Agregar_E_Click(object sender, RoutedEventArgs e)
         {
+
+            bool resp = false;
             Empleado_Negocio empN = new Empleado_Negocio();
-            if (Txt_Rut_Empleado.Text != "" && Txt_Dv_Empleado.Text != "" && Txt_P_Nombre_E.Text != "" && Txt_S_Nombre_E.Text != "" && Txt_P_Apellido_E.Text != "" &&
-               Txt_S_Apellido_E.Text != "" && Txt_Direccion_E.Text != "" && Txt_numeracion_E.Text != "" && Txt_Fono_E.Text != "" && Txt_Correo_E.Text != "" &&
-               Txt_NombreU_E.Text != "" && Txt_Contrasena_E.Password != "" && Cmb_comuna_E.Text != "" && Txt_id_taller_E.Text != "" && Cmb_cargo_E.Text != "")
+            if (Txt_Rut_Empleado.Text == "" || Txt_Dv_Empleado.Text == "" || Txt_P_Nombre_E.Text == "" || Txt_S_Nombre_E.Text == "" || Txt_P_Apellido_E.Text == "" ||
+                Txt_S_Apellido_E.Text == "" || Txt_Direccion_E.Text == "" || Txt_numeracion_E.Text == "" || Txt_Fono_E.Text == "" || Txt_Correo_E.Text == "" ||
+                Txt_NombreU_E.Text == "" || Txt_Contrasena_E.Password == "" || Cmb_comuna_E.Text == "" || Txt_id_taller_E.Text == "" || Cmb_cargo_E.Text == "")
             {
+                if (Txt_Rut_Empleado.Text == "" && Txt_Dv_Empleado.Text == "" && Txt_P_Nombre_E.Text == "" && Txt_S_Nombre_E.Text == "" && Txt_P_Apellido_E.Text == "" &&
+                   Txt_S_Apellido_E.Text == "" && Txt_Direccion_E.Text == "" && Txt_numeracion_E.Text == "" && Txt_Fono_E.Text == "" && Txt_Correo_E.Text == "" &&
+                   Txt_NombreU_E.Text == "" && Txt_Contrasena_E.Password == "" && Cmb_comuna_E.Text == "" && Txt_id_taller_E.Text == "" && Cmb_cargo_E.Text == "")
+                {
+                    MessageBox.Show("Debe completar todos los campos");
+                }
+                else
+                {
+                    if (Txt_Rut_Empleado.Text == "" && !resp )
+                    {
+                        MessageBox.Show("Debe ingresar Rut de empleado");
+                        resp = true ;
+                    }
+                    if (Txt_Dv_Empleado.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar dígito verificador ");
+                        resp = true;
+                    }
+                    if (Txt_P_Nombre_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar primer nombre ");
+                        resp = true;
+                    }
+                    if (Txt_S_Nombre_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar segundo nombre");
+                        resp = true;
+                    }
+                    if (Txt_P_Apellido_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar apellido paterno");
+                        resp = true;
+                    }
+                    if (Txt_S_Apellido_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar apellido materno ");
+                        resp = true;
+                    }
+                    if (Txt_Direccion_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar dirección");
+                        resp = true;
+                    }
+                    if (Txt_numeracion_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar numeración de domicilio ");
+                        resp = true;
+                    }
+                    if ( Txt_Fono_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar número de telefono");
+                        resp = true;
+                    }
+                    if (Txt_Correo_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar correo");
+                        resp = true;
+                    }
+                    if (Txt_NombreU_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar nombre de usuario");
+                        resp = true;
+                    }
+                    if (Txt_Contrasena_E.Password == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar una contraseña");
+                        resp = true;
+                    }
+                    if (Cmb_comuna_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe elecionar comuna ");
+                        resp = true;
+                    }
+                    if (Txt_id_taller_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe seleccionar taller ");
+                        resp = true;
+                    }
+                    if (Cmb_cargo_E.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe seleccionar cargo ");
+                        resp = true;
+                    }
+                }
+
+            }
+            else
+            {
+               
                 bool resultado = false;
                 try
                 {
-                    resultado = empN.crearEmpleado(Txt_id_E.Text ,Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
+                    resultado = empN.crearEmpleado(Txt_id_E.Text, Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
                                                    Txt_Direccion_E.Text, Txt_numeracion_E.Text, Txt_Depto_E.Text,
                                                    Txt_Fono_E.Text, Txt_Correo_E.Text, Txt_NombreU_E.Text, Txt_Contrasena_E.Password,
                                                    Cmb_comuna_E.SelectedValue.ToString(), Txt_id_taller_E.Text, Cmb_cargo_E.SelectedValue.ToString());
                     if (resultado)
                     {
-                        if( Txt_id_E.Text != "")
+                        if (Txt_id_E.Text != "")
                         {
-                            MessageBox.Show("Cliente Modificado");
+                            MessageBox.Show("Empleado Modificado");
                         }
                         else
                         {
-                            MessageBox.Show("Cliente creado");
+                            MessageBox.Show("Empleado Registrado");
                             limpiarEmp();
                         }
 
@@ -232,13 +324,8 @@ namespace Taller_Escritorio_wpf
 
                     MessageBox.Show("Empleado no pudo ser creado");
                     throw;
-                    
-                }
 
-            }
-            else
-            {
-                MessageBox.Show("Debe completar todos los campos");
+                }
 
             }
 
@@ -378,6 +465,127 @@ namespace Taller_Escritorio_wpf
             this.Hide();
             MenuPrincipal ventana = new MenuPrincipal();
             ventana.ShowDialog();
+        }
+
+        private void Txt_Rut_Empleado_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            CheckIsNumeric(e);
+        }
+
+        /// <summary>
+        /// Metodo que valida solo numero, se utilizar para el campo rut
+        /// </summary>
+        /// <param name="e"></param>
+        private void CheckIsNumeric(TextCompositionEventArgs e)
+        {
+            int result;
+
+            if (!(int.TryParse(e.Text, out result) || e.Text == "."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Txt_Dv_Empleado_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_Rut_Empleado.Text!="")
+            {
+                if (!ValidaRut(Txt_Rut_Empleado.Text))
+                {
+                    MessageBox.Show("Dígito verificador no corresponde a rut ingresado");
+                    Txt_Dv_Empleado.Text = string.Empty;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar Rut!");
+                Txt_Dv_Empleado.Text = string.Empty;
+                Txt_Rut_Empleado.Focus();
+            }
+            
+        }
+
+        /// <summary>
+        /// Metodo de validación de rut con digito verificador
+        /// dentro de la cadena
+        /// </summary>
+        /// <param name="rut">string</param>
+        /// <returns>booleano</returns>
+        public  bool ValidaRut(string rut)
+        {
+
+            var largo = Txt_Dv_Empleado.Text.Length;
+            if (largo > 1)
+            {
+                var nuevoValor = Txt_Dv_Empleado.Text.Substring(0, 1);
+                Txt_Dv_Empleado.Text = string.Empty;
+                Txt_Dv_Empleado.Text = nuevoValor;
+                Txt_Dv_Empleado.Focus();
+                Txt_Dv_Empleado.SelectionStart = Txt_Dv_Empleado.Text.Length;
+            }
+
+            if (Txt_Dv_Empleado.Text != Digito(int.Parse(rut)))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// método que calcula el digito verificador a partir
+        /// de la mantisa del rut
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns></returns>
+        public static string Digito(int rut)
+        {
+            int suma = 0;
+            int multiplicador = 1;
+            while (rut != 0)
+            {
+                multiplicador++;
+                if (multiplicador == 8)
+                    multiplicador = 2;
+                suma += (rut % 10) * multiplicador;
+                rut = rut / 10;
+            }
+            suma = 11 - (suma % 11);
+            if (suma == 11)
+            {
+                return "0";
+            }
+            else if (suma == 10)
+            {
+                return "K";
+            }
+            else
+            {
+                return suma.ToString();
+            }
+        }
+
+        public void ValidaLargoRut()
+        {
+
+           
+            
+        }
+
+        private void Txt_Rut_Empleado_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var largo = Txt_Rut_Empleado.Text.Length;
+            if (largo != 7 && largo != 8)
+            {
+                MessageBox.Show("Largo del Rut no corresponde");
+                //Txt_Rut_Empleado.Text = string.Empty;
+                //Txt_Rut_Empleado.Focus();
+                //Txt_Rut_Empleado.SelectionStart = Txt_Rut_Empleado.Text.Length;
+            }
+            else
+            {
+                Txt_Dv_Empleado.Focus();
+            }
+
         }
     }
 }

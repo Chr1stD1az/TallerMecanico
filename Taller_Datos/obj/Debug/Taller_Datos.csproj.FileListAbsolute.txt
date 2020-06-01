@@ -13,8 +13,8 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\bin\Debug
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\bin\Debug\Taller_Datos.pdb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\bin\Debug\Oracle.DataAccess.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\bin\Debug\Oracle.ManagedDataAccess.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.csprojAssemblyReference.cache
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.csproj.CoreCompileInputs.cache
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.csproj.CopyComplete
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.pdb
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.csprojAssemblyReference.cache

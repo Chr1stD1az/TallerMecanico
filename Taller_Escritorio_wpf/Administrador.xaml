@@ -52,12 +52,12 @@
             <Button x:Name="Btn_Proveedor" Click="Btn_Proveedor_Click" Content="PROVEEDOR" HorizontalAlignment="Left" Height="105" Margin="5,509,0,0" VerticalAlignment="Top" Width="233" Background="#FF8EC590" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
             <!-- ELIMINAR PARA UTILIZAR -->
             <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <Label x:Name="label2" Content="EMPLEADO" Margin="175,0,276.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
+                <Label x:Name="label2" Content="Empleado" Margin="36,0,276.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
 
             </StackPanel>
             <StackPanel  Height="273" Margin="248,80,705,346.2" VerticalAlignment="Center" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <TextBox x:Name="Txt_id_E" materialDesign:HintAssist.Hint=" ID " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,57.2,0" Height="51" SpellCheck.IsEnabled="True" IsEnabled="False"/>
-                <TextBox x:Name="Txt_Rut_Empleado" materialDesign:HintAssist.Hint=" Rut" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.6,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <TextBox x:Name="Txt_Rut_Empleado" materialDesign:HintAssist.Hint=" Rut" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.6,0" Height="52" SpellCheck.IsEnabled="True" PreviewTextInput="Txt_Rut_Empleado_PreviewTextInput" LostFocus="Txt_Rut_Empleado_LostFocus"/>
                 <TextBox x:Name="Txt_P_Nombre_E" materialDesign:HintAssist.Hint=" Primer Nombre" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,0,0" Height="51" SpellCheck.IsEnabled="True" HorizontalAlignment="Left" Width="197"/>
                 <TextBox x:Name="Txt_P_Apellido_E" materialDesign:HintAssist.Hint=" Apellido Paterno" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.6,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_Fono_E" materialDesign:HintAssist.Hint=" Teléfono " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.6,0" Height="52" SpellCheck.IsEnabled="True"/>
@@ -65,7 +65,7 @@
 
             </StackPanel>
             <StackPanel Height="223" Margin="495,130,453,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_Dv_Empleado" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,184,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <TextBox x:Name="Txt_Dv_Empleado" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,184,0" Height="52" SpellCheck.IsEnabled="True" KeyUp="Txt_Dv_Empleado_KeyUp" />
                 <TextBox x:Name="Txt_S_Nombre_E" materialDesign:HintAssist.Hint=" Segundo Nombre" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_S_Apellido_E" materialDesign:HintAssist.Hint=" Apellido Materno" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_Correo_E" materialDesign:HintAssist.Hint=" Correo " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0" Height="52" SpellCheck.IsEnabled="True"/>
@@ -190,7 +190,7 @@
             <StackPanel HorizontalAlignment="Left" Height="646" Margin="243,10,0,0" VerticalAlignment="Top" Width="947" Background="LightGray" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}">
             </StackPanel>   -->
 
-
+            
             <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Label x:Name="label_P" Content="Proveedor" Margin="34,0,258.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
             </StackPanel>
@@ -237,11 +237,12 @@
             </StackPanel>
             <Grid Grid.Row="2">
                 <Button  x:Name="Btn_Buscar_p"  Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}"  Width="32" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFFCFCFC" FontSize="16" Margin="0,147,591,520.2" />
-               <!-- <materialDesign:PackIcon  Height="32" Width="32" Margin="665,147,0,0" RenderTransformOrigin="-0.189,0.329" />-->
-            </Grid>
+              
+            </Grid> 
+
             <Grid Grid.Row="2">
-                <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menu Principal" Width="226" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="btn_MenuP_Click" Margin="0,20,964,584.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
-                <materialDesign:PackIcon Kind="Home" Height="81" Width="63" Margin="10,34,0,0" />
+                <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="226" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="btn_MenuP_Click" Margin="0,20,964,584.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
+                <materialDesign:PackIcon Kind="Home" Height="81" Width="63" Margin="10,20,0,0" />
             </Grid>
 
 

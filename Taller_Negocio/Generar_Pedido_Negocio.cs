@@ -11,15 +11,15 @@ namespace Taller_Negocio
 {
     public class Generar_Pedido_Negocio
     {
-        public string CrearPedidoHDR( string fecha_pedido, string estado_pedido, string id_prov_pedido,string id_empl_pedido)
+        public string CrearPedidoHDR(string fecha_pedido, string estado_pedido, string id_prov_pedido, string id_empl_pedido)
         {
 
             OracleComand exec = new OracleComand();
-            string id ="";
+            string id = "";
             DataTable respuesta = new DataTable();
             var Parameters = new Dictionary<string, string>();
             var Parameters2 = new Dictionary<string, string>();
-           
+
             try
             {
 
@@ -42,7 +42,7 @@ namespace Taller_Negocio
             }
             return id;
         }
-       
+
 
         public bool CrearPedidoDet(string cantidad_pedido_dt, string precio_pedido_dt, string total_pedido, string id_pedido, string id_producto)
         {
@@ -69,6 +69,7 @@ namespace Taller_Negocio
             return respuesta;
         }
 
+        
 
     }
 }

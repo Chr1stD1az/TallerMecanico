@@ -88,6 +88,7 @@ namespace Taller_Escritorio_wpf
             CargarComboBoxEmpleado();
             CargarComboBoxCliente();
             CargarComboBoxProveedor();
+            cmb_id_taller_E.SelectedValue = 1;
         }
         /// <summary>
         /// Método que Carga de informacion los cmb de la vista
@@ -123,6 +124,12 @@ namespace Taller_Escritorio_wpf
             Cmb_comuna_C.ItemsSource = comunaN.ListarComuna();
             Cmb_comuna_C.DisplayMemberPath = "desc_comuna";
             Cmb_comuna_C.SelectedValuePath = "id_comuna";
+
+            TallerNegocio TallerN = new TallerNegocio();
+            //////////////LISTAR taller/////////////////
+            cmb_id_taller_E.ItemsSource = TallerN.ListarTaller();
+            cmb_id_taller_E.DisplayMemberPath = "nombre";
+            cmb_id_taller_E.SelectedValuePath = "id_taller";
         }
         public void CargarComboBoxProveedor()
         {
@@ -192,7 +199,6 @@ namespace Taller_Escritorio_wpf
             Txt_NombreU_E.Text = string.Empty;
             Txt_Contrasena_E.Password = string.Empty;
             Cmb_comuna_E.SelectedValue = null;
-            Txt_id_taller_E.Text = string.Empty;
             Cmb_cargo_E.SelectedValue = null;
         }
 
@@ -203,11 +209,11 @@ namespace Taller_Escritorio_wpf
             Empleado_Negocio empN = new Empleado_Negocio();
             if (Txt_Rut_Empleado.Text == "" || Txt_Dv_Empleado.Text == "" || Txt_P_Nombre_E.Text == "" || Txt_S_Nombre_E.Text == "" || Txt_P_Apellido_E.Text == "" ||
                 Txt_S_Apellido_E.Text == "" || Txt_Direccion_E.Text == "" || Txt_numeracion_E.Text == "" || Txt_Fono_E.Text == "" || Txt_Correo_E.Text == "" ||
-                Txt_NombreU_E.Text == "" || Txt_Contrasena_E.Password == "" || Cmb_comuna_E.Text == "" || Txt_id_taller_E.Text == "" || Cmb_cargo_E.Text == "")
+                Txt_NombreU_E.Text == "" || Txt_Contrasena_E.Password == "" || Cmb_comuna_E.Text == "" || cmb_id_taller_E.Text == "" || Cmb_cargo_E.Text == "")
             {
                 if (Txt_Rut_Empleado.Text == "" && Txt_Dv_Empleado.Text == "" && Txt_P_Nombre_E.Text == "" && Txt_S_Nombre_E.Text == "" && Txt_P_Apellido_E.Text == "" &&
                    Txt_S_Apellido_E.Text == "" && Txt_Direccion_E.Text == "" && Txt_numeracion_E.Text == "" && Txt_Fono_E.Text == "" && Txt_Correo_E.Text == "" &&
-                   Txt_NombreU_E.Text == "" && Txt_Contrasena_E.Password == "" && Cmb_comuna_E.Text == "" && Txt_id_taller_E.Text == "" && Cmb_cargo_E.Text == "")
+                   Txt_NombreU_E.Text == "" && Txt_Contrasena_E.Password == "" && Cmb_comuna_E.Text == "" && cmb_id_taller_E.Text == "" && Cmb_cargo_E.Text == "")
                 {
                     MessageBox.Show("Debe completar todos los campos");
                 }
@@ -278,7 +284,7 @@ namespace Taller_Escritorio_wpf
                         MessageBox.Show("Debe elecionar comuna ");
                         resp = true;
                     }
-                    if (Txt_id_taller_E.Text == "" && !resp)
+                    if (cmb_id_taller_E.Text == "" && !resp)
                     {
                         MessageBox.Show("Debe seleccionar taller ");
                         resp = true;
@@ -300,7 +306,7 @@ namespace Taller_Escritorio_wpf
                     resultado = empN.crearEmpleado(Txt_id_E.Text, Txt_Rut_Empleado.Text, Txt_Dv_Empleado.Text, Txt_P_Nombre_E.Text, Txt_S_Nombre_E.Text, Txt_P_Apellido_E.Text, Txt_S_Apellido_E.Text,
                                                    Txt_Direccion_E.Text, Txt_numeracion_E.Text, Txt_Depto_E.Text,
                                                    Txt_Fono_E.Text, Txt_Correo_E.Text, Txt_NombreU_E.Text, Txt_Contrasena_E.Password,
-                                                   Cmb_comuna_E.SelectedValue.ToString(), Txt_id_taller_E.Text, Cmb_cargo_E.SelectedValue.ToString());
+                                                   Cmb_comuna_E.SelectedValue.ToString(), cmb_id_taller_E.SelectedValue.ToString(), Cmb_cargo_E.SelectedValue.ToString());
                     if (resultado)
                     {
                         if (Txt_id_E.Text != "")
@@ -390,13 +396,13 @@ namespace Taller_Escritorio_wpf
                             Txt_Contrasena_E.Password = comp.DecrytedString(item["contrasena_empleado"].ToString());
                             Cmb_comuna_E.SelectedValue = item["id_comuna"].ToString();
                             Cmb_cargo_E.SelectedValue = item["id_cargo"].ToString();
-                            Txt_id_taller_E.Text = item["id_taller"].ToString();
+                            cmb_id_taller_E.SelectedValue = item["id_taller"].ToString();
                         }
                     }
                     else
                     {
                         MessageBox.Show("Rut invalido");
-                        limpiarEmp();
+                        //limpiarEmp();
                     }
 
                     

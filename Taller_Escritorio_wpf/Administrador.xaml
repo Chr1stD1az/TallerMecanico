@@ -75,7 +75,7 @@
                 </Grid>
             </StackPanel>
             <StackPanel Height="57" Margin="863,125,95,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_id_taller_E" materialDesign:HintAssist.Hint=" Taller" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0" Height="53" SpellCheck.IsEnabled="True"/>
+                <ComboBox x:Name="cmb_id_taller_E" materialDesign:HintAssist.Hint=" Taller" materialDesign:HintAssist.IsFloating="True"  Margin="10,0" Height="53" IsEnabled="False" />
             </StackPanel>
             <StackPanel Height="54" Margin="248,363,743,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <TextBox x:Name="Txt_Direccion_E" materialDesign:HintAssist.Hint=" Dirección " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,10.2,0" Height="52" SpellCheck.IsEnabled="True"/>
@@ -185,12 +185,13 @@
             <StackPanel Height="74" Margin="931,580,27,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Button x:Name="btn_Eliminar_C" Content=" ELIMINAR" Height="58" Margin="0,0,-0.4,0" Background="#FFE44E4E" Foreground="#DDFFFFFF" Click="btn_Eliminar_C_Click"/>
             </StackPanel>
+            <!-- -->
 
             <!-- 
             <StackPanel HorizontalAlignment="Left" Height="646" Margin="243,10,0,0" VerticalAlignment="Top" Width="947" Background="LightGray" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}">
             </StackPanel>   -->
 
-            
+            <!-- -->
             <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Label x:Name="label_P" Content="Proveedor" Margin="34,0,258.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
             </StackPanel>
@@ -238,7 +239,7 @@
             <Grid Grid.Row="2">
                 <Button  x:Name="Btn_Buscar_p"  Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}"  Width="32" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFFCFCFC" FontSize="16" Margin="0,147,591,520.2" />
               
-            </Grid> 
+            </Grid> <!-- -->
 
             <Grid Grid.Row="2">
                 <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="226" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="btn_MenuP_Click" Margin="0,20,964,584.2" BorderBrush="{x:Null}" HorizontalAlignment="Right" />

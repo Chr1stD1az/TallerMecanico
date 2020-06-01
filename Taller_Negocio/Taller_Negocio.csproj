@@ -50,6 +50,8 @@
     <Compile Include="Producto_Negocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor_Negocio.cs" />
+    <Compile Include="Recepcionar_Pedido_Negocio.cs" />
+    <Compile Include="TallerNegocio.cs" />
     <Compile Include="Tipo_Cliente_Negocio.cs" />
   </ItemGroup>
   <ItemGroup>

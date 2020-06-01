@@ -11,7 +11,7 @@ namespace Taller_Negocio
 {
     public class Generar_Pedido_Negocio
     {
-        public string CrearPedidoHDR(string fecha_pedido, string estado_pedido, string id_prov_pedido, string id_empl_pedido)
+        public string CrearPedidoHDR(string fecha_pedido, string estado_pedido, string id_prov_pedido, string id_empl_pedido, string total_pedido)
         {
 
             OracleComand exec = new OracleComand();
@@ -23,10 +23,13 @@ namespace Taller_Negocio
             try
             {
 
+               var totalFormat = Math.Round(decimal.Parse(total_pedido),0);
+
                 Parameters.Add("v_FECHA_PEDIDO", fecha_pedido.ToString());
                 Parameters.Add("v_ID_ESTADO", estado_pedido.ToString());
                 Parameters.Add("v_ID_PROVEEDOR", id_prov_pedido.ToString());
                 Parameters.Add("v_ID_EMPLEADO", id_empl_pedido.ToString());
+                Parameters.Add("v_TOTAL_PEDIDO", totalFormat.ToString());
                 exec.ExecStoredProcedure("SP_CREAR_PEDIDO_HDR", Parameters);
                 exec.ExecStoredProcedure("SP_TRAE_ID_PEDIDO_HDR", respuesta, Parameters2);
                 foreach (DataRow item in respuesta.Rows)

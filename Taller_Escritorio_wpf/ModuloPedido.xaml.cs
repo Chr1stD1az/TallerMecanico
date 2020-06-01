@@ -193,8 +193,8 @@ namespace Taller_Escritorio_wpf
                         entidad.SKU = Convert.ToInt64(item["sku_prod"].ToString());
                         entidad.Descripción = item["descr_producto"].ToString();
                         entidad.Cantidad = cantidad_prod;
-                        entidad.Precio = decimal.Parse(item["precio_prod"].ToString()).ToString("n2");
-                        entidad.Total = (decimal.Parse(item["precio_prod"].ToString()) * cantidad_prod).ToString("n2");
+                        entidad.Precio = decimal.Parse(item["precio_costo"].ToString()).ToString("n2");
+                        entidad.Total = (decimal.Parse(item["precio_costo"].ToString()) * cantidad_prod).ToString("n2");
 
                         total = total + decimal.Parse(entidad.Total);
                         listado_det.Add(entidad);
@@ -321,7 +321,7 @@ namespace Taller_Escritorio_wpf
                 }
                 else
                 {
-                    cabecera = Pedido_Neg.CrearPedidoHDR(txt_Fecha_P.Text, cmb_Estado_P.SelectedValue.ToString(), cmb_Proveedor_P.SelectedValue.ToString(), cmb_Empleado_P.SelectedValue.ToString());
+                    cabecera = Pedido_Neg.CrearPedidoHDR(txt_Fecha_P.Text, cmb_Estado_P.SelectedValue.ToString(), cmb_Proveedor_P.SelectedValue.ToString(), cmb_Empleado_P.SelectedValue.ToString(), txt_total.Text);
 
                     if (Application.Current.Properties["ListadoPedido"] != null)
                     {
@@ -342,6 +342,7 @@ namespace Taller_Escritorio_wpf
 
                         }
                         txt_Id_Pedido.Text = cabecera;
+                        MessageBox.Show("Pedido generado");
                     }
                 }
                 
@@ -374,69 +375,79 @@ namespace Taller_Escritorio_wpf
         private void Btn_Editar_p_Click(object sender, RoutedEventArgs e)
         {
 
-            bool editar = false;
-            int id = int.Parse(txt_Id_producto.Text.ToString());
-            int cantidad = int.Parse(txt_Cant_producto.Text.ToString());
-            decimal total = 0;
-         //   Producto_Negocio Prod_Neg = new Producto_Negocio();
+            
 
             List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
 
-            if (Application.Current.Properties["ListadoPedido"] != null)
+            if (txt_Id_producto.Text =="")
             {
-                // trae lo que esta en la variable de sesion
-                var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
-
-                // lo convierte en un array
-                JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
-
-                //lo recorre para añadir al listado que luego se mostrará en la grilla
-                foreach (JObject item in jsonPreservar.Children<JObject>())
-                {
-                    // estos datos vienen de la grilla, creamosla entidad para añadir al listado
-                   
-                    Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
-                    entidad.Producto = int.Parse(item["Producto"].ToString());
-                    entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
-                    entidad.Descripción = item["Descripción"].ToString();
-
-                    if (id == int.Parse(item["Producto"].ToString()))
-                    {
-                        entidad.Cantidad = cantidad;
-                        entidad.Total = (cantidad * decimal.Parse(item["Precio"].ToString())).ToString("n2");
-                        editar = true;
-                    }
-                    else
-                    {
-                        entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
-                        entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
-                    }
-              
-                    entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
-
-                    total = total + decimal.Parse(entidad.Total);
-                    listado_det.Add(entidad);
-                }
-
-            }
-
-            if (editar == true)
-            {
-
-                MessageBox.Show("Cantidad Actualizada");
-                limpiar1();
+                MessageBox.Show("Debe seleccionar un producto");
             }
             else
             {
-                MessageBox.Show("El Producto a actualizar no existe!");
-                limpiar1();
+                bool editar = false;
+                int id = int.Parse(txt_Id_producto.Text.ToString());
+                int cantidad = int.Parse(txt_Cant_producto.Text.ToString());
+                decimal total = 0;
+                //   Producto_Negocio Prod_Neg = new Producto_Negocio();
+
+                if (Application.Current.Properties["ListadoPedido"] != null)
+                {
+                    // trae lo que esta en la variable de sesion
+                    var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
+
+                    // lo convierte en un array
+                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                    //lo recorre para añadir al listado que luego se mostrará en la grilla
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
+                    {
+                        // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+
+                        Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
+                        entidad.Producto = int.Parse(item["Producto"].ToString());
+                        entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
+                        entidad.Descripción = item["Descripción"].ToString();
+
+                        if (id == int.Parse(item["Producto"].ToString()))
+                        {
+                            entidad.Cantidad = cantidad;
+                            entidad.Total = (cantidad * decimal.Parse(item["Precio"].ToString())).ToString("n2");
+                            editar = true;
+                        }
+                        else
+                        {
+                            entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
+                            entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
+                        }
+
+                        entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
+
+                        total = total + decimal.Parse(entidad.Total);
+                        listado_det.Add(entidad);
+                    }
+
+                }
+
+                if (editar == true)
+                {
+
+                    MessageBox.Show("Cantidad Actualizada");
+                    limpiar1();
+                }
+                else
+                {
+                    MessageBox.Show("El Producto a actualizar no existe!");
+                    limpiar1();
+                }
+
+                var jsonValueToSave = JsonConvert.SerializeObject(listado_det);
+                Application.Current.Properties["ListadoPedido"] = jsonValueToSave;
+
+                txt_total.Text = total.ToString("n2");
+                Dt_G_list_pedido.ItemsSource = listado_det;
             }
-
-            var jsonValueToSave = JsonConvert.SerializeObject(listado_det);
-            Application.Current.Properties["ListadoPedido"] = jsonValueToSave;
-
-            txt_total.Text = total.ToString("n2");
-            Dt_G_list_pedido.ItemsSource = listado_det;
+            
 
             
 
@@ -444,64 +455,74 @@ namespace Taller_Escritorio_wpf
 
         private void Btn_Eliminar_p_Click(object sender, RoutedEventArgs e)
         {
-            bool eliminado = false;
-            string id_prod = txt_Id_producto.Text;
-            int cantidad_prod = int.Parse(txt_Cant_producto.Text);
-            decimal total = 0;
+           
             List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
-
-            // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
-            if (Application.Current.Properties["ListadoPedido"] != null)
+            if (txt_Id_producto.Text =="")
             {
-                // trae lo que esta en la variable de sesion
-                var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
+                MessageBox.Show("Debe seleccionar un producto");
+            }
+            else
+            {
+                bool eliminado = false;
+                string id_prod = txt_Id_producto.Text;
+                int cantidad_prod = int.Parse(txt_Cant_producto.Text);
+                decimal total = 0;
 
-                // lo convierte en un array
-                JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
-
-                //lo recorre para añadir al listado que luego se mostrará en la grilla
-                foreach (JObject item in jsonPreservar.Children<JObject>())
+                // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
+                if (Application.Current.Properties["ListadoPedido"] != null)
                 {
-                    // estos datos vienen de la grilla, creamos la entidad para añadir al listado
-                    Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
-                    entidad.Producto = int.Parse(item["Producto"].ToString());
-                    entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
-                    entidad.Descripción = item["Descripción"].ToString();
-                    entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
-                    entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
-                    entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
-                    total = total + decimal.Parse(entidad.Total);
+                    // trae lo que esta en la variable de sesion
+                    var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoPedido"].ToString());
 
-                    if (id_prod != item["Producto"].ToString())
+                    // lo convierte en un array
+                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                    //lo recorre para añadir al listado que luego se mostrará en la grilla
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
                     {
-                        listado_det.Add(entidad);
+                        // estos datos vienen de la grilla, creamos la entidad para añadir al listado
+                        Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
+                        entidad.Producto = int.Parse(item["Producto"].ToString());
+                        entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
+                        entidad.Descripción = item["Descripción"].ToString();
+                        entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
+                        entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
+                        entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
+                        total = total + decimal.Parse(entidad.Total);
 
+                        if (id_prod != item["Producto"].ToString())
+                        {
+                            listado_det.Add(entidad);
+
+                        }
+                        else
+                        {
+                            eliminado = true;
+                            total = total - decimal.Parse(entidad.Total);
+                        }
+
+                    }
+
+                    if (eliminado == true)
+                    {
+
+                        MessageBox.Show("Producto eliminado");
+                        limpiar1();
                     }
                     else
                     {
-                        eliminado = true;
-                        total = total - decimal.Parse(entidad.Total);
+                        MessageBox.Show("El Producto no existe!");
+                        limpiar1();
                     }
- 
-                }
+                    var jsonValueToSave = JsonConvert.SerializeObject(listado_det);
+                    Application.Current.Properties["ListadoPedido"] = jsonValueToSave;
 
-                if (eliminado == true)
-                {
-                    
-                    MessageBox.Show("Producto eliminado");
-                    limpiar1();
+                    txt_total.Text = total.ToString("n2");
+                    Dt_G_list_pedido.ItemsSource = listado_det;
                 }
-                else
-                {
-                    MessageBox.Show("El Producto no existe!");
-                    limpiar1();
-                }
-                var jsonValueToSave = JsonConvert.SerializeObject(listado_det);
-                Application.Current.Properties["ListadoPedido"] = jsonValueToSave;
-
-                txt_total.Text = total.ToString("n2");
-                Dt_G_list_pedido.ItemsSource = listado_det;
             }
+
+           
 
         }
     }

@@ -40,16 +40,16 @@
             </materialDesign:ColorZone>
         </Grid>
         <Grid Grid.Row="2">
-            <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="btn_MenuP_Click" Content="  Menú Principal" Width="240" Height="100"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16"  Margin="0,60,899,540" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
-            <materialDesign:PackIcon Kind="Home" Height="81" Width="63" Margin="61,60,0,0" RenderTransformOrigin="1.244,0.753" />
+            <Button  x:Name="btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="btn_MenuP_Click" Content="  Menú Principal" Width="240" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16"  Margin="0,60,899,578" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
+            <materialDesign:PackIcon Kind="Home" Height="62" Width="59" Margin="61,60,0,0" RenderTransformOrigin="1.244,0.753" />
         </Grid>
         <Grid Grid.Row="2">
-            <Button  x:Name="Btn_pedidos" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="GENERAR PEDIDO" Click="Btn_pedidos_Click" Width="240" Height="100"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16"  Margin="0,398,901,202" />
-            <materialDesign:PackIcon Kind="TruckFast" Height="42" Width="44" Margin="59,428,0,0" RenderTransformOrigin="-0.133,-0.033"/>
+            <Button  x:Name="Btn_pedidos" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="GENERAR PEDIDO" Click="Btn_pedidos_Click" Width="240" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16"  Margin="0,480,901,162" />
+            <materialDesign:PackIcon Kind="TruckFast" Height="58" Width="42" Margin="59,480,0,0" RenderTransformOrigin="-0.133,-0.033"/>
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_recep_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="Btn_recep_p_Click" Content="       RECEPCIONAR PEDIDO" Width="240" Height="100"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16"  Margin="0,522,900,78" />
-            <materialDesign:PackIcon Kind="BasketFill" Height="61" Width="49" Margin="60,541,0,0" RenderTransformOrigin="16.58,-6.125"/>
+            <Button  x:Name="Btn_recep_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="Btn_recep_p_Click" Content="       RECEPCIONAR PEDIDO" Width="240" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16"  Margin="0,559,900,80" />
+            <materialDesign:PackIcon Kind="BasketFill" Height="59" Width="49" Margin="60,561,0,0" RenderTransformOrigin="16.58,-6.125"/>
             <DataGrid x:Name="DG_Recep" HorizontalAlignment="Left" Height="235" Margin="422,302,0,0" VerticalAlignment="Top" Width="617"/>
         </Grid>
         <TextBox x:Name="txt_id_recep" materialDesign:HintAssist.Hint=" ID Recepción" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" HorizontalAlignment="Left" Height="44" Margin="421,37.2,0,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Width="97" IsEnabled="False"/>

@@ -199,6 +199,7 @@ namespace Taller_Escritorio_wpf
             Txt_NombreU_E.Text = string.Empty;
             Txt_Contrasena_E.Password = string.Empty;
             Cmb_comuna_E.SelectedValue = null;
+       ;
             Cmb_cargo_E.SelectedValue = null;
         }
 
@@ -345,17 +346,28 @@ namespace Taller_Escritorio_wpf
             {
                 bool retorno = false;
 
-                retorno = empN.EliminarEmp(int.Parse(Txt_id_E.Text));
-                if (retorno)
-                {
+                string msj= "Esta seguro de eliminar este empleado";
+                string titulo = "ELIMINAR EMPLEADO";
 
-                    MessageBox.Show("Cliente Eliminado");
-                    limpiarEmp();
-                }
-                else
+               
+                var resp = MessageBox.Show(msj, titulo,
+                     MessageBoxButton.YesNo);
+                if (resp == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Cliente no pudo ser Eliminado");
+                    retorno = empN.EliminarEmp(int.Parse(Txt_id_E.Text));
+                    if (retorno)
+                    {
+
+                        MessageBox.Show("Cliente Eliminado");
+                        limpiarEmp();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cliente no pudo ser Eliminado");
+                    }
+
                 }
+               
             }
             else
             {

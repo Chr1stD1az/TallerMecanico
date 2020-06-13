@@ -61,12 +61,12 @@
             <materialDesign:PackIcon Kind="Search" Height="33" Width="33" Margin="827,210,0,0" RenderTransformOrigin="1.203,0.588"/>
         </Grid>
         <Grid Grid.Row="2">
-            <Button  x:Name="Btn_pedidos" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="GENERAR PEDIDO" Width="240" Height="100"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="Btn_pedidos_Click" Margin="0,397,899,203" />
-            <materialDesign:PackIcon Kind="TruckFast" Height="42" Width="44" Margin="61,425,0,0" RenderTransformOrigin="-0.133,-0.033"/>
+            <Button  x:Name="Btn_pedidos" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="GENERAR PEDIDO" Width="240" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="Btn_pedidos_Click" Margin="0,480,898,162" />
+            <materialDesign:PackIcon Kind="TruckFast" Height="58" Width="48" Margin="62,480,0,0" RenderTransformOrigin="-0.133,-0.033"/>
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_recep_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="       RECEPCIONAR PEDIDO" Width="240" Height="100"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="Btn_recep_p_Click" Margin="0,518,901,82" />
-            <materialDesign:PackIcon Kind="BasketFill" Height="61" Width="49" Margin="64,534,0,0"/>
+            <Button  x:Name="Btn_recep_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="       RECEPCIONAR PEDIDO" Width="240" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="Btn_recep_p_Click" Margin="0,559,896,82" />
+            <materialDesign:PackIcon Kind="BasketFill" Height="59" Width="49" Margin="64,559,0,0"/>
         </Grid>
         <Grid Grid.Row="3">
             <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF51B06D" FontSize="16" Click="Btn_Agregar_p_Click" Margin="0,267,265,400" RenderTransformOrigin="1.212,-0.094" />
@@ -88,8 +88,8 @@
                 <ColumnDefinition Width="121*"/>
                 <ColumnDefinition Width="479*"/>
             </Grid.ColumnDefinitions>
-            <Button  x:Name="Btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="238" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="Btn_MenuP_Click" Margin="0,60,891,537.8" BorderBrush="{x:Null}" HorizontalAlignment="Right" Grid.ColumnSpan="2" />
-            <materialDesign:PackIcon Kind="Home" Height="81" Width="63" Margin="71,60,0,0" />
+            <Button  x:Name="Btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="238" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="Btn_MenuP_Click" Margin="0,60,891,578.8" BorderBrush="{x:Null}" HorizontalAlignment="Right" Grid.ColumnSpan="2" />
+            <materialDesign:PackIcon Kind="Home" Height="61" Width="59" Margin="71,60,0,0" />
             <TextBox x:Name="txt_descr_producto" materialDesign:HintAssist.Hint="Descripción Producto" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="429.4,259,389,397.8" SpellCheck.IsEnabled="True" IsEnabled="False" RenderTransformOrigin="1.706,-0.662" Grid.Column="1"/>
         </Grid>
         <StackPanel Height="62" Margin="793,561.2,158,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">

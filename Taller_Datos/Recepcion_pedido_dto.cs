@@ -9,7 +9,7 @@ namespace Taller_Datos
     public class Recepcion_pedido_dto
     {
 
-        public int id_pedido { get; set; }
+    //    public int id_pedido { get; set; }
         
        // public int SKU { get; set; }
         public int Producto { get; set; }

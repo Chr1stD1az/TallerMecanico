@@ -54,7 +54,16 @@ namespace Taller_Escritorio_wpf
 
         private void BTN_modVenta_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
+            ModuloVenta ventana = new ModuloVenta();
+            ventana.ShowDialog();
+        }
 
+        private void BTN_Informes_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            ModuloInformes ventana = new ModuloInformes();
+            ventana.ShowDialog();
         }
     }
 }

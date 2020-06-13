@@ -40,21 +40,56 @@
             </materialDesign:ColorZone>
         </Grid>
         <Grid Grid.Row="2">
-            <Button  x:Name="BTN_Administrador" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="Administrador" Width="300" Height="120"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_Administrador_Click" Margin="0,142,639,438" />
-            <materialDesign:PackIcon Kind="AccountCog" Height="61" Width="60" Margin="178,170,0,0"/>
+            <Button  x:Name="BTN_Administrador" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="   Administrador" Width="259" Height="80"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_Administrador_Click" Margin="0,61,779,559.2" HorizontalAlignment="Right" />
+            <materialDesign:PackIcon Kind="AccountCog" Height="77" Width="58" Margin="82,61,0,0"/>
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="BTN_admPedido" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="Getionar Pedido" Width="300" Height="120"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_admPedido_Click" Margin="0,142,140,438" />
-            <materialDesign:PackIcon Kind="TruckFast" Height="61" Width="62" Margin="671,171,0,0"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="423*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="115*"/>
+            </Grid.ColumnDefinitions>
+            <Button  x:Name="BTN_admPedido" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="      Getionar Pedido" Width="257" Height="80"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_admPedido_Click" Margin="0,179,526.4,440.2" HorizontalContentAlignment="Center" />
+            <materialDesign:PackIcon Kind="TruckFast" Height="78" Width="60" Margin="80,179,0,0"/>
+        </Grid>
+        <Label x:Name="lblSaludo" Content="Saludo usuario" HorizontalAlignment="Left" Margin="785,40.6,0,0" VerticalAlignment="Top" Width="294" FontSize="16" FontWeight="Bold" Height="29" Grid.Row="1" Foreground="#DDC0EA77">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Grid Grid.Row="4">
+            <Button  x:Name="BTN_modVenta" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="        Modulo de Venta" Width="260" Height="80"  FontWeight="Bold"  FontSize="16" Click="BTN_modVenta_Click" Margin="0,541,779,79" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  />
+            <materialDesign:PackIcon Kind="CashMultiple" Height="80" Width="60" Margin="79,541,0,0"/>
         </Grid>
         <Grid Grid.Row="4">
-            <Button  x:Name="BTN_modVenta" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="   Modulo de Venta" Width="300" Height="120"  FontWeight="Bold"  FontSize="16" Click="BTN_modVenta_Click" Margin="0,380,141,200" HorizontalAlignment="Right"  />
-            <materialDesign:PackIcon Kind="CashMultiple" Height="61" Width="60" Margin="690,413,0,0"/>
+            <Button  x:Name="BTN_Informes" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content=" Informes/Estadisticas" Width="260" Height="80"  FontWeight="Bold"  FontSize="16"  Margin="0,418,780,202" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Right" Background="#FF6FB98F" Click="BTN_Informes_Click"  >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <materialDesign:PackIcon Kind="DatabaseSettings" Height="80" Width="60" Margin="80,420,0,0" RenderTransformOrigin="0.5,0.5">
+                <materialDesign:PackIcon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </materialDesign:PackIcon.RenderTransform>
+            </materialDesign:PackIcon>
         </Grid>
         <Grid Grid.Row="9">
-            <Button  x:Name="BTN_modReservas" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="Reservas" Width="300" Height="120"  HorizontalAlignment="Left"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_modReservas_Click" Margin="160,381,0,199" />
-            <materialDesign:PackIcon Kind="FolderClockOutline" Height="62" Width="62" Margin="185,410,0,0"/>
-            <Label x:Name="lblSaludo" Content="saludosUSU" HorizontalAlignment="Left" Margin="798,-31,0,0" VerticalAlignment="Top" Width="284" FontSize="16" FontWeight="Bold" Foreground="#DDB1AFAF"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button  x:Name="BTN_modReservas" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="Reservas" Width="259" Height="80"  HorizontalAlignment="Left"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_modReservas_Click" Margin="61,300,0,320" HorizontalContentAlignment="Center" />
+            <materialDesign:PackIcon Kind="FolderClockOutline" Height="80" Width="60" Margin="80,300,0,0"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="434" Margin="481,107,0,0" VerticalAlignment="Top" Width="480" Source="LogoTaller_1_1.png"/>
         </Grid>
         <Grid  HorizontalAlignment="Left" Height="30" Margin="0,660.2,0,0" VerticalAlignment="Top" Width="1100" Grid.Row="2">
             <Grid.ColumnDefinitions>

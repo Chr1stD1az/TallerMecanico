@@ -45,6 +45,7 @@ namespace Taller_Negocio
                 exec.ExecStoredProcedure("SP_OBTENER_PEDIDO_DET", dataTable, Parameters);
                 foreach (DataRow item in dataTable.Rows)
                 {
+                    
                     Recepcion_pedido_dto entidad = new Recepcion_pedido_dto();
                   //  entidad.id_pedido = item[""].ToString();
                     entidad.Producto = int.Parse(item["ID_PRODUCTO"].ToString());

@@ -39,12 +39,12 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </materialDesign:ColorZone>
-            <Rectangle HorizontalAlignment="Left" Height="137" Margin="280,85,0,-151.6" Stroke="#FF888484" VerticalAlignment="Top" Width="663" Grid.Column="1" Grid.ColumnSpan="2">
+            <Rectangle HorizontalAlignment="Left" Height="137" Margin="280,85,0,-151.6" Stroke="#FF232222" VerticalAlignment="Top" Width="663" Grid.Column="1" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <BlurEffect/>
                 </Rectangle.Effect>
             </Rectangle>
-            <Rectangle HorizontalAlignment="Left" Height="463" Margin="281,250,0,-642.6" Stroke="#FF888484" VerticalAlignment="Top" Width="662" Grid.Column="1" Grid.ColumnSpan="2">
+            <Rectangle HorizontalAlignment="Left" Height="463" Margin="281,250,0,-642.6" Stroke="#FF232222" VerticalAlignment="Top" Width="662" Grid.Column="1" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <BlurEffect Radius="4"/>
                 </Rectangle.Effect>

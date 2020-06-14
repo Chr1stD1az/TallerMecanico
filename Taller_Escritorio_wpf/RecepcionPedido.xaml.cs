@@ -27,6 +27,10 @@ namespace Taller_Escritorio_wpf
             InitializeComponent();
             CargarComboBox();
             txt_fecha_recep.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            DP_fecha_Venc.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(-1000), DateTime.Today));
+            //DP_fecha_Venc.DisplayDateStart = DateTime.Now;
+
+
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -136,6 +140,11 @@ namespace Taller_Escritorio_wpf
         }
 
         private void Btn_Confirmar_Rec_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

@@ -59,8 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor_dto.cs" />
     <Compile Include="Recepcion_pedido_dto.cs" />
+    <Compile Include="Servicios_dto.cs" />
     <Compile Include="Taller_dtocs.cs" />
     <Compile Include="Tipo_Cliente_dto.cs" />
+    <Compile Include="Tipo_Documento_dto.cs" />
     <Compile Include="Tipo_Producto_dto.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -157,6 +157,60 @@ namespace Taller_Negocio
             return retorno;
         }
 
+        public List<Tipo_Documento_dto> ListarDocumentos()
+        {
+            OracleComand exec = new OracleComand();
+
+            List<Tipo_Documento_dto> retorno = new List<Tipo_Documento_dto>();
+
+            try
+            {
+                var Parameters = new Dictionary<string, string>();
+                DataTable dataTable = new DataTable();
+                exec.ExecStoredProcedure("SP_DDL_LISTAR_T_DOC", dataTable, Parameters);
+                foreach (DataRow rows in dataTable.Rows)
+                {
+                    Tipo_Documento_dto entidad = new Tipo_Documento_dto();
+                    entidad.id_documento = int.Parse(rows["id_documento"].ToString());
+                    entidad.descr_documento = rows["descr_documento"].ToString();
+                    retorno.Add(entidad);
+                    entidad = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
+        public List<Servicios_dto> ListarServicios()
+        {
+            OracleComand exec = new OracleComand();
+
+            List<Servicios_dto> retorno = new List<Servicios_dto>();
+
+            try
+            {
+                var Parameters = new Dictionary<string, string>();
+                DataTable dataTable = new DataTable();
+                exec.ExecStoredProcedure("SP_DDL_LISTAR_SERVICIO", dataTable, Parameters);
+                foreach (DataRow rows in dataTable.Rows)
+                {
+                    Servicios_dto entidad = new Servicios_dto();
+                    entidad.id_servicio = int.Parse(rows["id_servicio"].ToString());
+                    entidad.desc_servicio = rows["desc_servicio"].ToString();
+                    retorno.Add(entidad);
+                    entidad = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
 
     }
 }

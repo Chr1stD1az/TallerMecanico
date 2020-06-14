@@ -20,3 +20,14 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Negocio\obj\Deb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.csproj.CopyComplete
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.pdb
+C:\TallerMecanico\Taller_Negocio\bin\Debug\Taller_Negocio.dll
+C:\TallerMecanico\Taller_Negocio\bin\Debug\Taller_Negocio.pdb
+C:\TallerMecanico\Taller_Negocio\bin\Debug\Taller_Datos.dll
+C:\TallerMecanico\Taller_Negocio\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\TallerMecanico\Taller_Negocio\bin\Debug\Taller_Datos.pdb
+C:\TallerMecanico\Taller_Negocio\bin\Debug\Taller_Datos.dll.config
+C:\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.csprojAssemblyReference.cache
+C:\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.csproj.CoreCompileInputs.cache
+C:\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.csproj.CopyComplete
+C:\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.dll
+C:\TallerMecanico\Taller_Negocio\obj\Debug\Taller_Negocio.pdb

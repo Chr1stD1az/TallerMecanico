@@ -32,7 +32,7 @@ namespace Taller_Negocio
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return retorno;
 

@@ -90,3 +90,16 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.csprojAssemblyReference.cache
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Administrador.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\MainWindow.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\MenuPrincipal.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloInformes.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloPedido.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloVenta.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\RecepcionPedido.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\App.g.cs
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf_MarkupCompile.cache
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf_MarkupCompile.lref
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.exe
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.pdb

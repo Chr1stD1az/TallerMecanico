@@ -47,22 +47,15 @@ namespace Taller_Escritorio_wpf
 
             Compartido_Negocio comunaN = new Compartido_Negocio();
 
-
-
-            //////////////LISTAR ESTADO/////////////////
-            cmb_estado_recep.ItemsSource = comunaN.ListarEstadoPedido();
-            cmb_estado_recep.DisplayMemberPath = "desc_estado";
-            cmb_estado_recep.SelectedValuePath = "id_estado";
-
             //////////////LISTAR EMPLEADO/////////////////
-            cmb_empleado.ItemsSource = comunaN.ListarEmpleado();
-            cmb_empleado.DisplayMemberPath = "p_nombre_empleado";
-            cmb_empleado.SelectedValuePath = "id_empleado";
+            cmb_Empl_info.ItemsSource = comunaN.ListarEmpleado();
+            cmb_Empl_info.DisplayMemberPath = "p_nombre_empleado";
+            cmb_Empl_info.SelectedValuePath = "id_empleado";
 
             //////////////LISTAR PROVEEDOR/////////////////
-            cmb_proveedor.ItemsSource = comunaN.ListarProveedor();
-            cmb_proveedor.DisplayMemberPath = "razon_social_prov";
-            cmb_proveedor.SelectedValuePath = "id_proveedor";
+            cmb_prov_info.ItemsSource = comunaN.ListarProveedor();
+            cmb_prov_info.DisplayMemberPath = "razon_social_prov";
+            cmb_prov_info.SelectedValuePath = "id_proveedor";
 
 
 

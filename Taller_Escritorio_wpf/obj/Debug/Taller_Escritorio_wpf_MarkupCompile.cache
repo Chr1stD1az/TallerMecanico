@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\
+C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\
 Taller_Escritorio_wpf
 none
 false
 DEBUG;TRACE
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\App.xaml
+C:\TallerMecanico\Taller_Escritorio_wpf\App.xaml
 7-834357300
 
 111213088074
-23-1664409813
+23-481865022
 Administrador.xaml;MainWindow.xaml;MenuPrincipal.xaml;ModuloInformes.xaml;ModuloPedido.xaml;ModuloVenta.xaml;RecepcionPedido.xaml;
 
-False
+True
 

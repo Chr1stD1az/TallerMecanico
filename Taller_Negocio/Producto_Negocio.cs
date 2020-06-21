@@ -58,5 +58,28 @@ namespace Taller_Negocio
             }
             return dataTable;
         }
+
+        public bool Aumentar_cant_prod(string id_producto, string cantidad)
+        {
+            OracleComand exec = new OracleComand();
+            bool respuesta = false;
+            var Parameters = new Dictionary<string, string>();
+            try
+            {
+                Parameters.Add("V_IDPRODUCTO", id_producto.ToString());
+                Parameters.Add("V_NEW_CANTIDAD", cantidad.ToString());
+                exec.ExecStoredProcedure("SP_AUMENTAR_STOCK", Parameters);
+                respuesta = true;
+            }
+
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                respuesta = false;
+            }
+            return respuesta;
+        }
+
+
     }
 }

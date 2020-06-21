@@ -17,4 +17,3 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.csproj.CopyComplete
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.pdb
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Datos\obj\Debug\Taller_Datos.csprojAssemblyReference.cache

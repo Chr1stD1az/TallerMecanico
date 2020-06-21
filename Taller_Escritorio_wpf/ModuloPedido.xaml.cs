@@ -159,7 +159,7 @@ namespace Taller_Escritorio_wpf
 
                         Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
                         entidad.Producto = int.Parse(item["Producto"].ToString());
-                        entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
+                        entidad.SKU =item["SKU"].ToString();
                         entidad.Descripción = item["Descripción"].ToString();
                         entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
                         entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
@@ -190,7 +190,7 @@ namespace Taller_Escritorio_wpf
                     {
                         Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
                         entidad.Producto = int.Parse(item["id_producto"].ToString());
-                        entidad.SKU = Convert.ToInt64(item["sku_prod"].ToString());
+                        entidad.SKU = item["sku_prod"].ToString();
                         entidad.Descripción = item["descr_producto"].ToString();
                         entidad.Cantidad = cantidad_prod;
                         entidad.Precio = decimal.Parse(item["precio_costo"].ToString()).ToString("n2");
@@ -246,13 +246,14 @@ namespace Taller_Escritorio_wpf
                 cmb_Producto.ItemsSource = respuesta;
                 cmb_Producto.DisplayMemberPath = "descr_producto";
                 cmb_Producto.SelectedValuePath = "id_producto";
-                limpiar1();
+                
             }
             else
             {
                 MessageBox.Show("Debe seleccionar tipo de producto");
             }
-            
+            limpiar1();
+
         }
 
         private void cmb_Producto_DropDownClosed(object sender, EventArgs e)
@@ -322,7 +323,6 @@ namespace Taller_Escritorio_wpf
                 else
                 {
                     cabecera = Pedido_Neg.CrearPedidoHDR(txt_Fecha_P.Text, cmb_Estado_P.SelectedValue.ToString(), cmb_Proveedor_P.SelectedValue.ToString(), cmb_Empleado_P.SelectedValue.ToString(), txt_total.Text);
-
                     if (Application.Current.Properties["ListadoPedido"] != null)
                     {
                         // trae lo que esta en la variable de sesion
@@ -334,22 +334,16 @@ namespace Taller_Escritorio_wpf
                         //lo recorre para añadir al listado que luego se mostrará en la grilla
                         foreach (JObject item in jsonPreservar.Children<JObject>())
                         {
-
                             var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".", "");
                             var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
                             // estos datos vienen de la grilla, creamosla entidad para añadir al listado
                             var respuesta = Pedido_Neg.CrearPedidoDet(item["Cantidad"].ToString(), precio, total, cabecera, item["Producto"].ToString());
-
                         }
                         txt_Id_Pedido.Text = cabecera;
                         MessageBox.Show("Pedido generado");
                     }
                 }
-                
-
             }
-           
-
         }
         //  int posProducto;
         private void Dt_G_list_pedido_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -374,9 +368,6 @@ namespace Taller_Escritorio_wpf
 
         private void Btn_Editar_p_Click(object sender, RoutedEventArgs e)
         {
-
-            
-
             List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
 
             if (txt_Id_producto.Text =="")
@@ -406,7 +397,7 @@ namespace Taller_Escritorio_wpf
 
                         Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
                         entidad.Producto = int.Parse(item["Producto"].ToString());
-                        entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
+                        entidad.SKU = item["SKU"].ToString();
                         entidad.Descripción = item["Descripción"].ToString();
 
                         if (id == int.Parse(item["Producto"].ToString()))
@@ -483,7 +474,7 @@ namespace Taller_Escritorio_wpf
                         // estos datos vienen de la grilla, creamos la entidad para añadir al listado
                         Detalle_Pedido_dto entidad = new Detalle_Pedido_dto();
                         entidad.Producto = int.Parse(item["Producto"].ToString());
-                        entidad.SKU = Convert.ToInt64(item["SKU"].ToString());
+                        entidad.SKU = item["SKU"].ToString();
                         entidad.Descripción = item["Descripción"].ToString();
                         entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
                         entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");

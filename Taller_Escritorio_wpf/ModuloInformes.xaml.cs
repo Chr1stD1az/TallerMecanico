@@ -25,6 +25,10 @@ namespace Taller_Escritorio_wpf
         {
             InitializeComponent();
             CargarComboBox();
+            txt_Fecha_ini_info.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
+            txt_Fecha_fn_info.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
+            txt_Fecha_ini_Venta.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
+            txt_Fecha_Final_Venta.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

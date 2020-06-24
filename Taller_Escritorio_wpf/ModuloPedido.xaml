@@ -57,8 +57,9 @@
 
         </Grid>
         <Grid Grid.Row="3">
+            <materialDesign:PackIcon Kind="TextSearch" Height="33" Width="33" Margin="827,210,0,0" RenderTransformOrigin="1.203,0.588" Background="White"/>
             <Button  x:Name="Btn_Buscar_prod" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="Btn_Buscar_prod_Click" Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,210,340,457" RenderTransformOrigin="0.506,0.503" />
-            <materialDesign:PackIcon Kind="Search" Height="33" Width="33" Margin="827,210,0,0" RenderTransformOrigin="1.203,0.588"/>
+
         </Grid>
         <Grid Grid.Row="2">
             <Button  x:Name="Btn_pedidos" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="GENERAR PEDIDO" Width="240" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="Btn_pedidos_Click" Margin="0,480,898,162" />
@@ -69,16 +70,18 @@
             <materialDesign:PackIcon Kind="BasketFill" Height="59" Width="49" Margin="64,559,0,0"/>
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF51B06D" FontSize="16" Click="Btn_Agregar_p_Click" Margin="0,267,265,400" RenderTransformOrigin="1.212,-0.094" />
-            <materialDesign:PackIcon Kind="AddCircleOutline" Height="33" Width="33" Margin="902,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+            <materialDesign:PackIcon Kind="AddCircleOutline" Height="33" Width="33" Margin="902,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF168C5B"/>
+            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16" Click="Btn_Agregar_p_Click" Margin="0,267,265,400" RenderTransformOrigin="1.212,-0.094" />
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF19B3F7" FontSize="16"  Margin="0,267,212,400" RenderTransformOrigin="3.903,0.615" Click="Btn_Editar_p_Click" />
-            <materialDesign:PackIcon Kind="CircleEditOutline" Height="33" Width="33" Margin="955,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+            <materialDesign:PackIcon Kind="CircleEditOutline" Height="33" Width="33" Margin="955,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF19B3F7"/>
+            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,267,212,400" RenderTransformOrigin="3.903,0.615" Click="Btn_Editar_p_Click" />
+
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFDD6A6A" FontSize="16"  Margin="0,265,159,401.2" RenderTransformOrigin="0.339,-0.385" Click="Btn_Eliminar_p_Click" />
-            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="1008,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="1008,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FFDD6A6A"/>
+            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,265,159,401.2" RenderTransformOrigin="0.339,-0.385" Click="Btn_Eliminar_p_Click" />
+
         </Grid>
 
         <DataGrid x:Name="Dt_G_list_pedido" HorizontalAlignment="Left" Height="214" Margin="422,321.2,0,0" VerticalAlignment="Top" Width="620" Grid.Row="2" MouseDoubleClick="Dt_G_list_pedido_MouseDoubleClick" IsReadOnly="True" />

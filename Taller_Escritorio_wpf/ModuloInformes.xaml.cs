@@ -1,34 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Taller_Datos;
 using Taller_Negocio;
+
+
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
+using System.Windows.Forms;
+using Org.BouncyCastle.Crypto.Digests;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Taller_Escritorio_wpf
 {
     /// <summary>
     /// Lógica de interacción para ModuloInformes.xaml
     /// </summary>
-    public partial class ModuloInformes : Window
+    public partial class ModuloInformes : System.Windows.Window
     {
         public ModuloInformes()
         {
             InitializeComponent();
             CargarComboBox();
-            txt_Fecha_ini_info.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
-            txt_Fecha_fn_info.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
-            txt_Fecha_ini_Venta.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
-            txt_Fecha_Final_Venta.BlackoutDates.Add(new CalendarDateRange(DateTime.Today, DateTime.Today.AddDays(1000)));
+            txt_Fecha_ini_info.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(1), DateTime.Today.AddDays(1000)));
+            txt_Fecha_fn_info.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(1), DateTime.Today.AddDays(1000)));
+            txt_Fecha_ini_Venta.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(1), DateTime.Today.AddDays(1000)));
+            txt_Fecha_Final_Venta.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(1), DateTime.Today.AddDays(1000)));
+
+            txt_Fecha_ini_info.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txt_Fecha_fn_info.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txt_Fecha_ini_Venta.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txt_Fecha_Final_Venta.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -38,7 +43,7 @@ namespace Taller_Escritorio_wpf
 
         private void BotonCerrar_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void Btn_Menu_Click(object sender, RoutedEventArgs e)
@@ -57,15 +62,21 @@ namespace Taller_Escritorio_wpf
             cmb_Empl_info.DisplayMemberPath = "p_nombre_empleado";
             cmb_Empl_info.SelectedValuePath = "id_empleado";
 
-            //////////////LISTAR PROVEEDOR INFORME PEDIDO/////////////////
+
+            //////////////LISTAR EMPLEADO/////////////////
+            cmb_Empl_info.ItemsSource = CompN.ListarEmpleado();
+            cmb_Empl_info.DisplayMemberPath = "p_nombre_empleado";
+            cmb_Empl_info.SelectedValuePath = "id_empleado";
+
+            //////////////LISTAR PROVEEDOR/////////////////
             cmb_prov_info.ItemsSource = CompN.ListarProveedor();
             cmb_prov_info.DisplayMemberPath = "razon_social_prov";
             cmb_prov_info.SelectedValuePath = "id_proveedor";
 
-            //////////////LISTAR FAMILIA INFORME PEDIDO/////////////////
-            cmb_Familia_prod_info.ItemsSource = CompN.ListarFamProd();
-            cmb_Familia_prod_info.DisplayMemberPath = "descr_familia";
-            cmb_Familia_prod_info.SelectedValuePath = "id_familia_prod";
+            //////////////LISTAR PROVEEDOR INFORME PEDIDO/////////////////
+            cmb_prov_info.ItemsSource = CompN.ListarProveedor();
+            cmb_prov_info.DisplayMemberPath = "razon_social_prov";
+            cmb_prov_info.SelectedValuePath = "id_proveedor";
 
             //////////////LISTAR TIPO DOCUMENTO VENTA/////////////////
             cmb_Tipo_Doc_info_vta.ItemsSource = CompN.ListarDocumentos();
@@ -81,45 +92,97 @@ namespace Taller_Escritorio_wpf
 
         }
 
-        private void cmb_Familia_prod_info_DropDownClosed(object sender, EventArgs e)
+        private void Btn_Busca_Ped_info_Click(object sender, RoutedEventArgs e)
         {
-            if (cmb_Familia_prod_info.Text == "")
-            {
-                MessageBox.Show("Seleccionar Familiar de producto");
-            }
-            else
-            {
-                Compartido_Negocio comp = new Compartido_Negocio();
-                List<Tipo_Producto_dto> respuesta = new List<Tipo_Producto_dto>();
+            Inf_Pedido_Negocio inf_pe = new Inf_Pedido_Negocio();
+            List<Inf_pedido_dto> detalle = new List<Inf_pedido_dto>();
+            System.Data.DataTable resp = new System.Data.DataTable();
 
-                int familiaCmb = int.Parse(cmb_Familia_prod_info.SelectedValue.ToString());
-                respuesta = comp.ListarTipoProd(familiaCmb);
-                cmb_Tipo_Prod_info.ItemsSource = respuesta;
-                cmb_Tipo_Prod_info.DisplayMemberPath = "descr_tipo_prod";
-                cmb_Tipo_Prod_info.SelectedValuePath = "id_tipo_prod";
+            if (cmb_prov_info.SelectedIndex.ToString() == "-1" || cmb_Empl_info.SelectedIndex.ToString() == "-1")
+            {
+                if (cmb_prov_info.SelectedIndex.ToString() == "-1")
+                {
+                    cmb_prov_info.SelectedIndex = 0;
+
+                }
+                if (cmb_Empl_info.SelectedIndex.ToString() == "-1")
+                {
+                    cmb_Empl_info.SelectedIndex = 0;
+
+                }
 
             }
+
+
+            try
+            {
+
+                detalle = inf_pe.ListarPedido(cmb_prov_info.SelectedIndex.ToString(), cmb_Empl_info.SelectedIndex.ToString(),
+                                              txt_Fecha_ini_info.SelectedDate.ToString(), txt_Fecha_fn_info.SelectedDate.ToString());
+                Dt_G_list_pedido_info.ItemsSource = detalle;
+
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Busqueda no arrojó resultados");
+                throw ex;
+            }
+
+
+
         }
 
-        private void cmb_Tipo_Prod_info_DropDownClosed(object sender, EventArgs e)
+        private void Btn_Gene_Excel_Click(object sender, RoutedEventArgs e)
         {
-            Producto_Negocio Prod_Nego = new Producto_Negocio();
-            List<Producto_dto> respuesta = new List<Producto_dto>();
 
-            if (cmb_Tipo_Prod_info.Text != "")
+
+            Excel.Application excel = new Excel.Application();
+            excel.Visible = true;
+            Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+
+            for (int j = 0; j < Dt_G_list_pedido_info.Columns.Count; j++)
             {
-                string  producto_buscar ="";
-                int tipo_prod = int.Parse(cmb_Tipo_Prod_info.SelectedValue.ToString());
-                respuesta = Prod_Nego.ListarProducto(tipo_prod, producto_buscar);
-                cmb_Producto_info.ItemsSource = respuesta;
-                cmb_Producto_info.DisplayMemberPath = "descr_producto";
-                cmb_Producto_info.SelectedValuePath = "id_producto";
-                
+                Range myRange = (Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].Font.Bold = true;
+                sheet1.Columns[j + 1].ColumnWidth = 15;
+                myRange.Value2 = Dt_G_list_pedido_info.Columns[j].Header;
             }
-            else
+            int num = 0;
+            for (int i = 0; i < Dt_G_list_pedido_info.Columns.Count; i++)
             {
-                MessageBox.Show("Debe seleccionar tipo de producto");
+                int z = 0;
+                var SelectProd = Dt_G_list_pedido_info.ItemsSource;
+                    var jsonValueToGet = JsonConvert.SerializeObject(SelectProd);
+
+                    // lo convierte en un array
+                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                    //lo recorre para añadir al listado que luego se mostrará en la grilla
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
+                    {
+                        Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[z + 2, num + 1];
+                        string dato = Dt_G_list_pedido_info.Columns[num].Header.ToString();
+                        if (dato != null)
+                        {
+                            myRange.Value2 = item[dato].ToString();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    z++;
+
+                    }
+                num++;
+                if (num == 8)
+                {
+                    break;
+                }
+
             }
+
+
         }
     }
 }

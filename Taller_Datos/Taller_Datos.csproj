@@ -54,6 +54,7 @@
     <Compile Include="empleado_dto.cs" />
     <Compile Include="Estado_Pedido_dto.cs" />
     <Compile Include="Familia_Prod_dto.cs" />
+    <Compile Include="Inf_pedido_dto.cs" />
     <Compile Include="OracleComand.cs" />
     <Compile Include="Producto_dto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

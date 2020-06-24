@@ -70,16 +70,19 @@
 
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF51B06D" FontSize="16"  Margin="0,267,265,400" RenderTransformOrigin="1.212,-0.094" />
-            <materialDesign:PackIcon Kind="AddCircleOutline" Height="33" Width="33" Margin="902,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+            <materialDesign:PackIcon Kind="AddCircleOutline" Height="33" Width="33" Margin="902,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF51B06D"/>
+            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,267,265,400" RenderTransformOrigin="1.212,-0.094" />
+
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FF19B3F7" FontSize="16"  Margin="0,267,212,400" RenderTransformOrigin="3.903,0.615"  />
-            <materialDesign:PackIcon Kind="CircleEditOutline" Height="33" Width="33" Margin="955,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+            <materialDesign:PackIcon Kind="CircleEditOutline" Height="33" Width="33" Margin="955,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF19B3F7"/>
+            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,267,212,400" RenderTransformOrigin="3.903,0.615"  />
+
         </Grid>
         <Grid Grid.Row="3">
-            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFDD6A6A" FontSize="16"  Margin="0,265,159,401.2" RenderTransformOrigin="0.339,-0.385"  />
-            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="1008,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White"/>
+            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="1008,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FFDD6A6A"/>
+            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,265,159,401.2" RenderTransformOrigin="0.339,-0.385"  />
+
         </Grid>
 
         <DataGrid x:Name="Dt_G_list_pedido" HorizontalAlignment="Left" Height="214" Margin="422,321.2,0,0" VerticalAlignment="Top" Width="620" Grid.Row="2"  IsReadOnly="True" />

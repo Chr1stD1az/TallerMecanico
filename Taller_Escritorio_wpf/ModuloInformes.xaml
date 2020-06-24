@@ -39,7 +39,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </materialDesign:ColorZone>
-            <Rectangle HorizontalAlignment="Left" Height="306" Margin="280,85,0,-320.6" Stroke="#FF232222" VerticalAlignment="Top" Width="717" Grid.Column="1" Grid.ColumnSpan="2">
+            <Rectangle HorizontalAlignment="Left" Height="306" Margin="214,85,0,-320.6" Stroke="#FF232222" VerticalAlignment="Top" Width="844" Grid.Column="1" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <BlurEffect/>
                 </Rectangle.Effect>
@@ -50,14 +50,32 @@
             <ComboBox x:Name="cmb_prov_info" materialDesign:HintAssist.Hint="Proveedor" materialDesign:HintAssist.IsFloating="True" Margin="442,111,43,-81" Height="40" Grid.Column="1" />
             <DatePicker x:Name="txt_Fecha_ini_info" materialDesign:HintAssist.Hint="Fecha Inicial" Grid.Column="1" Margin="761,122,220,-81" Height="29" Grid.ColumnSpan="2" />
             <DatePicker x:Name="txt_Fecha_fn_info" materialDesign:HintAssist.Hint="Fecha Final" Grid.Column="2" Margin="97,122,100,-81" Height="29" />
-            <ComboBox x:Name="cmb_Familia_prod_info" materialDesign:HintAssist.Hint=" Familia Producto" materialDesign:HintAssist.IsFloating="True" Margin="302,151,363,-121" Height="40" Grid.Column="1" DropDownClosed="cmb_Familia_prod_info_DropDownClosed"  />
-            <ComboBox x:Name="cmb_Tipo_Prod_info" materialDesign:HintAssist.Hint=" Tipo Producto" materialDesign:HintAssist.IsFloating="True" Margin="442,151,201,-121" Height="40" Grid.Column="1" DropDownClosed="cmb_Tipo_Prod_info_DropDownClosed" />
-            <ComboBox x:Name="cmb_Producto_info" materialDesign:HintAssist.Hint=" Producto" materialDesign:HintAssist.IsFloating="True" Margin="602,151,43,-121" Height="40" Grid.Column="1" />
-            <DataGrid x:Name="Dt_G_list_pedido_info" HorizontalAlignment="Left" Height="175" Margin="302,196,0,-300.6" VerticalAlignment="Top" Width="558"  IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" />
+            <Grid Grid.Row="2">
+                <materialDesign:PackIcon Kind="TextBoxSearch" Height="33" Width="33" Margin="1115,117,-1028,-79.6" />
+                <Button  x:Name="Btn_Busca_Ped_info" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="33" Height="33"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,117,-1028,-79.6" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Btn_Busca_Ped_info_Click"  />
+
+            </Grid>
+
+            <DataGrid x:Name="Dt_G_list_pedido_info" HorizontalAlignment="Left" Height="175" Margin="234,196,0,-300.6" VerticalAlignment="Top" Width="746"  IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1" FontSize="10" />
+            <Grid Grid.Row="2">
+                <materialDesign:PackIcon Kind="MicrosoftExcel" Height="33" Width="33" Margin="1116,212,-1029,-174.6" Foreground="#FF188249" />
+                <Button  x:Name="Btn_Gene_Excel" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="33" Height="33"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,212,-1029,-174.6" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Btn_Gene_Excel_Click"  />
+            </Grid>
+            <Grid Grid.Row="2">
+                <materialDesign:PackIcon Kind="FileWord" Height="33" Width="33" Margin="1116,250,-1029,-212.6" Foreground="#FF182982" />
+                <Button  x:Name="Btn_Gene_Word" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="33" Height="33"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,250,-1029,-212.6" BorderBrush="{x:Null}" HorizontalAlignment="Right"  />
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <materialDesign:PackIcon Kind="FormatText" Height="33" Width="33" Margin="1116,299,-1029,-261.6" Foreground="#FF020C07" />
+                <Button  x:Name="Btn_Gene_TXT" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="33" Height="33"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,299,-1029,-261.6" BorderBrush="{x:Null}" HorizontalAlignment="Right"  />
+
+            </Grid>
 
 
 
-            <Rectangle HorizontalAlignment="Left" Height="305" Margin="280,406,0,-641" Stroke="#FF232222" VerticalAlignment="Top" Width="717" Grid.Column="1" Grid.ColumnSpan="2">
+
+            <Rectangle HorizontalAlignment="Left" Height="305" Margin="214,406,0,-640.6" Stroke="#FF232222" VerticalAlignment="Top" Width="844" Grid.Column="1" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <BlurEffect Radius="4"/>
                 </Rectangle.Effect>
@@ -88,9 +106,7 @@
             <materialDesign:PackIcon Kind="Home" Height="58" Width="56" Margin="73,60,0,0" RenderTransformOrigin="0.764,0.471" />
 
         </Grid>
-        <StackPanel Height="39" Margin="1000,260.2,100,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
-            <Button x:Name="Btn_Generar_Informe" Content="GENERAR" Height="38" Background="#FF5AC1CB" Foreground="#DDFFFFFF" />
-        </StackPanel>
+
         <StackPanel Height="58" Margin="60,561.2,901,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
             <Button x:Name="Btn_Mod_Informes" Content="MODULO INFORMES" Height="58" Background="#FF6FB98F" Foreground="#DDFFFFFF" FontWeight="Bold" Margin="0,0,0.2,0" />
         </StackPanel>

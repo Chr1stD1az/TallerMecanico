@@ -181,6 +181,7 @@ namespace Taller_Escritorio_wpf
 
         private void Btn_Confirmar_Rec_Click(object sender, RoutedEventArgs e)
         {
+            txt_id_recep.Text = "";
             bool SkuVacio = false;
             string cabecera = "";
             bool aumentar = false ;
@@ -199,38 +200,47 @@ namespace Taller_Escritorio_wpf
                     SkuVacio = true;
                 }
             }
-
-            if (SkuVacio == false)
+            if (cmb_estado_recep.Text != "Generado" )
             {
-               // var total = Math.Round(decimal.Parse(item["TOTAL"].ToString()), 0).ToString().Replace(".", "");
-                cabecera = Recepnegocio.CrearRecepcionHDR(txt_fecha_recep.Text, cmb_estado_recep.SelectedValue.ToString(), txt_id_pedido.Text, cmb_empleado.SelectedValue.ToString(), cmb_proveedor.SelectedValue.ToString(), txt_total_recep.Text);
-                new_estado = Recepnegocio.Cambiar_Estado_Pedido(txt_id_pedido.Text, cmb_estado_recep.SelectedValue.ToString());
-                foreach (JObject item in jsonPreservar.Children<JObject>())
+                if (SkuVacio == false)
                 {
-                    try
+                    // var total = Math.Round(decimal.Parse(item["TOTAL"].ToString()), 0).ToString().Replace(".", "");
+                    cabecera = Recepnegocio.CrearRecepcionHDR(txt_fecha_recep.Text, cmb_estado_recep.SelectedValue.ToString(), txt_id_pedido.Text, cmb_empleado.SelectedValue.ToString(), cmb_proveedor.SelectedValue.ToString(), txt_total_recep.Text);
+                    new_estado = Recepnegocio.Cambiar_Estado_Pedido(txt_id_pedido.Text, cmb_estado_recep.SelectedValue.ToString());
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
                     {
-                        var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".", "");
-                        var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
+                        try
+                        {
+                            var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".", "");
+                            var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
 
-                        Recepnegocio.CrearRecepcionDet(item["Recibido"].ToString(),
-                                                       precio,
-                                                       item["SKU"].ToString(),
-                                                       cabecera,
-                                                       item["IDProducto"].ToString(),
-                                                       total);
-                        aumentar = producto_Neg.Aumentar_cant_prod(item["IDProducto"].ToString(),
-                                                                    item["Recibido"].ToString());
+                            Recepnegocio.CrearRecepcionDet(item["Recibido"].ToString(),
+                                                           precio,
+                                                           item["SKU"].ToString(),
+                                                           cabecera,
+                                                           item["IDProducto"].ToString(),
+                                                           total);
+                            aumentar = producto_Neg.Aumentar_cant_prod(item["IDProducto"].ToString(),
+                                                                        item["Recibido"].ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    // aumentar = producto_Neg.Aumentar_cant_prod();
+                    txt_id_recep.Text = cabecera;
+                    this.Btn_Confirmar_Rec.IsEnabled = false;
+                    MessageBox.Show("Recepción realizada con éxito");
                 }
-               // aumentar = producto_Neg.Aumentar_cant_prod();
-                txt_id_recep.Text = cabecera;
-                MessageBox.Show("Recepción realizada con éxito");
-                this.Btn_Confirmar_Rec.IsEnabled = false;
+
             }
+            else
+            {
+                MessageBox.Show("Debe Cambiar el estado del pedido");
+            }
+            
+
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

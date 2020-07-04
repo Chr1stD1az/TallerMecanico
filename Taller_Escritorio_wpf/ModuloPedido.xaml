@@ -23,6 +23,11 @@
                         </Button>
                     </StackPanel>
                 </materialDesign:ColorZone>
+                <Grid Grid.Row="2">
+                    <Button  x:Name="Btn_minimizar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  Height="30" Width="30" Margin="1136,0,34,0.4" Padding="0"   OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" Click="Btn_minimizar_Click"  >
+                        <materialDesign:PackIcon Kind="WindowMinimize"   />
+                    </Button>
+                </Grid>
 
             </Grid>
         </Border>
@@ -57,7 +62,7 @@
 
         </Grid>
         <Grid Grid.Row="3">
-            <materialDesign:PackIcon Kind="TextSearch" Height="33" Width="33" Margin="827,210,0,0" RenderTransformOrigin="1.203,0.588" Background="White"/>
+            <materialDesign:PackIcon Kind="Search" Height="33" Width="33" Margin="827,210,0,0" RenderTransformOrigin="1.203,0.588" Background="White"/>
             <Button  x:Name="Btn_Buscar_prod" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="Btn_Buscar_prod_Click" Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,210,340,457" RenderTransformOrigin="0.506,0.503" />
 
         </Grid>

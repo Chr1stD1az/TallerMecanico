@@ -29,6 +29,7 @@ namespace Taller_Negocio
                     Producto_dto entidad = new Producto_dto();
                     entidad.id_producto = int.Parse(item["id_producto"].ToString());
                     entidad.descr_producto = item["descr_producto"].ToString();
+                    entidad.stock = int.Parse(item["stock"].ToString());
                     listado_Pro.Add(entidad);
                     entidad = null;
                 }

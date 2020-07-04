@@ -10,6 +10,7 @@ namespace Taller_Datos
     {
         public int id_producto { get; set; }
         public string descr_producto { get; set; }
+        public int stock { get; set; }
 
     }
 }

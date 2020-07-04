@@ -23,6 +23,11 @@
                         </Button>
                     </StackPanel>
                 </materialDesign:ColorZone>
+                <Grid Grid.Row="2">
+                    <Button  x:Name="Btn_minimizar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  Height="30" Width="30" Margin="1136,0,34,0.4" Padding="0"   OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" Click="Btn_minimizar_Click"  >
+                        <materialDesign:PackIcon Kind="WindowMinimize"   />
+                    </Button>
+                </Grid>
 
             </Grid>
         </Border>
@@ -39,71 +44,84 @@
                     </TextBlock.Effect>
                 </TextBlock>
             </materialDesign:ColorZone>
-            <Rectangle HorizontalAlignment="Left" Height="137" Margin="280,85,0,-151.6" Stroke="#FF232222" VerticalAlignment="Top" Width="663" Grid.Column="1" Grid.ColumnSpan="2">
+            <Rectangle HorizontalAlignment="Left" Height="126" Margin="280,85,0,-140.6" Stroke="#FF232222" VerticalAlignment="Top" Width="663" Grid.Column="1" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <BlurEffect/>
                 </Rectangle.Effect>
             </Rectangle>
-            <Rectangle HorizontalAlignment="Left" Height="463" Margin="281,250,0,-642.6" Stroke="#FF232222" VerticalAlignment="Top" Width="662" Grid.Column="1" Grid.ColumnSpan="2">
+
+            <Rectangle HorizontalAlignment="Left" Height="480" Margin="281,233,0,-642.6" Stroke="#FF232222" VerticalAlignment="Top" Width="662" Grid.Column="1" Grid.ColumnSpan="2">
                 <Rectangle.Effect>
                     <BlurEffect Radius="4"/>
                 </Rectangle.Effect>
             </Rectangle>
 
-            <TextBox x:Name="txt_Id_venta" materialDesign:HintAssist.Hint=" ID venta" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="300,85,383.2,-58.6" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
-            <TextBox x:Name="txt_Fecha_P" materialDesign:HintAssist.Hint=" Fecha" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="439,85,243.2,-58.6" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False" RenderTransformOrigin="1.421,0.36"/>
-            <ComboBox x:Name="cmb_Docuemento_Vta" materialDesign:HintAssist.Hint=" Tipo Documento" materialDesign:HintAssist.IsFloating="True" Margin="581,85,83.2,-58.6" Height="44" Grid.Column="1" />
-            <ComboBox x:Name="cmb_Cliente_Vta" materialDesign:HintAssist.Hint=" Cliente" materialDesign:HintAssist.IsFloating="True" Margin="480,146,163.2,-119.6" Height="44" Grid.Column="1" />
+            <TextBox x:Name="txt_Id_venta" materialDesign:HintAssist.Hint=" ID venta" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="300,85,403.2,-58.6" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+            <DatePicker x:Name="txt_Fecha_P" materialDesign:HintAssist.Hint=" Fecha" materialDesign:HintAssist.IsFloating="True"  Margin="401,92,300.2,-58.6" Grid.Column="1" IsEnabled="False" RenderTransformOrigin="1.421,0.36"/>
+            <ComboBox x:Name="cmb_Docuemento_Vta" materialDesign:HintAssist.Hint=" Tipo Documento" materialDesign:HintAssist.IsFloating="True" Margin="501,85,163.2,-58.6" Height="44" Grid.Column="1" />
+            <ComboBox x:Name="cmb_Cliente_Vta" materialDesign:HintAssist.Hint=" Cliente" materialDesign:HintAssist.IsFloating="True" Margin="480,146,142.2,-119.6" Height="44" Grid.Column="1" />
 
 
-            <ComboBox x:Name="cmb_taller_Vta" materialDesign:HintAssist.Hint=" Taller" materialDesign:HintAssist.IsFloating="True" Margin="742,89,162,-58.6" Height="40" Grid.Column="1" Grid.ColumnSpan="2" />
+            <ComboBox x:Name="cmb_taller_Vta" materialDesign:HintAssist.Hint=" Taller" materialDesign:HintAssist.IsFloating="True" Margin="640,90,219,-59.6" Height="40" Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False" FontWeight="Bold" />
             <TextBox x:Name="Txt_Rut_Cli_Vta" materialDesign:HintAssist.Hint=" Rut" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="300,146,383.2,-119.6" SpellCheck.IsEnabled="True" Grid.Column="1"/>
             <TextBox x:Name="Txt_Dv_Cli_Vta" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="419,146,322.2,-119.6" SpellCheck.IsEnabled="True" Grid.Column="1" RenderTransformOrigin="0.41,-0.203"/>
 
-            <ComboBox x:Name="cmb_servicio_Vta" materialDesign:HintAssist.Hint=" Servicio" materialDesign:HintAssist.IsFloating="True" Margin="300,250,363.2,-219.6" Height="40" Grid.Column="1" />
-            <ComboBox x:Name="cmb_Familia_prod_Vta" materialDesign:HintAssist.Hint=" Familia Producto" materialDesign:HintAssist.IsFloating="True" Margin="300,290,364.2,-259.6" Height="40" Grid.Column="1"  />
-            <ComboBox x:Name="cmb_Tipo_Prod_Vta" materialDesign:HintAssist.Hint=" Tipo Producto" materialDesign:HintAssist.IsFloating="True" Margin="439,290,225.2,-259.6" Height="40" Grid.Column="1" />
-            <TextBox x:Name="txt_Sku_producto" materialDesign:HintAssist.Hint=" SKU Producto" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="300,330,363.2,-301.6" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
-            <ComboBox x:Name="cmb_Producto" materialDesign:HintAssist.Hint=" Producto" materialDesign:HintAssist.IsFloating="True" Margin="581,290,43.2,-259.6" Height="40" Grid.Column="1" />
-            <TextBox x:Name="txt_Cant_producto" materialDesign:HintAssist.Hint=" Cantidad" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="581,330,142.2,-301.6" SpellCheck.IsEnabled="True" Grid.Column="1"/>
+            <ComboBox x:Name="cmb_servicio_Vta" materialDesign:HintAssist.Hint=" Servicios" materialDesign:HintAssist.IsFloating="True" Margin="300,250,283.2,-219.6" Height="40" Grid.Column="1" />
+            <TextBox x:Name="txt_Cant_servicios" materialDesign:HintAssist.Hint=" Cantidad" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="525,248,198.2,-219.6" SpellCheck.IsEnabled="True" Grid.Column="1"/>
+
+            <ComboBox x:Name="cmb_Familia_prod_Vta" materialDesign:HintAssist.Hint=" Familia Producto" materialDesign:HintAssist.IsFloating="True" Margin="300,290,364.2,-259.6" Height="40" Grid.Column="1" DropDownClosed="cmb_Familia_prod_Vta_DropDownClosed"  />
+            <ComboBox x:Name="cmb_Tipo_Prod_Vta" materialDesign:HintAssist.Hint=" Tipo Producto" materialDesign:HintAssist.IsFloating="True" Margin="439,290,223.2,-259.6" Height="40" Grid.Column="1" DropDownClosed="cmb_Tipo_Prod_Vta_DropDownClosed" />
+            <TextBox x:Name="txt_Sku_producto" materialDesign:HintAssist.Hint=" SKU Producto" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="300,330,383.2,-301.6" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+            <TextBox x:Name="txt_descr_producto" materialDesign:HintAssist.Hint="Descripción Producto" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="419,330,183.2,-301.6" SpellCheck.IsEnabled="True" IsEnabled="False" RenderTransformOrigin="0.501,0.531" Grid.Column="1"/>
+            <ComboBox x:Name="cmb_Producto" materialDesign:HintAssist.Hint=" Producto" materialDesign:HintAssist.IsFloating="True" Margin="580,290,43.2,-259.6" Height="40" Grid.Column="1" DropDownClosed="cmb_Producto_DropDownClosed" />
+            <TextBox x:Name="txt_stock" materialDesign:HintAssist.Hint=" Stock" IsEnabled="False" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="620,330,124.2,-301.6" SpellCheck.IsEnabled="True" Grid.Column="1"/>
+
+            <TextBox x:Name="txt_Cant_producto" materialDesign:HintAssist.Hint=" Cantidad" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="680,330,43.2,-301.6" SpellCheck.IsEnabled="True" Grid.Column="1"/>
             <TextBox x:Name="txt_total" materialDesign:HintAssist.Hint="TOTAL" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="302,611,319.2,-589.6" SpellCheck.IsEnabled="True" Grid.Column="1" FontSize="18" FontWeight="Bold" IsEnabled="False" RenderTransformOrigin="0.517,0.933"/>
 
         </Grid>
         <Grid Grid.Row="3">
-            <materialDesign:PackIcon Kind="AddCircleOutline" Height="33" Width="33" Margin="902,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF51B06D"/>
-            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,267,265,400" RenderTransformOrigin="1.212,-0.094" />
+            <materialDesign:PackIcon Kind="Add" Height="33" Width="33" Margin="743,186,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF51B06D"/>
+            <Button  x:Name="Btn_Agregar_serv" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,186,424,480.2" RenderTransformOrigin="1.212,-0.094" Click="Btn_Agregar_serv_Click"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="789,186,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FFDD6A6A"/>
+            <Button  x:Name="Btn_Eliminar_Servi" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,186,378,480.2" RenderTransformOrigin="0.339,-0.385" Click="Btn_Eliminar_Servi_Click"   />
 
         </Grid>
         <Grid Grid.Row="3">
-            <materialDesign:PackIcon Kind="CircleEditOutline" Height="33" Width="33" Margin="955,267,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF19B3F7"/>
-            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,267,212,400" RenderTransformOrigin="3.903,0.615"  />
+            <materialDesign:PackIcon Kind="AddCircleOutline" Height="34" Width="33" Margin="897,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF51B06D"/>
+            <Button  x:Name="Btn_Agregar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="34" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,265,270,401" RenderTransformOrigin="1.212,-0.094" Click="Btn_Agregar_p_Click" />
+        </Grid>
+        <Grid Grid.Row="3">
+            <materialDesign:PackIcon Kind="CircleEditOutline" Height="33" Width="33" Margin="953,266,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FF19B3F7"/>
+            <Button  x:Name="Btn_Editar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="35" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,265,214,400" RenderTransformOrigin="3.903,0.615" Click="Btn_Editar_p_Click"  />
 
         </Grid>
         <Grid Grid.Row="3">
-            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="1008,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FFDD6A6A"/>
-            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="33" Height="33"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,265,159,401.2" RenderTransformOrigin="0.339,-0.385"  />
+            <materialDesign:PackIcon Kind="DeleteCircleOutline"  Height="33" Width="33" Margin="1006,265,0,0" RenderTransformOrigin="-2.465,3.693" Foreground="White" Background="#FFDD6A6A"/>
+            <Button  x:Name="Btn_Eliminar_p" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Width="35" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,265,161,400.2" RenderTransformOrigin="0.339,-0.385" Click="Btn_Eliminar_p_Click"  />
 
         </Grid>
 
-        <DataGrid x:Name="Dt_G_list_pedido" HorizontalAlignment="Left" Height="214" Margin="422,321.2,0,0" VerticalAlignment="Top" Width="620" Grid.Row="2"  IsReadOnly="True" />
+        <DataGrid x:Name="Dt_G_list_pedido" HorizontalAlignment="Left" Height="218" Margin="422,321.2,0,0" VerticalAlignment="Top" Width="617" Grid.Row="2"  IsReadOnly="True" MouseDoubleClick="Dt_G_list_pedido_MouseDoubleClick" />
+        <Label x:Name="label1" Content="-" Grid.Column="1" HorizontalAlignment="Left" Margin="291.4,96,0,0" VerticalAlignment="Top" Height="23"/>
+
+
+
 
         <Grid Grid.Row="2" Margin="-10,0.2,10,0" ClipToBounds="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="121*"/>
-                <ColumnDefinition Width="479*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button  x:Name="Btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="236" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="Btn_MenuP_Click" Margin="0,60,891,580.8" BorderBrush="{x:Null}" HorizontalAlignment="Right" Grid.ColumnSpan="2" />
+            <Button  x:Name="Btn_MenuP" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="237" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Click="Btn_MenuP_Click" Margin="0,60,890,580.8" BorderBrush="{x:Null}" HorizontalAlignment="Right" />
             <materialDesign:PackIcon Kind="Home" Height="58" Width="56" Margin="73,60,0,0" RenderTransformOrigin="0.764,0.471" />
-            <TextBox x:Name="txt_descr_producto" materialDesign:HintAssist.Hint="Descripción Producto" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="329.4,256,511,398.8" SpellCheck.IsEnabled="True" IsEnabled="False" RenderTransformOrigin="0.501,0.531" Grid.Column="1"/>
-            <Label x:Name="label1" Content="-" Grid.Column="1" HorizontalAlignment="Left" Margin="291.4,96,0,0" VerticalAlignment="Top" Height="23"/>
-
         </Grid>
-        <StackPanel Height="62" Margin="793,561.2,158,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
-            <Button x:Name="Btn_Generar_Ped" Content="GENERAR VENTA" Height="58" Margin="10,0,-1.2,0" Background="#FF5AC1CB" Foreground="#DDFFFFFF" />
+        <StackPanel Height="60" Margin="801,559.2,159,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
+            <Button x:Name="Btn_Generar_venta" Content="GENERAR VENTA" Height="60" Background="#FF5AC1CB" Foreground="#DDFFFFFF" Click="Btn_Generar_venta_Click" />
         </StackPanel>
-        <StackPanel Height="58" Margin="60,561.2,904,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
-            <Button x:Name="Btn_Cancelar_Vta" Content="CANCELAR VENTA" Height="57" Background="#FFCB5A5A" Foreground="#DDFFFFFF" FontWeight="Bold" />
+        <StackPanel Height="60" Margin="60,559.2,900,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.645,0.91" Grid.Row="2">
+            <Button x:Name="Btn_Cancelar_Vta" Content="Cancelar venta" Height="60" Background="#FFCB5A5A" Foreground="#DDFFFFFF" FontWeight="Bold" Click="Btn_Cancelar_Vta_Click" />
+        </StackPanel>
+        <StackPanel Height="59" Margin="60,480.2,904,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
+            <Button x:Name="Btn_Nueva_Vta" Content="Nueva venta" Height="59" Background="#FF51B06D" Foreground="#DDFFFFFF" FontWeight="Bold" BorderBrush="#FF4CAF50" Click="Btn_Nueva_Vta_Click" Margin="0,0,-4,0" />
         </StackPanel>
         <Grid  HorizontalAlignment="Left" Height="30" Margin="0,660.2,0,0" VerticalAlignment="Top" Width="1100" Grid.Row="2">
             <Grid.ColumnDefinitions>

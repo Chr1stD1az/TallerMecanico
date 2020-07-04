@@ -65,6 +65,7 @@
     <Compile Include="Tipo_Cliente_dto.cs" />
     <Compile Include="Tipo_Documento_dto.cs" />
     <Compile Include="Tipo_Producto_dto.cs" />
+    <Compile Include="Venta_dto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

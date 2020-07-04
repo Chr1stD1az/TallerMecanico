@@ -46,6 +46,48 @@ namespace Taller_Negocio
             return respuesta;
         }
 
+        public bool EliminarProveedor(int ID_PROVEEDOR)
+
+        {
+            OracleComand exec = new OracleComand();
+            bool respuesta = false;
+            var Parameters = new Dictionary<string, string>();
+            try
+            {
+                Parameters.Add("v_ID_PROV", ID_PROVEEDOR.ToString());
+
+                exec.ExecStoredProcedure("SP_DELETEPROVEEDOR ", Parameters);
+                respuesta = true;
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                respuesta = false;
+            }
+            return respuesta;
+        }
+
+        public DataTable ListarProveedor(string RUT_PROVEEDOR)
+        {
+            OracleComand exec = new OracleComand();
+            DataTable dataTable = new DataTable();
+            var Parameters = new Dictionary<string, string>();
+            try
+            {
+
+                Parameters.Add("v_rut_prov;", RUT_PROVEEDOR);
+                exec.ExecStoredProcedure("SP_LISTAR_PROVEEDOR", dataTable, Parameters);
+
+                return dataTable;
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+            }
+            return dataTable;
+        }
+
+
 
     }
 }

@@ -65,5 +65,10 @@ namespace Taller_Escritorio_wpf
             ModuloInformes ventana = new ModuloInformes();
             ventana.ShowDialog();
         }
+
+        private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

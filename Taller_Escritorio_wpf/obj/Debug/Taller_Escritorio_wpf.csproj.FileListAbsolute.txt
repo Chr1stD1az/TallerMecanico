@@ -105,13 +105,7 @@ C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.exe
 C:\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.pdb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\BouncyCastle.Crypto.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\ICSharpCode.SharpZipLib.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\NPOI.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\NPOI.OOXML.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\NPOI.OpenXml4Net.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\NPOI.OpenXmlFormats.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\BouncyCastle.Crypto.xml
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\ICSharpCode.SharpZipLib.pdb
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\ICSharpCode.SharpZipLib.xml
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\Taller_Escritorio_wpf.csproj.ResolveComReference.cache
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\SpreadsheetLight.dll
-C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\SpreadsheetLight.xml

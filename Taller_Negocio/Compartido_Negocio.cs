@@ -198,8 +198,8 @@ namespace Taller_Negocio
                 foreach (DataRow rows in dataTable.Rows)
                 {
                     Servicios_dto entidad = new Servicios_dto();
-                    entidad.id_servicio = int.Parse(rows["id_servicio"].ToString());
-                    entidad.desc_servicio = rows["desc_servicio"].ToString();
+                    entidad.ID = int.Parse(rows["id_servicio"].ToString());
+                    entidad.Descripción = rows["desc_servicio"].ToString();
                     retorno.Add(entidad);
                     entidad = null;
                 }

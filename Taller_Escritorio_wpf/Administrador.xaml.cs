@@ -89,6 +89,7 @@ namespace Taller_Escritorio_wpf
             CargarComboBoxCliente();
             CargarComboBoxProveedor();
             cmb_id_taller_E.SelectedValue = 1;
+            cmb_id_taller_C.SelectedValue = 1;
         }
         /// <summary>
         /// Método que Carga de informacion los cmb de la vista
@@ -109,6 +110,12 @@ namespace Taller_Escritorio_wpf
             Cmb_cargo_E.DisplayMemberPath = "desc_cargo";
             Cmb_cargo_E.SelectedValuePath = "id_cargo";
 
+            TallerNegocio TallerN = new TallerNegocio();
+            //////////////LISTAR taller/////////////////
+            cmb_id_taller_E.ItemsSource = TallerN.ListarTaller();
+            cmb_id_taller_E.DisplayMemberPath = "nombre";
+            cmb_id_taller_E.SelectedValuePath = "id_taller";
+
         }
         
         public void CargarComboBoxCliente()
@@ -127,9 +134,9 @@ namespace Taller_Escritorio_wpf
 
             TallerNegocio TallerN = new TallerNegocio();
             //////////////LISTAR taller/////////////////
-            cmb_id_taller_E.ItemsSource = TallerN.ListarTaller();
-            cmb_id_taller_E.DisplayMemberPath = "nombre";
-            cmb_id_taller_E.SelectedValuePath = "id_taller";
+            cmb_id_taller_C.ItemsSource = TallerN.ListarTaller();
+            cmb_id_taller_C.DisplayMemberPath = "nombre";
+            cmb_id_taller_C.SelectedValuePath = "id_taller";
         }
         public void CargarComboBoxProveedor()
         {
@@ -150,7 +157,12 @@ namespace Taller_Escritorio_wpf
         {
             Application.Current.Shutdown();
         }
-
+        private void btn_MenuP_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MenuPrincipal ventana = new MenuPrincipal();
+            ventana.ShowDialog();
+        }
         private void frame_Navigated(object sender, NavigationEventArgs e)
         {
 
@@ -164,12 +176,14 @@ namespace Taller_Escritorio_wpf
         private void Btn_Empleado_Click(object sender, RoutedEventArgs e)
         {
             this.PanelSeleccionado = PanelAdministrador.EMPLEADO;
+            limpiarEmp();
 
         }
 
         private void Btn_Cliente_Click(object sender, RoutedEventArgs e)
         {
             this.PanelSeleccionado = PanelAdministrador.CLIENTE;
+            limpiarCLiente();
         }
         private void Btn_Proveedor_Click(object sender, RoutedEventArgs e)
         {
@@ -181,7 +195,10 @@ namespace Taller_Escritorio_wpf
         {
 
         }
-        
+
+        ////////////////////////////////////////////////////////////
+        /////////////////EMPLEADO//////////////////////////////////
+        ///////////////////////////////////////////////////////////
         private void limpiarEmp()
         {
             Txt_id_E.Text = string.Empty;
@@ -199,22 +216,21 @@ namespace Taller_Escritorio_wpf
             Txt_NombreU_E.Text = string.Empty;
             Txt_Contrasena_E.Password = string.Empty;
             Cmb_comuna_E.SelectedValue = null;
-       ;
             Cmb_cargo_E.SelectedValue = null;
+            chk_Fiado.IsChecked = false;
         }
 
         private void btn_Agregar_E_Click(object sender, RoutedEventArgs e)
         {
-
             bool resp = false;
             Empleado_Negocio empN = new Empleado_Negocio();
             if (Txt_Rut_Empleado.Text == "" || Txt_Dv_Empleado.Text == "" || Txt_P_Nombre_E.Text == "" || Txt_S_Nombre_E.Text == "" || Txt_P_Apellido_E.Text == "" ||
                 Txt_S_Apellido_E.Text == "" || Txt_Direccion_E.Text == "" || Txt_numeracion_E.Text == "" || Txt_Fono_E.Text == "" || Txt_Correo_E.Text == "" ||
-                Txt_NombreU_E.Text == "" || Txt_Contrasena_E.Password == "" || Cmb_comuna_E.Text == "" || cmb_id_taller_E.Text == "" || Cmb_cargo_E.Text == "")
+                Txt_NombreU_E.Text == "" || Txt_Contrasena_E.Password == "" || Cmb_comuna_E.Text == "" ||  Cmb_cargo_E.Text == "")
             {
                 if (Txt_Rut_Empleado.Text == "" && Txt_Dv_Empleado.Text == "" && Txt_P_Nombre_E.Text == "" && Txt_S_Nombre_E.Text == "" && Txt_P_Apellido_E.Text == "" &&
                    Txt_S_Apellido_E.Text == "" && Txt_Direccion_E.Text == "" && Txt_numeracion_E.Text == "" && Txt_Fono_E.Text == "" && Txt_Correo_E.Text == "" &&
-                   Txt_NombreU_E.Text == "" && Txt_Contrasena_E.Password == "" && Cmb_comuna_E.Text == "" && cmb_id_taller_E.Text == "" && Cmb_cargo_E.Text == "")
+                   Txt_NombreU_E.Text == "" && Txt_Contrasena_E.Password == "" && Cmb_comuna_E.Text == "" && Cmb_cargo_E.Text == "")
                 {
                     MessageBox.Show("Debe completar todos los campos");
                 }
@@ -222,7 +238,7 @@ namespace Taller_Escritorio_wpf
                 {
                     if (Txt_Rut_Empleado.Text == "" && !resp )
                     {
-                        MessageBox.Show("Debe ingresar Rut de empleado");
+                        MessageBox.Show("Debe ingresar Rut del empleado");
                         resp = true ;
                     }
                     if (Txt_Dv_Empleado.Text == "" && !resp)
@@ -262,7 +278,7 @@ namespace Taller_Escritorio_wpf
                     }
                     if ( Txt_Fono_E.Text == "" && !resp)
                     {
-                        MessageBox.Show("Debe ingresar número de telefono");
+                        MessageBox.Show("Debe ingresar número de teléfono");
                         resp = true;
                     }
                     if (Txt_Correo_E.Text == "" && !resp)
@@ -282,25 +298,19 @@ namespace Taller_Escritorio_wpf
                     }
                     if (Cmb_comuna_E.Text == "" && !resp)
                     {
-                        MessageBox.Show("Debe elecionar comuna ");
-                        resp = true;
-                    }
-                    if (cmb_id_taller_E.Text == "" && !resp)
-                    {
-                        MessageBox.Show("Debe seleccionar taller ");
+                        MessageBox.Show("Debe selecionar comuna ");
                         resp = true;
                     }
                     if (Cmb_cargo_E.Text == "" && !resp)
                     {
-                        MessageBox.Show("Debe seleccionar cargo ");
+                        MessageBox.Show("Debe seleccionar cargo del empleado");
                         resp = true;
                     }
                 }
 
             }
             else
-            {
-               
+            {             
                 bool resultado = false;
                 try
                 {
@@ -328,14 +338,11 @@ namespace Taller_Escritorio_wpf
                 }
                 catch (Exception)
                 {
-
                     MessageBox.Show("Empleado no pudo ser creado");
                     throw;
-
                 }
 
             }
-
         }
 
 
@@ -345,11 +352,8 @@ namespace Taller_Escritorio_wpf
             if (Txt_Rut_Empleado.Text !="")
             {
                 bool retorno = false;
-
                 string msj= "Esta seguro de eliminar este empleado";
-                string titulo = "ELIMINAR EMPLEADO";
-
-               
+                string titulo = "ELIMINAR EMPLEADO";              
                 var resp = MessageBox.Show(msj, titulo,
                      MessageBoxButton.YesNo);
                 if (resp == MessageBoxResult.Yes)
@@ -357,26 +361,19 @@ namespace Taller_Escritorio_wpf
                     retorno = empN.EliminarEmp(int.Parse(Txt_id_E.Text));
                     if (retorno)
                     {
-
-                        MessageBox.Show("Cliente Eliminado");
+                        MessageBox.Show("Empleado Eliminado");
                         limpiarEmp();
                     }
                     else
                     {
-                        MessageBox.Show("Cliente no pudo ser Eliminado");
+                        MessageBox.Show("El empleado no pudo ser eliminado");
                     }
-
-                }
-               
+                }             
             }
             else
             {
-                MessageBox.Show("Debe ingresar RUT para Eliminar cliente");
-
+                MessageBox.Show("Debe ingresar RUT para eliminar un empleado");
             }
-
-            
-
         }
 
         private void btn_Buscar_E_Click(object sender, RoutedEventArgs e)
@@ -433,67 +430,11 @@ namespace Taller_Escritorio_wpf
 
         }
 
-        private void btn_Agregar_C_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_Eliminar_C_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_agregar_P_Click(object sender, RoutedEventArgs e)
-        {
-            Proveedor_Negocio provNeg = new Proveedor_Negocio();
-            bool resultado = false;
-            try
-            {
-                resultado = provNeg.CrearProveedor(Txt_Razon_S_.Text, Txt_Giro.Text, Txt_Rut_Proveedor.Text, Txt_Dv_Proveedor.Text, Txt_Direccion_P.Text, Txt_numeracion_P.Text,
-                                               Txt_Fono_P.Text, Txt_Correo_P.Text, Txt_NombreU_P.Text,
-                                               Txt_Contrasena_P.Text, 
-                                               Cmb_comuna_P.SelectedValue.ToString());
-                if (resultado)
-                {
-                    MessageBox.Show("Proveedor creado");
-                   
-                }
-                else
-                {
-                    MessageBox.Show("Proveedor no pudo ser creado");
-                }
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("Proveedor no pudo ser creado2");
-                throw;
-
-            }
-
-        }
-
-        private void btn_Eliminar_P_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_MenuP_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            MenuPrincipal ventana = new MenuPrincipal();
-            ventana.ShowDialog();
-        }
-
         private void Txt_Rut_Empleado_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             CheckIsNumeric(e);
         }
 
-        /// <summary>
-        /// Metodo que valida solo numero, se utilizar para el campo rut
-        /// </summary>
-        /// <param name="e"></param>
         private void CheckIsNumeric(TextCompositionEventArgs e)
         {
             int result;
@@ -506,7 +447,7 @@ namespace Taller_Escritorio_wpf
 
         private void Txt_Dv_Empleado_KeyUp(object sender, KeyEventArgs e)
         {
-            if (Txt_Rut_Empleado.Text!="")
+            if (Txt_Rut_Empleado.Text != "")
             {
                 if (!ValidaRut(Txt_Rut_Empleado.Text))
                 {
@@ -520,7 +461,7 @@ namespace Taller_Escritorio_wpf
                 Txt_Dv_Empleado.Text = string.Empty;
                 Txt_Rut_Empleado.Focus();
             }
-            
+
         }
 
         /// <summary>
@@ -529,7 +470,7 @@ namespace Taller_Escritorio_wpf
         /// </summary>
         /// <param name="rut">string</param>
         /// <returns>booleano</returns>
-        public  bool ValidaRut(string rut)
+        public bool ValidaRut(string rut)
         {
 
             var largo = Txt_Dv_Empleado.Text.Length;
@@ -582,28 +523,331 @@ namespace Taller_Escritorio_wpf
             }
         }
 
-        public void ValidaLargoRut()
-        {
-
-           
-            
-        }
-
         private void Txt_Rut_Empleado_LostFocus(object sender, RoutedEventArgs e)
         {
             var largo = Txt_Rut_Empleado.Text.Length;
             if (largo != 7 && largo != 8)
             {
                 MessageBox.Show("Largo del Rut no corresponde");
-                //Txt_Rut_Empleado.Text = string.Empty;
-                //Txt_Rut_Empleado.Focus();
-                //Txt_Rut_Empleado.SelectionStart = Txt_Rut_Empleado.Text.Length;
             }
             else
             {
                 Txt_Dv_Empleado.Focus();
             }
 
+        }
+
+
+        ////////////////////////////////////////////////////////////
+        /////////////////CLIENTE///////////////////////////////////
+        ///////////////////////////////////////////////////////////
+
+
+        private void limpiarCLiente()
+        {
+            Txt_id_C.Text = string.Empty;
+            Txt_Rut_Cliente.Text = string.Empty;
+            Txt_Dv_Empleado.Text = string.Empty;
+            Txt_P_Nombre_C.Text = string.Empty;
+            Txt_S_Nombre_C.Text = string.Empty;
+            Txt_P_Apellido_C.Text = string.Empty;
+            Txt_S_Apellido_C.Text = string.Empty;
+            Txt_Direccion_C.Text = string.Empty;
+            Txt_numeracion_C.Text = string.Empty;
+            Txt_Depto_C.Text = string.Empty;
+            Txt_Fono_C.Text = string.Empty;
+            Txt_Correo_C.Text = string.Empty;
+            Txt_NombreU_C.Text = string.Empty;
+            Txt_Contrasena_C.Password = string.Empty;
+            Cmb_comuna_C.SelectedValue = null;
+            Cmb_Tipo_Cliente.SelectedValue = null;
+        }
+        private void btn_Agregar_C_Click(object sender, RoutedEventArgs e)
+        {
+            Cliente_Negocio clienteN = new Cliente_Negocio();
+            bool resp = false;
+            if (Txt_Rut_Cliente.Text == "" || Txt_Dv_Cliente.Text == "" || Txt_P_Nombre_C.Text == "" || Txt_S_Nombre_C.Text == "" || Txt_P_Apellido_C.Text == "" || Txt_S_Apellido_C.Text == "" ||
+                                                   Txt_Direccion_C.Text == "" || Txt_numeracion_C.Text == "" || Txt_Fono_C.Text == "" || Txt_Correo_C.Text == "" ||  
+                                                   Txt_NombreU_C.Text == "" || Txt_Contrasena_C.Password == "" || Cmb_Tipo_Cliente.Text == "" || Cmb_comuna_C.Text == "" )
+            {
+                if (Txt_Rut_Cliente.Text == "" && Txt_Dv_Cliente.Text == "" && Txt_P_Nombre_C.Text == "" && Txt_S_Nombre_C.Text == "" && Txt_P_Apellido_C.Text == "" &&
+                   Txt_S_Apellido_C.Text == "" && Txt_Direccion_C.Text == "" && Txt_numeracion_C.Text == "" &&  Txt_Fono_C.Text == "" &&
+                   Txt_Correo_C.Text == ""  && Txt_NombreU_C.Text == "" && Txt_Contrasena_C.Password == "" && Cmb_Tipo_Cliente.Text == "" && 
+                   Cmb_comuna_C.Text == "" )
+                {
+                    MessageBox.Show("Debe completar todos los campos");
+                }
+                else
+                {
+                    if (Txt_Rut_Cliente.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar Rut del cliente");
+                        resp = true;
+                    }
+                    if (Txt_Dv_Cliente.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar dígito verificador ");
+                        resp = true;
+                    }
+                    if (Txt_P_Nombre_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar primer nombre ");
+                        resp = true;
+                    }
+                    if (Txt_S_Nombre_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar segundo nombre");
+                        resp = true;
+                    }
+                    if (Txt_P_Apellido_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar apellido paterno");
+                        resp = true;
+                    }
+                    if (Txt_S_Apellido_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar apellido materno ");
+                        resp = true;
+                    }
+                    if (Txt_Direccion_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar dirección");
+                        resp = true;
+                    }
+                    if (Txt_numeracion_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar numeración del domicilio ");
+                        resp = true;
+                    }
+                    if (Txt_Fono_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar número de telefono");
+                        resp = true;
+                    }
+                    if (Txt_Correo_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar correo");
+                        resp = true;
+                    }
+                    if (Txt_NombreU_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar nombre de usuario");
+                        resp = true;
+                    }
+                    if (Txt_Contrasena_C.Password == "" && !resp)
+                    {
+                        MessageBox.Show("Debe ingresar una contraseña");
+                        resp = true;
+                    }
+                    if (Cmb_Tipo_Cliente.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe elecionar tipo de cliente ");
+                        resp = true;
+                    }
+                    if (Cmb_comuna_C.Text == "" && !resp)
+                    {
+                        MessageBox.Show("Debe seleccionar comuna ");
+                        resp = true;
+                    }
+                }
+            }
+            else
+            {
+                bool resultado = false;
+                try
+                {
+                    var fiado1 = "0";
+                    if (chk_Fiado.IsChecked == true)
+                    {
+                        fiado1 = "1";
+                        chk_Fiado.IsChecked = true;
+                    }
+                    else
+                    {
+                        fiado1 = "0";
+                        chk_Fiado.IsChecked = false;
+                    }
+                    resultado = clienteN.CrearCliente(Txt_Rut_Cliente.Text, Txt_Dv_Cliente.Text, Txt_P_Nombre_C.Text, Txt_S_Nombre_C.Text, Txt_P_Apellido_C.Text, Txt_S_Apellido_C.Text,
+                                                   Txt_Direccion_C.Text, Txt_numeracion_C.Text, Txt_Depto_C.Text,
+                                                   Txt_Fono_C.Text, Txt_Correo_C.Text, fiado1, Txt_NombreU_C.Text, Txt_Contrasena_C.Password,
+                                                   Cmb_Tipo_Cliente.SelectedValue.ToString(), Cmb_comuna_C.SelectedValue.ToString(), cmb_id_taller_C.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        private void btn_Buscar_C_Click(object sender, RoutedEventArgs e)
+        {
+            Cliente_Negocio clienteN = new Cliente_Negocio();
+            DataTable resp = new DataTable();
+            Compartido_Negocio comp = new Compartido_Negocio();
+
+            if (Txt_Rut_Cliente.Text != "")
+            {
+                try
+                {
+                    resp = clienteN.ListarCliente(Txt_Rut_Cliente.Text);
+                    if (resp.Rows.Count > 0)
+                    {
+
+
+                        foreach (DataRow item in resp.Rows)
+                        {
+                            
+
+                            Txt_id_C.Text = item["ID_CLIENTE"].ToString();
+                            Txt_Dv_Cliente.Text = item["DV_CLIENTE"].ToString();
+                            Txt_P_Nombre_C.Text = item["p_nombre_cliente"].ToString();
+                            Txt_S_Nombre_C.Text = item["s_nombre_cliente"].ToString();
+                            Txt_P_Apellido_C.Text = item["p_apellido_cliente"].ToString();
+                            Txt_S_Apellido_C.Text = item["s_apellido_cliente"].ToString();
+                            Txt_Direccion_C.Text = item["direccion_cliente"].ToString();
+                            Txt_numeracion_C.Text = item["numeracion_cliente"].ToString();
+                            Txt_Fono_C.Text = item["fono_cliente"].ToString();
+                            Txt_Depto_C.Text = item["dept_cliente"].ToString();
+                            Txt_Correo_C.Text = item["correo_cliente"].ToString();
+                            Txt_NombreU_C.Text = item["nombre_usu_cliente"].ToString();
+                            Txt_Contrasena_C.Password = comp.DecrytedString(item["contrasena_cliente"].ToString());
+                            Cmb_comuna_C.SelectedValue = item["id_comuna"].ToString();
+                            Cmb_Tipo_Cliente.SelectedValue = item["id_tipo_cliente"].ToString();
+                            cmb_id_taller_C.SelectedValue = item["id_taller"].ToString();
+
+                            if (item["fiado"].ToString() == "1")
+                            {
+                                chk_Fiado.IsChecked = true;
+                            }
+                            else
+                            {
+
+                                chk_Fiado.IsChecked = false;
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Rut invalido");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Busqueda no arrojó resultados");
+                    throw ex;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar un Rut para la busqueda");
+            }
+        }
+        private void btn_Eliminar_C_Click(object sender, RoutedEventArgs e)
+        {
+            Cliente_Negocio clienteN = new Cliente_Negocio();
+            if (Txt_Rut_Cliente.Text != "")
+            {
+                bool retorno = false;
+                string msj = "Esta seguro de eliminar este cliente";
+                string titulo = "ELIMINAR CLIENTE";
+                var resp = MessageBox.Show(msj, titulo,
+                     MessageBoxButton.YesNo);
+                if (resp == MessageBoxResult.Yes)
+                {
+                    retorno = clienteN.EliminarCliente(int.Parse(Txt_id_C.Text));
+                    if (retorno)
+                    {
+                        MessageBox.Show("Cliente Eliminado");
+                        limpiarCLiente();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El cliente no pudo ser eliminado");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar RUT para eliminar un cliente");
+            }
+        }
+
+        ////////////////////////////////////////////////////////////
+        /////////////////PROVEDOR//////////////////////////////////
+        ///////////////////////////////////////////////////////////
+
+        private void btn_agregar_P_Click(object sender, RoutedEventArgs e)
+        {
+            Proveedor_Negocio provNeg = new Proveedor_Negocio();
+            bool resultado = false;
+            try
+            {
+                resultado = provNeg.CrearProveedor(Txt_Razon_S_.Text, Txt_Giro.Text, Txt_Rut_Proveedor.Text, Txt_Dv_Proveedor.Text, Txt_Direccion_P.Text, Txt_numeracion_P.Text,
+                                               Txt_Fono_P.Text, Txt_Correo_P.Text, Txt_NombreU_P.Text,
+                                               Txt_Contrasena_P.Password, 
+                                               Cmb_comuna_P.SelectedValue.ToString());
+                if (resultado)
+                {
+                    MessageBox.Show("Proveedor creado");
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Proveedor no pudo ser creado");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Proveedor no pudo ser creado2");
+                throw;
+            }
+
+        }
+
+        private void btn_Eliminar_P_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Btn_Buscar_p_Click(object sender, RoutedEventArgs e)
+        {
+            Proveedor_Negocio proveedorN = new Proveedor_Negocio();
+            DataTable resp = new DataTable();
+            try
+            {
+                resp = proveedorN.ListarProveedor(Txt_Rut_Proveedor.Text);
+
+                foreach (DataRow item in resp.Rows)
+                {
+                    Txt_id_p.Text = item["ID_PROVEEDOR"].ToString();
+                    Txt_Rut_Proveedor.Text = item["RUT_PROV"].ToString();
+                    Txt_Dv_Proveedor.Text = item["DV_PROV"].ToString();
+                    Txt_Razon_S_.Text = item["RAZON_SOCIAL_PROV"].ToString();
+                    Txt_Giro.Text = item["GIRO_PROV"].ToString();
+                    Txt_Fono_P.Text = item["FONO_PROV"].ToString();
+                    Txt_Correo_P.Text = item["CORREO_PROV"].ToString();
+                    Txt_Direccion_P.Text = item["DIRECCION_PROV"].ToString();
+                    Txt_numeracion_P.Text = item["NUMERACION_PROV"].ToString();
+                    Cmb_comuna_P.SelectedValue = item["ID_COMUNA"].ToString();
+                    Txt_NombreU_P.Text = item["NOMBRE_USU_PROV"].ToString();
+                    Txt_Contrasena_P.Password = item["CONTRASENA_PROV"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
+
+        private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Taller_Datos
 {
-    public class Servicios_dto
+    public class Venta_dto
     {
         public int ID { get; set; }
+        public string SKU { get; set; }
         public string Descripción { get; set; }
-        public string Precio { get; set; }
         public int Cantidad { get; set; }
+        public string Precio { get; set; }
         public string Total { get; set; }
-
- 
+        
     }
 }

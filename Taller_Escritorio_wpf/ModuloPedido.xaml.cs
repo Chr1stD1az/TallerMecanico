@@ -30,6 +30,8 @@ namespace Taller_Escritorio_wpf
             CargarComboBoxPedido();
             txt_Fecha_P.Text = DateTime.Now.ToString("dd/MM/yyyy");
             cmb_Estado_P.SelectedValue = 1;
+            Application.Current.Properties["ListadoPedido"] = null;
+
         }
 
 
@@ -42,28 +44,31 @@ namespace Taller_Escritorio_wpf
         {
             Application.Current.Shutdown();
         }
-
+        private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
         public void CargarComboBoxPedido()
         {
             //////////////LISTAR FAMILIA/////////////////
-            Compartido_Negocio comunaN = new Compartido_Negocio();
-            cmb_Familia_P.ItemsSource = comunaN.ListarFamProd();
+            Compartido_Negocio ComparN = new Compartido_Negocio();
+            cmb_Familia_P.ItemsSource = ComparN.ListarFamProd();
             cmb_Familia_P.DisplayMemberPath = "descr_familia";
             cmb_Familia_P.SelectedValuePath = "id_familia_prod";
 
 
             //////////////LISTAR ESTADO/////////////////
-            cmb_Estado_P.ItemsSource = comunaN.ListarEstadoPedido();
+            cmb_Estado_P.ItemsSource = ComparN.ListarEstadoPedido();
             cmb_Estado_P.DisplayMemberPath = "desc_estado";
             cmb_Estado_P.SelectedValuePath = "id_estado";
 
             //////////////LISTAR EMPLEADO/////////////////
-            cmb_Empleado_P.ItemsSource = comunaN.ListarEmpleado();
+            cmb_Empleado_P.ItemsSource = ComparN.ListarEmpleado();
             cmb_Empleado_P.DisplayMemberPath = "p_nombre_empleado";
             cmb_Empleado_P.SelectedValuePath = "id_empleado";
 
             //////////////LISTAR PROVEEDOR/////////////////
-            cmb_Proveedor_P.ItemsSource = comunaN.ListarProveedor();
+            cmb_Proveedor_P.ItemsSource = ComparN.ListarProveedor();
             cmb_Proveedor_P.DisplayMemberPath = "razon_social_prov";
             cmb_Proveedor_P.SelectedValuePath = "id_proveedor";
 
@@ -95,7 +100,9 @@ namespace Taller_Escritorio_wpf
         }
         private void Btn_pedidos_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            ModuloPedido ventana = new ModuloPedido();
+            ventana.ShowDialog();
         }
 
         private void Btn_recep_p_Click(object sender, RoutedEventArgs e)
@@ -107,13 +114,9 @@ namespace Taller_Escritorio_wpf
 
         private void Btn_Agregar_p_Click(object sender, RoutedEventArgs e)
         {
-
             decimal total = 0;
             Producto_Negocio Prod_Neg = new Producto_Negocio();
-
             List<Detalle_Pedido_dto> listado_det = new List<Detalle_Pedido_dto>();
-
-
 
             if (txt_Cant_producto.Text == "" || cmb_Producto.Text == "")
             {
@@ -131,10 +134,8 @@ namespace Taller_Escritorio_wpf
                     if (txt_Cant_producto.Text == "")
                     {
                         MessageBox.Show("Debe ingresar cantidad");
-
                     }
                 }
-
             }
             else
             {
@@ -340,7 +341,13 @@ namespace Taller_Escritorio_wpf
                             var respuesta = Pedido_Neg.CrearPedidoDet(item["Cantidad"].ToString(), precio, total, cabecera, item["Producto"].ToString());
                         }
                         txt_Id_Pedido.Text = cabecera;
-                        MessageBox.Show("Pedido generado");
+                        this.Btn_Generar_Ped.IsEnabled = false;
+                        this.Dt_G_list_pedido.IsEnabled = false;
+                        this.Btn_Agregar_p.IsEnabled = false;
+                        this.Btn_Editar_p.IsEnabled = false;
+                        this.Btn_Eliminar_p.IsEnabled = false;
+                        this.Btn_Buscar_prod.IsEnabled = false;
+                        MessageBox.Show("Pedido generado con el Numero :" + txt_Id_Pedido.Text);
                     }
                 }
             }
@@ -512,9 +519,8 @@ namespace Taller_Escritorio_wpf
                     Dt_G_list_pedido.ItemsSource = listado_det;
                 }
             }
-
-           
-
         }
+
+
     }
 }

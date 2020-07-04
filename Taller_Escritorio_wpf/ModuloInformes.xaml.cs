@@ -45,7 +45,10 @@ namespace Taller_Escritorio_wpf
         {
             System.Windows.Application.Current.Shutdown();
         }
-
+        private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
         private void Btn_Menu_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
@@ -63,17 +66,8 @@ namespace Taller_Escritorio_wpf
             cmb_Empl_info.SelectedValuePath = "id_empleado";
 
 
-            //////////////LISTAR EMPLEADO/////////////////
-            cmb_Empl_info.ItemsSource = CompN.ListarEmpleado();
-            cmb_Empl_info.DisplayMemberPath = "p_nombre_empleado";
-            cmb_Empl_info.SelectedValuePath = "id_empleado";
 
             //////////////LISTAR PROVEEDOR/////////////////
-            cmb_prov_info.ItemsSource = CompN.ListarProveedor();
-            cmb_prov_info.DisplayMemberPath = "razon_social_prov";
-            cmb_prov_info.SelectedValuePath = "id_proveedor";
-
-            //////////////LISTAR PROVEEDOR INFORME PEDIDO/////////////////
             cmb_prov_info.ItemsSource = CompN.ListarProveedor();
             cmb_prov_info.DisplayMemberPath = "razon_social_prov";
             cmb_prov_info.SelectedValuePath = "id_proveedor";
@@ -91,35 +85,51 @@ namespace Taller_Escritorio_wpf
 
 
         }
+        private void Limpiarpedido()
+        {
+            cmb_prov_info.SelectedValue= null;
+            cmb_Empl_info.SelectedValue = null;
+        }
 
         private void Btn_Busca_Ped_info_Click(object sender, RoutedEventArgs e)
         {
             Inf_Pedido_Negocio inf_pe = new Inf_Pedido_Negocio();
             List<Inf_pedido_dto> detalle = new List<Inf_pedido_dto>();
             System.Data.DataTable resp = new System.Data.DataTable();
-
-            if (cmb_prov_info.SelectedIndex.ToString() == "-1" || cmb_Empl_info.SelectedIndex.ToString() == "-1")
+            string proveedor = "";
+            string empleado = "";
+            if (cmb_prov_info.SelectedIndex == -1 )
             {
-                if (cmb_prov_info.SelectedIndex.ToString() == "-1")
+                if (cmb_prov_info.SelectedIndex == -1)
                 {
-                    cmb_prov_info.SelectedIndex = 0;
-
+                    //// cmb_prov_info.SelectedIndex = 0;
+                    proveedor = "0";
                 }
-                if (cmb_Empl_info.SelectedIndex.ToString() == "-1")
-                {
-                    cmb_Empl_info.SelectedIndex = 0;
-
-                }
-
+              
             }
-
-
+            else
+            {
+                proveedor = cmb_prov_info.SelectedValue.ToString();
+              
+            }
+            if (cmb_Empl_info.SelectedIndex == -1)
+            {
+                if (cmb_Empl_info.SelectedIndex == -1)
+                {
+                    //cmb_Empl_info.SelectedIndex = 0;
+                    empleado = "0";
+                }
+            }
+            else
+            {
+                empleado = cmb_Empl_info.SelectedValue.ToString();
+            }
             try
             {
-
-                detalle = inf_pe.ListarPedido(cmb_prov_info.SelectedIndex.ToString(), cmb_Empl_info.SelectedIndex.ToString(),
+                detalle = inf_pe.ListarPedido(proveedor, empleado,
                                               txt_Fecha_ini_info.SelectedDate.ToString(), txt_Fecha_fn_info.SelectedDate.ToString());
                 Dt_G_list_pedido_info.ItemsSource = detalle;
+                Limpiarpedido();
 
             }
             catch (Exception ex)
@@ -135,24 +145,27 @@ namespace Taller_Escritorio_wpf
         private void Btn_Gene_Excel_Click(object sender, RoutedEventArgs e)
         {
 
-
-            Excel.Application excel = new Excel.Application();
-            excel.Visible = true;
-            Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
-            Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
-
-            for (int j = 0; j < Dt_G_list_pedido_info.Columns.Count; j++)
-            {
-                Range myRange = (Range)sheet1.Cells[1, j + 1];
-                sheet1.Cells[1, j + 1].Font.Bold = true;
-                sheet1.Columns[j + 1].ColumnWidth = 15;
-                myRange.Value2 = Dt_G_list_pedido_info.Columns[j].Header;
+            if(Dt_G_list_pedido_info.Items.Count == 0) {
+                System.Windows.MessageBox.Show("No existen datos para exportar!");
             }
-            int num = 0;
-            for (int i = 0; i < Dt_G_list_pedido_info.Columns.Count; i++)
+            else
             {
-                int z = 0;
-                var SelectProd = Dt_G_list_pedido_info.ItemsSource;
+                Excel.Application excel = new Excel.Application();
+                excel.Visible = true;
+                Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+                Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+                for (int j = 0; j < Dt_G_list_pedido_info.Columns.Count; j++)
+                {
+                    Range myRange = (Range)sheet1.Cells[1, j + 1];
+                    sheet1.Cells[1, j + 1].Font.Bold = true;
+                    sheet1.Columns[j + 1].ColumnWidth = 15;
+                    myRange.Value2 = Dt_G_list_pedido_info.Columns[j].Header;
+                }
+                int num = 0;
+                for (int i = 0; i < Dt_G_list_pedido_info.Columns.Count; i++)
+                {
+                    int z = 0;
+                    var SelectProd = Dt_G_list_pedido_info.ItemsSource;
                     var jsonValueToGet = JsonConvert.SerializeObject(SelectProd);
 
                     // lo convierte en un array
@@ -171,18 +184,28 @@ namespace Taller_Escritorio_wpf
                         {
                             break;
                         }
-                    z++;
+                        z++;
 
                     }
-                num++;
-                if (num == 8)
-                {
-                    break;
+                    num++;
+                    if (num == 8)
+                    {
+                        break;
+                    }
+
                 }
 
             }
+            
 
 
         }
+
+        private void Btn_Gene_Excel_Vta_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+
     }
 }

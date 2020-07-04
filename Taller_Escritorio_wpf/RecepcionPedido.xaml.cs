@@ -153,6 +153,7 @@ namespace Taller_Escritorio_wpf
                             detalle = RecepN.ListarDetallePedido(txt_id_pedido.Text);
                             DG_Recep.ItemsSource = detalle;
                             this.Btn_Confirmar_Rec.IsEnabled = true;
+                            this.DG_Recep.IsEnabled = true;
                         }
 
                         
@@ -227,6 +228,7 @@ namespace Taller_Escritorio_wpf
                         {
                             throw ex;
                         }
+                        
                     }
                     // aumentar = producto_Neg.Aumentar_cant_prod();
                     txt_id_recep.Text = cabecera;
@@ -283,7 +285,7 @@ namespace Taller_Escritorio_wpf
                 {
                     if (txt_IdProd.Text == "" && DP_fecha_Venc.Text == "" && txt_cantidad_recep.Text == "")
                     {
-                        MessageBox.Show("Debe seleccionar un producto su Fecha de Vencimiento y cantidad recepcionada");
+                        MessageBox.Show("Debe seleccionar un producto, su Fecha de Vencimiento y cantidad recepcionada");
                     }
                     else
                     {
@@ -355,6 +357,7 @@ namespace Taller_Escritorio_wpf
 
                             total = total + decimal.Parse(entidad.Total);
                             listado_det.Add(entidad);
+                        
                         }
 
                     }
@@ -370,17 +373,9 @@ namespace Taller_Escritorio_wpf
 
         }
 
-       /* public string CrearSku()
-         {
-            
-            string sku = "";
-            string idProd = cmb_proveedor.SelectedValue.ToString();
-            
-            string Fam = Familia.Substring(1, 3);
-            string ttipo = entidad.Tipo.Substring(11, 3);
-            string FechVen = DP_fecha_Venc.Text.Replace("-","");
-            string val1 = idProd.Substring(0, 3);
-            return sku;
-         }*/
+        private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }  
 }

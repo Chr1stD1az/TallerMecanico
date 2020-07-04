@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Taller_Escritorio_wpf"
         mc:Ignorable="d"
-         Title="Login" Height="550" Width="400" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+         Title="Login" Height="600" Width="400" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -23,6 +23,11 @@
                         </Button>
                     </StackPanel>
                 </materialDesign:ColorZone>
+                <Grid Grid.Row="2">
+                    <Button  x:Name="Btn_minimizar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  Height="30" Width="30" Margin="334,0,36,0.4" Padding="0"   OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" Click="Btn_minimizar_Click"  >
+                        <materialDesign:PackIcon Kind="WindowMinimize"   />
+                    </Button>
+                </Grid>
 
             </Grid>
         </Border>
@@ -64,8 +69,8 @@
                 </materialDesign:Card>-->
             </StackPanel>
         </Grid>
-        <Grid  HorizontalAlignment="Left" Height="31" Margin="0,389,0,0" VerticalAlignment="Top" Width="400" Grid.Row="2">
-            <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="15" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="21" Margin="0,0,0,10"/>
+        <Grid  HorizontalAlignment="Left" Height="31" Margin="0,438.6,0,0" VerticalAlignment="Top" Width="400" Grid.Row="2">
+            <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="15" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="21" Margin="0,0,0,9"/>
         </Grid>
     </Grid>
 </Window>

@@ -66,5 +66,9 @@ namespace Taller_Escritorio_wpf
 
         }
 
+        private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

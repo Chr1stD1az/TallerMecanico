@@ -28,6 +28,11 @@
                         </Button>
                     </StackPanel>
                 </materialDesign:ColorZone>
+                <Grid Grid.Row="2">
+                    <Button  x:Name="Btn_minimizar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  Height="30" Width="30" Margin="1136,0,34,0.4" Padding="0"   OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" Click="Btn_minimizar_Click"  >
+                        <materialDesign:PackIcon Kind="WindowMinimize"   />
+                    </Button>
+                </Grid>
 
             </Grid>
         </Border>
@@ -52,6 +57,7 @@
             <Button x:Name="Btn_Proveedor" Click="Btn_Proveedor_Click" Content="Proveedor" HorizontalAlignment="Left" Height="61" Margin="62,579,0,0" VerticalAlignment="Top" Width="220" Background="#FF8EC590" Foreground="#DDFFFFFF" FontSize="18" FontWeight="Bold"/>
 
             <!-- ELIMINAR PARA USAR -->
+
             <StackPanel  Height="80" Margin="360,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
@@ -115,11 +121,13 @@
             <StackPanel Height="74" Margin="908,423,50,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelEmpleadoActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Button x:Name="btn_Eliminar_E" Content="ELIMINAR" Height="58" Margin="0,0,-0.4,0" Background="#FFE44E4E" Foreground="#DDFFFFFF" Click="btn_Eliminar_E_Click"/>
             </StackPanel>
+
             <!-- ELIMINAR PARA USAR -->
 
             <!-- ELIMINAR PARA USAR -->
-            <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <Label x:Name="label_C" Content="CLIENTE" Margin="332,0,292.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
+
+            <StackPanel  Height="80" Margin="357,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
+                <Label x:Name="label_C" Content="Cliente" Margin="42,0,292.8,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
             </StackPanel>
             <StackPanel  Height="273" Margin="357,71,596,356" VerticalAlignment="Center" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <TextBox x:Name="Txt_id_C" materialDesign:HintAssist.Hint=" ID " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,98,0" Height="51" SpellCheck.IsEnabled="True" IsEnabled="False"/>
@@ -131,10 +139,14 @@
 
 
             <StackPanel Height="223" Margin="621,121,327,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_Dv_Cliente" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <TextBox x:Name="Txt_Dv_Cliente" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,196,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_S_Nombre_C" materialDesign:HintAssist.Hint=" Segundo Nombre" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_S_Apellido_C" materialDesign:HintAssist.Hint=" Apellido Materno" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_Correo_C" materialDesign:HintAssist.Hint=" Correo " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <Grid Grid.Row="2">
+                    <Button  x:Name="btn_Buscar_C" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   Width="32" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFFCFCFC" FontSize="16" Margin="0,-188,148,156" Click="btn_Buscar_C_Click" />
+                    <materialDesign:PackIcon Kind="Search" Height="32" Width="32" Margin="72,-188,0,0" RenderTransformOrigin="-0.189,0.329" />
+                </Grid>
             </StackPanel>
 
 
@@ -144,7 +156,7 @@
 
 
             <StackPanel Height="54" Margin="626,428,327,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_Contrasena_C" materialDesign:HintAssist.Hint=" Contraseña" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9.2,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <PasswordBox x:Name="Txt_Contrasena_C" materialDesign:HintAssist.Hint=" Contraseña" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9.2,0" Height="52" />
             </StackPanel>
 
 
@@ -163,7 +175,7 @@
             </StackPanel>
 
             <StackPanel Height="57" Margin="910,130,48,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelClienteActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_id_taller_C" materialDesign:HintAssist.Hint=" Taller" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0" Height="53" SpellCheck.IsEnabled="True"/>
+                <ComboBox x:Name="cmb_id_taller_C" materialDesign:HintAssist.Hint=" Taller" materialDesign:HintAssist.IsFloating="True" Margin="10,0" Height="53" IsEnabled="False" />
             </StackPanel>
 
 
@@ -191,12 +203,13 @@
 
 
             <!-- ELIMINAR PARA USAR -->
-            <StackPanel  Height="80" Margin="248,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
+
+            <StackPanel  Height="80" Margin="357,0,10,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Label x:Name="label_P" Content="Proveedor" Margin="34,0,258.4,0" FontSize="48" Height="67" FontWeight="Bold" FontFamily="Arial Black"/>
             </StackPanel>
 
             <StackPanel  Height="273" Margin="352,71,600,356" VerticalAlignment="Center" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_id_p" materialDesign:HintAssist.Hint=" ID " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,57.2,0" Height="51" SpellCheck.IsEnabled="True" IsEnabled="False"/>
+                <TextBox x:Name="Txt_id_p" materialDesign:HintAssist.Hint=" ID " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,113,0" Height="51" SpellCheck.IsEnabled="True" IsEnabled="False"/>
                 <TextBox x:Name="Txt_Rut_Proveedor" materialDesign:HintAssist.Hint=" Rut" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.6,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_Razon_S_" materialDesign:HintAssist.Hint=" Razón Social" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,0,0" Height="51" SpellCheck.IsEnabled="True" HorizontalAlignment="Left" Width="197"/>
                 <TextBox x:Name="Txt_Fono_P" materialDesign:HintAssist.Hint=" Teléfono " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.6,0" Height="52" SpellCheck.IsEnabled="True"/>
@@ -204,9 +217,14 @@
 
 
             <StackPanel Height="223" Margin="621,121,327,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_Dv_Proveedor" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,173,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <TextBox x:Name="Txt_Dv_Proveedor" materialDesign:HintAssist.Hint=" DV" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,183,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_Giro" materialDesign:HintAssist.Hint=" Giro" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9,0" Height="52" SpellCheck.IsEnabled="True"/>
                 <TextBox x:Name="Txt_Correo_P" materialDesign:HintAssist.Hint=" Correo " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <Grid Grid.Row="2">
+                    <materialDesign:PackIcon Kind="Search" Height="32" Width="32" Margin="72,-138,0,0" RenderTransformOrigin="-0.189,0.329" />
+                    <Button  x:Name="Btn_Buscar_p" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   Width="32" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="{x:Null}" FontSize="16" Margin="0,-138,148,106" Click="Btn_Buscar_p_Click" />
+
+                </Grid>
             </StackPanel>
 
 
@@ -214,12 +232,12 @@
                 <TextBox x:Name="Txt_Direccion_P" materialDesign:HintAssist.Hint=" Dirección " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,10.2,0" Height="52" SpellCheck.IsEnabled="True"/>
             </StackPanel>
             <StackPanel Height="54" Margin="626,428,327,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
-                <TextBox x:Name="Txt_Contrasena_P" materialDesign:HintAssist.Hint=" Contraseña" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9.2,0" Height="52" SpellCheck.IsEnabled="True"/>
+                <PasswordBox x:Name="Txt_Contrasena_P" materialDesign:HintAssist.Hint=" Contraseña" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0,9.2,0" Height="52" />
             </StackPanel>
             <StackPanel Height="54" Margin="626,359,478,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <TextBox x:Name="Txt_numeracion_P" materialDesign:HintAssist.Hint=" N° " materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="10,0" Height="52" SpellCheck.IsEnabled="True"/>
             </StackPanel>
-            <StackPanel Height="54" Margin="352,428,596,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
+            <StackPanel Height="54" Margin="352,428,596,0" VerticalAlignment="Top" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76" Background="#FFFAFFFE">
                 <TextBox x:Name="Txt_NombreU_P" materialDesign:HintAssist.Hint=" Nombre Usuario" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="40,0,9.2,0" Height="52" SpellCheck.IsEnabled="True" />
             </StackPanel>
 
@@ -235,10 +253,7 @@
             <StackPanel Height="74" Margin="910,421,48,0" VerticalAlignment="Top" Background="#FFFAFFFE" Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}" RenderTransformOrigin="0.649,0.76">
                 <Button x:Name="btn_Eliminar_P" Content=" ELIMINAR" Height="58" Margin="0,0,-0.4,0" Background="#FFE44E4E" Foreground="#DDFFFFFF" Click="btn_Eliminar_P_Click"/>
             </StackPanel>
-            <Grid Grid.Row="2">
-                <Button  x:Name="Btn_Buscar_p"  Visibility="{Binding PanelProveedorActivo, Converter={StaticResource VisibleIfTrueConverter}}"  Width="32" Height="Auto"  HorizontalAlignment="Right"  FontWeight="Bold" Background="#FFFCFCFC" FontSize="16" Margin="0,147,591,520.2" />
 
-            </Grid>
             <!-- ELIMINAR PARA USAR -->
 
             <Grid Grid.Row="2">
@@ -253,9 +268,5 @@
         <Grid  HorizontalAlignment="Left" Height="34" Margin="0,655.2,0,0" VerticalAlignment="Top" Width="1200" Grid.Row="2">
             <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="18" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="31"/>
         </Grid>
-
-
-
-
     </Grid>
 </Window>

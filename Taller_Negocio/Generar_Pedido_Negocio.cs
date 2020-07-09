@@ -13,7 +13,6 @@ namespace Taller_Negocio
     {
         public string CrearPedidoHDR(string fecha_pedido, string estado_pedido, string id_prov_pedido, string id_empl_pedido, string total_pedido)
         {
-
             OracleComand exec = new OracleComand();
             string id = "";
             DataTable respuesta = new DataTable();

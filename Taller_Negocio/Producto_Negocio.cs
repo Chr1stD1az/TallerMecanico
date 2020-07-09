@@ -81,6 +81,27 @@ namespace Taller_Negocio
             return respuesta;
         }
 
+        public bool Restar_cant_prod(string id_producto, string cantidad)
+        {
+            OracleComand exec = new OracleComand();
+            bool respuesta = false;
+            var Parameters = new Dictionary<string, string>();
+            try
+            {
+                Parameters.Add("V_IDPRODUCTO", id_producto.ToString());
+                Parameters.Add("V_CANTIDAD_MENOS", cantidad.ToString());
+                exec.ExecStoredProcedure("SP_QUITAR_STOCK", Parameters);
+                respuesta = true;
+            }
+
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                respuesta = false;
+            }
+            return respuesta;
+        }
+
 
     }
 }

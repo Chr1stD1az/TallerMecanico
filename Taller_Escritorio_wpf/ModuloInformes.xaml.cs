@@ -78,16 +78,16 @@ namespace Taller_Escritorio_wpf
             cmb_Tipo_Doc_info_vta.SelectedValuePath = "id_documento";
 
 
-            //////////////LISTAR SERVICIO VENTA/////////////////
-            cmb_Servicio_info_vta.ItemsSource = CompN.ListarServicios();
-            cmb_Servicio_info_vta.DisplayMemberPath = "desc_servicio";
-            cmb_Servicio_info_vta.SelectedValuePath = "id_servicio";
+            //////////////LISTAR FAMILIA PRODUCTO VENTA/////////////////
+            cmb_familiaProd_info_vta.ItemsSource = CompN.ListarFamProd();
+            cmb_familiaProd_info_vta.DisplayMemberPath = "descr_familia";
+            cmb_familiaProd_info_vta.SelectedValuePath = "id_familia_prod";
 
 
         }
         private void Limpiarpedido()
         {
-            cmb_prov_info.SelectedValue= null;
+            cmb_prov_info.SelectedValue = null;
             cmb_Empl_info.SelectedValue = null;
         }
 
@@ -98,19 +98,19 @@ namespace Taller_Escritorio_wpf
             System.Data.DataTable resp = new System.Data.DataTable();
             string proveedor = "";
             string empleado = "";
-            if (cmb_prov_info.SelectedIndex == -1 )
+            if (cmb_prov_info.SelectedIndex == -1)
             {
                 if (cmb_prov_info.SelectedIndex == -1)
                 {
                     //// cmb_prov_info.SelectedIndex = 0;
                     proveedor = "0";
                 }
-              
+
             }
             else
             {
                 proveedor = cmb_prov_info.SelectedValue.ToString();
-              
+
             }
             if (cmb_Empl_info.SelectedIndex == -1)
             {
@@ -145,7 +145,8 @@ namespace Taller_Escritorio_wpf
         private void Btn_Gene_Excel_Click(object sender, RoutedEventArgs e)
         {
 
-            if(Dt_G_list_pedido_info.Items.Count == 0) {
+            if (Dt_G_list_pedido_info.Items.Count == 0)
+            {
                 System.Windows.MessageBox.Show("No existen datos para exportar!");
             }
             else
@@ -196,16 +197,119 @@ namespace Taller_Escritorio_wpf
                 }
 
             }
-            
+
 
 
         }
 
         private void Btn_Gene_Excel_Vta_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (Dt_G_list_venta.Items.Count == 0)
+            {
+                System.Windows.MessageBox.Show("No existen datos para exportar!");
+            }
+            else
+            {
+                Excel.Application excel = new Excel.Application();
+                excel.Visible = true;
+                Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+                Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+                for (int j = 0; j < Dt_G_list_venta.Columns.Count; j++)
+                {
+                    Range myRange = (Range)sheet1.Cells[1, j + 1];
+                    sheet1.Cells[1, j + 1].Font.Bold = true;
+                    sheet1.Columns[j + 1].ColumnWidth = 15;
+                    myRange.Value2 = Dt_G_list_venta.Columns[j].Header;
+                }
+                int num = 0;
+                for (int i = 0; i < Dt_G_list_venta.Columns.Count; i++)
+                {
+                    int z = 0;
+                    var SelectProd = Dt_G_list_venta.ItemsSource;
+                    var jsonValueToGet = JsonConvert.SerializeObject(SelectProd);
+
+                    // lo convierte en un array
+                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                    //lo recorre para añadir al listado que luego se mostrará en la grilla
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
+                    {
+                        Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[z + 2, num + 1];
+                        string dato = Dt_G_list_venta.Columns[num].Header.ToString();
+                        if (dato != null)
+                        {
+                            myRange.Value2 = item[dato].ToString();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        z++;
+
+                    }
+                    num++;
+                    if (num == 8)
+                    {
+                        break;
+                    }
+
+                }
+
+
+            }
+        }
+        private void LimpiarcmbVenta()
+        {
+            cmb_Tipo_Doc_info_vta.SelectedValue = null;
+            cmb_familiaProd_info_vta.SelectedValue = null;
         }
 
+        private void Btn_Busca_Vent_info_Click(object sender, RoutedEventArgs e)
+        {
 
+            Info_Venta_Negocio inf_vt = new Info_Venta_Negocio();
+            List<Info_Venta_dto> detalle = new List<Info_Venta_dto>();
+            System.Data.DataTable resp = new System.Data.DataTable();
+            string TipoDoc = "";
+            string TipoFam = "";
+            if (cmb_Tipo_Doc_info_vta.SelectedIndex == -1)
+            {
+                if (cmb_Tipo_Doc_info_vta.SelectedIndex == -1)
+                {
+                    TipoDoc = "0";
+                }
+            }
+            else
+            {
+                TipoDoc = cmb_Tipo_Doc_info_vta.SelectedValue.ToString();
+
+            }
+            if (cmb_familiaProd_info_vta.SelectedIndex == -1)
+            {
+                if (cmb_familiaProd_info_vta.SelectedIndex == -1)
+                {
+                    ;
+                    TipoFam = "0";
+                }
+            }
+            else
+            {
+                TipoFam = cmb_familiaProd_info_vta.SelectedValue.ToString();
+            }
+            try
+            {
+                detalle = inf_vt.ListarVenta(TipoDoc, TipoFam,
+                                              txt_Fecha_ini_Venta.SelectedDate.ToString(), txt_Fecha_Final_Venta.SelectedDate.ToString());
+                Dt_G_list_venta.ItemsSource = detalle;
+                LimpiarcmbVenta();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Busqueda no arrojó resultados");
+                throw ex;
+            }
+
+
+        }
     }
 }

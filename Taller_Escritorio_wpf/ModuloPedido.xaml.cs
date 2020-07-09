@@ -445,10 +445,6 @@ namespace Taller_Escritorio_wpf
                 txt_total.Text = total.ToString("n2");
                 Dt_G_list_pedido.ItemsSource = listado_det;
             }
-            
-
-            
-
         }
 
         private void Btn_Eliminar_p_Click(object sender, RoutedEventArgs e)

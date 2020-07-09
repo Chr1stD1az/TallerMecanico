@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Taller_Datos;
+using Taller_Datos.DataSet;
+using Taller_Escritorio_wpf.RPT;
 using Taller_Negocio;
 
 namespace Taller_Escritorio_wpf
@@ -21,6 +27,7 @@ namespace Taller_Escritorio_wpf
             CargarComboBox();
             cmb_taller_Vta.SelectedValue = 1;
             Application.Current.Properties["ListadoVenta"] = null;
+            txt_Fecha_V.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -41,9 +48,9 @@ namespace Taller_Escritorio_wpf
         {
             Tipo_Documento_Negocio Docu_Neg = new Tipo_Documento_Negocio();
             //////////////LISTAR FAMILIA/////////////////
-            cmb_Docuemento_Vta.ItemsSource =Docu_Neg.ListarDocumento();
-            cmb_Docuemento_Vta.DisplayMemberPath = "descr_documento";
-            cmb_Docuemento_Vta.SelectedValuePath = "id_documento";
+            cmb_Documento_Vta.ItemsSource =Docu_Neg.ListarDocumento();
+            cmb_Documento_Vta.DisplayMemberPath = "descr_documento";
+            cmb_Documento_Vta.SelectedValuePath = "id_documento";
 
             TallerNegocio TallerN = new TallerNegocio();
             //////////////LISTAR taller/////////////////
@@ -64,6 +71,10 @@ namespace Taller_Escritorio_wpf
             cmb_Familia_prod_Vta.DisplayMemberPath = "descr_familia";
             cmb_Familia_prod_Vta.SelectedValuePath = "id_familia_prod";
 
+            Cliente_Negocio ClienN = new Cliente_Negocio();
+            cmb_Cliente_Vta.ItemsSource = ClienN.ListarClienteCMB();
+            cmb_Cliente_Vta.DisplayMemberPath = "nombre_cliente";
+            cmb_Cliente_Vta.SelectedValuePath = "id_cliente";
 
         }
 
@@ -86,38 +97,270 @@ namespace Taller_Escritorio_wpf
             txt_Sku_producto.Text = string.Empty;
             txt_descr_producto.Text = string.Empty;
             txt_stock.Text = string.Empty;
+            txt_id_pro.Text = string.Empty;
         }
 
+        /////////////////////////////////////////////////
+        /////////////////////PRODUCTO////////////////////
+        ////////////////////////////////////////////////////
         private void Btn_Agregar_p_Click(object sender, RoutedEventArgs e)
         {
             decimal total = 0;
             Producto_Negocio Prod_Neg = new Producto_Negocio();
             List<Venta_dto> list_venta = new List<Venta_dto>();
 
-            if (txt_Cant_producto.Text == "" || txt_descr_producto.Text == "")
+            if(cmb_Documento_Vta.Text == "")
             {
-                if (txt_Cant_producto.Text == "" && txt_descr_producto.Text == "")
-                {
-                    MessageBox.Show("Debe seleccionar un producto y su cantidad");
-                }
-                else
-                {
-                    if (txt_descr_producto.Text == "")
-                    {
-                        MessageBox.Show("Debe seleccionar un producto");
+                MessageBox.Show("Favor de seleccionar tipo de documento");
+                limpiar();
 
-                    }
-                    if (txt_Cant_producto.Text == "")
-                    {
-                        MessageBox.Show("Debe ingresar cantidad");
-                    }
-                }
             }
             else
             {
-                bool existe = false;
-                string id_prod = cmb_Producto.SelectedValue.ToString();
+
+                if (txt_Cant_producto.Text == "" || txt_descr_producto.Text == "")
+                {
+                    if (txt_Cant_producto.Text == "" && txt_descr_producto.Text == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un producto y su cantidad");
+                    }
+                    else
+                    {
+                        if (txt_descr_producto.Text == "")
+                        {
+                            MessageBox.Show("Debe seleccionar un producto");
+
+                        }
+                        if (txt_Cant_producto.Text == "")
+                        {
+                            MessageBox.Show("Debe ingresar cantidad");
+                        }
+                    }
+                }
+                else
+                {
+                    bool existe = false;
+                    string id_prod = txt_id_pro.Text.ToString();
+                    int cantidad_prod = int.Parse(txt_Cant_producto.Text);
+                    string txt_tipo = "P";
+                    decimal subT = 0;
+                    decimal IVA = 0;
+
+
+                    // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
+                    if (Application.Current.Properties["ListadoVenta"] != null)
+                    {
+                        // trae lo que esta en la variable de sesion
+                        var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoVenta"].ToString());
+
+                        // lo convierte en un array
+                        JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                        //lo recorre para añadir al listado que luego se mostrará en la grilla
+                        foreach (JObject item in jsonPreservar.Children<JObject>())
+                        {
+
+                            // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+
+                            Venta_dto entidad = new Venta_dto();
+                            entidad.ID = int.Parse(item["ID"].ToString());
+                            //entidad.SKU = item["SKU"].ToString();
+                            entidad.Descripción = item["Descripción"].ToString();
+                            entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
+                            entidad.T = item["T"].ToString();
+
+
+                            entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
+                            entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
+
+                            if (cmb_Documento_Vta.Text == "Factura")
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+                            else
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+
+                            list_venta.Add(entidad);
+                            if (id_prod == item["ID"].ToString() && item["T"].ToString() == "P")
+                            {
+
+                                existe = true;
+
+                            }
+
+                        }
+                    }
+
+                    if (existe)
+                    {
+                        MessageBox.Show(" El Producto : " + txt_descr_producto.Text + " ya existe en el listado");
+
+                    }
+                    else
+                    {
+                        DataTable respuesta = Prod_Neg.Buscar_Prod_id(id_prod);
+                        foreach (DataRow item in respuesta.Rows)
+                        {
+                            Venta_dto entidad = new Venta_dto();
+                            entidad.ID = int.Parse(item["id_producto"].ToString());
+                            // entidad.SKU = item["sku_prod"].ToString();
+                            entidad.Descripción = item["descr_producto"].ToString();
+                            entidad.Cantidad = cantidad_prod;
+
+
+                            entidad.Precio = decimal.Parse(item["precio_prod"].ToString()).ToString("n2");
+                            entidad.Total = (decimal.Parse(item["precio_prod"].ToString()) * cantidad_prod).ToString("n2");
+
+
+                            entidad.T = txt_tipo;
+                            if (cmb_Documento_Vta.Text == "Factura")
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+                            else
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+
+                            list_venta.Add(entidad);
+
+                        }
+
+                    }
+
+                    // actualiza variable de sesion con los datos actuales de la grilla
+                    var jsonValueToSave = JsonConvert.SerializeObject(list_venta);
+                    Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
+
+                    txt_Sub.Text = subT.ToString("n2");
+                    txt_iva.Text = IVA.ToString("n2");
+                    txt_total.Text = total.ToString("n2");
+                    Dt_G_list_pedido.ItemsSource = list_venta;
+                    limpiar();
+
+                }
+
+            }
+
+
+        }
+
+        private void Btn_Editar_p_Click(object sender, RoutedEventArgs e)
+        {
+            List<Venta_dto> listado_pro = new List<Venta_dto>();
+
+            if (txt_id_pro.Text == "")
+            {
+                MessageBox.Show("Debe seleccionar un producto");
+            }
+            else
+            {
+                bool editar = false;
+                int id = int.Parse(txt_id_pro.Text.ToString());
+                int cantidad = int.Parse(txt_Cant_producto.Text.ToString());
+                decimal total = 0;
+                decimal subT = 0;
+                decimal IVA = 0;
+                //   Producto_Negocio Prod_Neg = new Producto_Negocio();
+
+                if (Application.Current.Properties["ListadoVenta"] != null)
+                {
+                    // trae lo que esta en la variable de sesion
+                    var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoVenta"].ToString());
+
+                    // lo convierte en un array
+                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                    //lo recorre para añadir al listado que luego se mostrará en la grilla
+                    foreach (JObject item in jsonPreservar.Children<JObject>())
+                    {
+                        // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+
+                        Venta_dto entidad = new Venta_dto();
+                        entidad.ID = int.Parse(item["ID"].ToString());
+                       // entidad.SKU = item["SKU"].ToString();
+                        entidad.Descripción = item["Descripción"].ToString();
+
+                        if (id == int.Parse(item["ID"].ToString()) &&  item["T"].ToString() == "P")
+                        {
+                            entidad.Cantidad = cantidad;
+                            entidad.Total = (cantidad * decimal.Parse(item["Precio"].ToString())).ToString("n2");
+                            editar = true;
+                        }
+                        else
+                        {
+                            entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
+                            entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
+                        }
+                        entidad.T = item["T"].ToString();
+                        entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
+
+                        if (cmb_Documento_Vta.Text == "Factura")
+                        {
+                            subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                            IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                            total = total + decimal.Parse(entidad.Total);
+                        }
+                        else
+                        {
+                            subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                            IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                            total = total + decimal.Parse(entidad.Total);
+                        }
+
+                      //  total = total + decimal.Parse(entidad.Total);
+                        listado_pro.Add(entidad);
+                    }
+                }
+
+                var jsonValueToSave = JsonConvert.SerializeObject(listado_pro);
+                Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
+                txt_Sub.Text = subT.ToString("n2");
+                txt_iva.Text = IVA.ToString("n2");
+                txt_total.Text = total.ToString("n2");
+                Dt_G_list_pedido.ItemsSource = listado_pro;
+
+                if (editar == true)
+                {
+
+                    MessageBox.Show("Cantidad Actualizada");
+                    limpiar();
+                }
+                else
+                {
+                    MessageBox.Show("El Producto a actualizar no existe!");
+                    limpiar();
+                }
+            }
+
+        }
+
+        private void Btn_Eliminar_p_Click(object sender, RoutedEventArgs e)
+        {
+            List<Venta_dto> list_prod = new List<Venta_dto>();
+            if (txt_descr_producto.Text == "")
+            {
+                MessageBox.Show("Debe seleccionar un producto");
+                limpiar();
+            }
+            else
+            {
+                bool eliminado = false;
+                string id_prod = txt_id_pro.Text.ToString();
                 int cantidad_prod = int.Parse(txt_Cant_producto.Text);
+                decimal total = 0;
+                decimal subT = 0;
+                decimal IVA = 0;
 
                 // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
                 if (Application.Current.Properties["ListadoVenta"] != null)
@@ -131,91 +374,64 @@ namespace Taller_Escritorio_wpf
                     //lo recorre para añadir al listado que luego se mostrará en la grilla
                     foreach (JObject item in jsonPreservar.Children<JObject>())
                     {
-
-                        // estos datos vienen de la grilla, creamosla entidad para añadir al listado
-
                         Venta_dto entidad = new Venta_dto();
                         entidad.ID = int.Parse(item["ID"].ToString());
-                        //entidad.SKU = item["SKU"].ToString();
                         entidad.Descripción = item["Descripción"].ToString();
                         entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
                         entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
                         entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
-
-                        total = total + decimal.Parse(entidad.Total);
-
-                        list_venta.Add(entidad);
-                        if (id_prod == item["ID"].ToString())
+                        entidad.T = item["T"].ToString();
+                        if (cmb_Documento_Vta.Text == "Factura")
                         {
-
-                            existe = true;
-
+                            subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                            IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                            total = total + decimal.Parse(entidad.Total);
+                        }
+                        else
+                        {
+                            subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                            IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                            total = total + decimal.Parse(entidad.Total);
                         }
 
+                        if (id_prod == item["ID"].ToString() && item["T"].ToString() == "P")
+                        {
+                            eliminado = true;
+                            total = total - decimal.Parse(entidad.Total);
+
+                        }
+                        else
+                        {
+                            list_prod.Add(entidad);
+                        }
                     }
-                }
+                    var jsonValueToSave = JsonConvert.SerializeObject(list_prod);
+                    Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
 
-                if (existe)
-                {
-                    MessageBox.Show(" El Producto : " + txt_descr_producto.Text + " ya existe en el listado");
+                    txt_Sub.Text = subT.ToString("n2");
+                    txt_iva.Text = IVA.ToString("n2");
+                    txt_total.Text = total.ToString("n2");
 
-                }
-                else
-                {
-                    DataTable respuesta = Prod_Neg.Buscar_Prod_id(id_prod);
-                    foreach (DataRow item in respuesta.Rows)
+                    if (eliminado == true)
                     {
-                        Venta_dto entidad = new Venta_dto();
-                        entidad.ID = int.Parse(item["id_producto"].ToString());
-                       // entidad.SKU = item["sku_prod"].ToString();
-                        entidad.Descripción = item["descr_producto"].ToString();
-                        entidad.Cantidad = cantidad_prod;
-                        entidad.Precio = decimal.Parse(item["precio_prod"].ToString()).ToString("n2");
-                        entidad.Total = (decimal.Parse(item["precio_prod"].ToString()) * cantidad_prod).ToString("n2");
 
-                        total = total + decimal.Parse(entidad.Total);
-                        list_venta.Add(entidad);
+                        MessageBox.Show("Producto eliminado");
 
                     }
+                    else
+                    {
+                        MessageBox.Show("El producto no existe!");
 
+                    }
+                    Dt_G_list_pedido.ItemsSource = list_prod;
                 }
-
-                // actualiza variable de sesion con los datos actuales de la grilla
-                var jsonValueToSave = JsonConvert.SerializeObject(list_venta);
-                Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
-
-                txt_total.Text = total.ToString("n2");
-                Dt_G_list_pedido.ItemsSource = list_venta;
-               
+                limpiar();
             }
 
         }
 
-        private void Btn_Editar_p_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Btn_Eliminar_p_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
 
-        private void Btn_Generar_venta_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Btn_Nueva_Vta_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Btn_Cancelar_Vta_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void cmb_Familia_prod_Vta_DropDownClosed(object sender, EventArgs e)
         {
@@ -273,6 +489,7 @@ namespace Taller_Escritorio_wpf
                 {
                     foreach (DataRow item in resp.Rows)
                     {
+                        txt_id_pro.Text = item["id_producto"].ToString();
                         txt_Sku_producto.Text = item["sku_prod"].ToString();
                         txt_descr_producto.Text = cmb_Producto.Text;
                         txt_stock.Text = item["stock"].ToString();
@@ -285,6 +502,10 @@ namespace Taller_Escritorio_wpf
             }
         }
 
+        /// ///////////////////////////////////////
+        /// //////////SERVICIOS////////////////////
+        /// ///////////////////////////////////////
+
         private void Btn_Agregar_serv_Click(object sender, RoutedEventArgs e)
         {
 
@@ -292,80 +513,124 @@ namespace Taller_Escritorio_wpf
             Servicio_Negocio Serv_Neg = new Servicio_Negocio();
             List<Servicios_dto> list_serv = new List<Servicios_dto>();
 
-            if (cmb_servicio_Vta.Text == "" )
-            {
-                 MessageBox.Show("Debe seleccionar un servicio");
+            if (cmb_Documento_Vta.Text == "")
+            { MessageBox.Show("Favor de seleccionar tipo de documento");
+                limpiar();
             }
             else
             {
-                bool existe = false;
-                string id_serv = cmb_servicio_Vta.SelectedValue.ToString();
-                int cantidad_serv = int.Parse(txt_Cant_servicios.Text);
-
-                // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
-                if (Application.Current.Properties["ListadoVenta"] != null)
+                if (cmb_servicio_Vta.Text == "")
                 {
-                    // trae lo que esta en la variable de sesion
-                    var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoVenta"].ToString());
-
-                    // lo convierte en un array
-                    JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
-
-                    //lo recorre para añadir al listado que luego se mostrará en la grilla
-                    foreach (JObject item in jsonPreservar.Children<JObject>())
-                    {
-                        // estos datos vienen de la grilla, creamosla entidad para añadir al listado
-                        Servicios_dto entidad = new Servicios_dto();
-                        entidad.ID = int.Parse(item["ID"].ToString());
-                        entidad.Descripción = item["Descripción"].ToString();
-                        entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
-                        entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
-                        entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
-
-                        total = total + decimal.Parse(entidad.Total);
-
-                        list_serv.Add(entidad);
-                        if (id_serv == item["ID"].ToString())
-                        {
-                            existe = true;
-                            
-                        }
-                    }
-                    
-                }
-
-                if (existe)
-                {
-                    MessageBox.Show(" El Servicio : " + cmb_servicio_Vta.Text + " ya existe en el listado");
+                    MessageBox.Show("Debe seleccionar un servicio");
                 }
                 else
                 {
-                    DataTable respuesta = Serv_Neg.Buscar_SERV_id(id_serv);
-                    foreach (DataRow item in respuesta.Rows)
-                    {
-                        Servicios_dto entidad = new Servicios_dto();
-                        entidad.ID = int.Parse(item["ID_SERVICIO"].ToString());
-                        entidad.Descripción = item["DESC_SERVICIO"].ToString();
-                        entidad.Cantidad = cantidad_serv;
-                        entidad.Precio = decimal.Parse(item["VALOR_SERVICIO"].ToString()).ToString("n2");
-                        entidad.Total = (decimal.Parse(item["VALOR_SERVICIO"].ToString()) * cantidad_serv).ToString("n2");
+                    bool existe = false;
+                    string id_serv = cmb_servicio_Vta.SelectedValue.ToString();
+                    int cantidad_serv = int.Parse(txt_Cant_servicios.Text);
+                    string txt_tipo = "S";
+                    decimal subT = 0;
+                    decimal IVA = 0;
 
-                        total = total + decimal.Parse(entidad.Total);
-                        list_serv.Add(entidad);
+                    // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
+                    if (Application.Current.Properties["ListadoVenta"] != null)
+                    {
+                        // trae lo que esta en la variable de sesion
+                        var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoVenta"].ToString());
+
+                        // lo convierte en un array
+                        JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                        //lo recorre para añadir al listado que luego se mostrará en la grilla
+                        foreach (JObject item in jsonPreservar.Children<JObject>())
+                        {
+                            // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+                            Servicios_dto entidad = new Servicios_dto();
+
+                            entidad.ID = int.Parse(item["ID"].ToString());
+                            entidad.Descripción = item["Descripción"].ToString();
+                            entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
+                            entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
+                            entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
+                            entidad.T = item["T"].ToString();
+
+
+                            if (cmb_Documento_Vta.Text == "Factura")
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+                            else
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+
+                            list_serv.Add(entidad);
+                            if (id_serv == item["ID"].ToString() && item["T"].ToString() == "S")
+                            {
+                                existe = true;
+
+                            }
+                        }
+
                     }
+
+                    if (existe)
+                    {
+                        MessageBox.Show(" El Servicio : " + cmb_servicio_Vta.Text + " ya existe en el listado");
+                    }
+                    else
+                    {
+                        DataTable respuesta = Serv_Neg.Buscar_SERV_id(id_serv);
+                        foreach (DataRow item in respuesta.Rows)
+                        {
+                            Servicios_dto entidad = new Servicios_dto();
+
+
+                            entidad.ID = int.Parse(item["ID_SERVICIO"].ToString());
+                            entidad.Descripción = item["DESC_SERVICIO"].ToString();
+                            entidad.Cantidad = cantidad_serv;
+                            entidad.Precio = decimal.Parse(item["VALOR_SERVICIO"].ToString()).ToString("n2");
+                            entidad.Total = (decimal.Parse(item["VALOR_SERVICIO"].ToString()) * cantidad_serv).ToString("n2");
+                            entidad.T = txt_tipo;
+
+
+                            if (cmb_Documento_Vta.Text == "Factura")
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+                            else
+                            {
+                                subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                                IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                                total = total + decimal.Parse(entidad.Total);
+                            }
+                            list_serv.Add(entidad);
+                        }
+
+                    }
+
+                    // actualiza variable de sesion con los datos actuales de la grilla
+                    var jsonValueToSave = JsonConvert.SerializeObject(list_serv);
+                    Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
+
+
+                    txt_Sub.Text = subT.ToString("n2");
+                    txt_iva.Text = IVA.ToString("n2");
+                    txt_total.Text = total.ToString("n2");
+                    Dt_G_list_pedido.ItemsSource = list_serv;
 
                 }
 
-                // actualiza variable de sesion con los datos actuales de la grilla
-                var jsonValueToSave = JsonConvert.SerializeObject(list_serv);
-                Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
-
-                txt_total.Text = total.ToString("n2");
-                Dt_G_list_pedido.ItemsSource = list_serv;
+                limpiar();
 
             }
-
-            limpiar();
+            
         }
 
         private void Btn_Eliminar_Servi_Click(object sender, RoutedEventArgs e)
@@ -374,6 +639,7 @@ namespace Taller_Escritorio_wpf
             if (cmb_servicio_Vta.Text == "")
             {
                 MessageBox.Show("Debe seleccionar un servicio");
+                limpiar();
             }
             else
             {
@@ -381,6 +647,8 @@ namespace Taller_Escritorio_wpf
                 string id_prod = cmb_servicio_Vta.SelectedValue.ToString();
                 int cantidad_prod = int.Parse(txt_Cant_servicios.Text);
                 decimal total = 0;
+                decimal subT = 0;
+                decimal IVA = 0;
 
                 // Aqui trae lo previamente guardado en la grilla, si la variable se session esta nula no entra
                 if (Application.Current.Properties["ListadoVenta"] != null)
@@ -400,18 +668,38 @@ namespace Taller_Escritorio_wpf
                         entidad.Cantidad = int.Parse(item["Cantidad"].ToString());
                         entidad.Total = decimal.Parse(item["Total"].ToString()).ToString("n2");
                         entidad.Precio = decimal.Parse(item["Precio"].ToString()).ToString("n2");
-                        total = total + decimal.Parse(entidad.Total);
+                        entidad.T = item["T"].ToString();
 
-                        if (id_prod != item["ID"].ToString())
+                        if (cmb_Documento_Vta.Text == "Factura")
                         {
-                            list_serv.Add(entidad);
+                            subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                            IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                            total = total + decimal.Parse(entidad.Total);
                         }
                         else
                         {
+                            subT = ((total + decimal.Parse(entidad.Total)) * 81) / 100;
+                            IVA = ((total + decimal.Parse(entidad.Total)) * 19) / 100;
+                            total = total + decimal.Parse(entidad.Total);
+                        }
+
+                        if (id_prod == item["ID"].ToString() && item["T"].ToString() == "S" )
+                        {
                             eliminado = true;
                             total = total - decimal.Parse(entidad.Total);
+                            
+                        }
+                        else
+                        {
+                            list_serv.Add(entidad);
                         }
                     }
+                    var jsonValueToSave = JsonConvert.SerializeObject(list_serv);
+                    Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
+
+                    txt_Sub.Text = subT.ToString("n2");
+                    txt_iva.Text = IVA.ToString("n2");
+                    txt_total.Text = total.ToString("n2");
 
                     if (eliminado == true)
                     {
@@ -424,12 +712,11 @@ namespace Taller_Escritorio_wpf
                         MessageBox.Show("El Servicio no existe!");
 
                     }
-                    var jsonValueToSave = JsonConvert.SerializeObject(list_serv);
-                    Application.Current.Properties["ListadoVenta"] = jsonValueToSave;
+                    
 
-                    txt_total.Text = total.ToString("n2");
                     Dt_G_list_pedido.ItemsSource = list_serv;
                 }
+                limpiar();
             }
 
         }
@@ -445,28 +732,186 @@ namespace Taller_Escritorio_wpf
             {
                 if (i == sel)
                 {
-                    cmb_servicio_Vta.Text = item["Descripción"].ToString();
-                    txt_descr_producto.Text = item["Descripción"].ToString();
-                    if (cmb_servicio_Vta.Text =="")
-                    {
 
-                        txt_descr_producto.Text = item["Descripción"].ToString();
-                        txt_Cant_producto.Text = item["Cantidad"].ToString();
-                        txt_Cant_servicios.Text = "";
+                    if(item["T"].ToString() == "S")
+                    {
+                        cmb_servicio_Vta.Text = item["Descripción"].ToString();
+                        txt_Cant_servicios.Text = item["Cantidad"].ToString();
+
+                        txt_descr_producto.Text = "";
+                        txt_Cant_producto.Text = "";
+                        txt_stock.Text = "";
+                        txt_id_pro.Text = "";
                     }
                     else
                     {
-                        txt_Cant_servicios.Text = item["Cantidad"].ToString();
-                        txt_descr_producto.Text = "";
-                        txt_Cant_producto.Text = "";
+                        
+                        txt_descr_producto.Text = item["Descripción"].ToString(); ;
+                        txt_Cant_producto.Text = item["Cantidad"].ToString();
+                        txt_id_pro.Text = item["ID"].ToString();
+
+                        cmb_servicio_Vta.SelectedValue = null;
+                        txt_Cant_servicios.Text = "";
                     }
-                    //   txt_Id_producto.Text = item["Producto"].ToString();
-                    //  txt_Sku_producto.Text = item["SKU"].ToString();
                     
                     
                 }
                 i++;
             }
         }
+
+        //////////////////////////////////////
+        /////////////////VENTA////////////////
+        //////////////////////////////////////
+        private void Btn_Generar_venta_Click(object sender, RoutedEventArgs e)
+        {
+            BoletaVenta rpt = new BoletaVenta();
+            VentaHDR dataset = new VentaHDR();
+            ReportDocument doc = new ReportDocument();
+
+
+            string cabecera = "";
+            txt_Id_venta.Text = "";
+            bool restar = false;
+            Producto_Negocio producto_Neg = new Producto_Negocio();
+            Venta_Negocio Venta_Neg = new Venta_Negocio();
+            if (cmb_Cliente_Vta.Text == "" || cmb_Documento_Vta.Text == "")
+            {
+                if (cmb_Cliente_Vta.Text == "" && cmb_Documento_Vta.Text == "")
+                {
+                    MessageBox.Show("Debe seleccionar un cliente y tipo de documento");
+                }
+                else
+                {
+                    if (cmb_Cliente_Vta.Text == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un cliente");
+
+                    }
+                    if (cmb_Documento_Vta.Text == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un tipo de documento");
+
+                    }
+                }
+            }
+            else
+            {
+                if (Application.Current.Properties["ListadoVenta"] == null || Application.Current.Properties["ListadoVenta"].ToString() == "[]")
+                {
+                    MessageBox.Show("Debe ingresar al menos un Producto o Servicio");
+                }
+                else
+                {
+                    cabecera = Venta_Neg.CrearVentaHDR(txt_Fecha_V.Text, txt_iva.Text, txt_total.Text, cmb_Cliente_Vta.SelectedValue.ToString(), cmb_Documento_Vta.SelectedValue.ToString(), cmb_taller_Vta.SelectedValue.ToString());
+
+                    try
+                    {
+
+                        var row = dataset.Tables["VentaHdr"].NewRow();
+                        row["Numero_Doc"] = "N° Documento: " + cabecera;
+                        row["Fecha"] = "Fecha: " + txt_Fecha_V.Text;
+                        row["Tipo_Doc"] = "Tipo Documento: " + cmb_Documento_Vta.Text;
+                        row["Nombre_Cliente"] = "Nombre Cliente: " + cmb_Cliente_Vta.Text;
+                        row["SubTotal"] = "SUBTOTAL $ " + txt_Sub.Text;
+                        row["IVA"] = "IVA $ " + txt_iva.Text;
+                        row["Empresa_Nombre"] = cmb_taller_Vta.Text;
+                        row["Total"] = "TOTAL $ " + txt_total.Text;
+
+                        ///campos en duro para pdf//////
+
+                        row["rut"] =       "RUT: 78.598.553 - 9";
+                        row["giro"] =      "GIRO: Venta Mantenimiento y Reparación de Vehiculos Y sus Partes Piezas Y Accesorios";
+                        row["fono"] =      "FONO: 98758789";
+                        row["direccion"] = "DIRECCIÓN: Tristan Matta 458, San Miguel";
+
+                        row["idp_hdr"]=       "ID";
+                        row["nombrep_hdr"] =  "Descripción";
+                        row["tipo_hdr"] =     "Tipo";
+                        row["cantidad_hdr"] = "Cantidad";
+                        row["precio_hdr"] =   "Precio";
+                        row["total_hdr"] =    "Total";
+                        ///////////////////////////////////////////
+                        ///
+                        dataset.Tables["VentaHdr"].Rows.Add(row);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw ex;
+                    }
+                    if (Application.Current.Properties["ListadoVenta"] != null)
+                    {
+                        // trae lo que esta en la variable de sesion77k
+                        var jsonValueToGet = JsonConvert.DeserializeObject(Application.Current.Properties["ListadoVenta"].ToString());
+
+                        // lo convierte en un array
+                        JArray jsonPreservar = JArray.Parse(jsonValueToGet.ToString());
+
+                        //lo recorre para añadir al listado que luego se mostrará en la grilla
+                        foreach (JObject item in jsonPreservar.Children<JObject>())
+                        {
+                            var precio = Math.Round(decimal.Parse(item["Precio"].ToString()), 0).ToString().Replace(".", "");
+                            var total = Math.Round(decimal.Parse(item["Total"].ToString()), 0).ToString().Replace(".", "");
+
+
+                            // estos datos vienen de la grilla, creamosla entidad para añadir al listado
+                            var respuesta = Venta_Neg.CrearVentaDet(item["Cantidad"].ToString(), precio, cabecera, total, item["T"].ToString(), item["ID"].ToString());
+                            if (item["T"].ToString() == "P")
+                            {
+                                restar = producto_Neg.Restar_cant_prod(item["ID"].ToString(),
+                                                item["Cantidad"].ToString());
+                            }
+
+                            var rowlist = dataset.Tables["Venta_DT"].NewRow();
+
+                            rowlist["Descripcion"] = item["Descripción"].ToString();
+                            rowlist["Id_Prod_Serv"] = item["ID"].ToString();
+                            // rowlist["SKU"] = ;
+                            rowlist["Tipo"] = item["T"].ToString();
+                            rowlist["Cantidad"] = item["Cantidad"].ToString();
+                            rowlist["Precio"] = item["Precio"].ToString();
+                            rowlist["Total_Prod_Serv"] = item["Total"].ToString();
+
+                            dataset.Tables["Venta_DT"].Rows.Add(rowlist);
+
+                        }
+
+                        txt_Id_venta.Text = cabecera;
+                        MessageBox.Show("Venta generado con el Numero: " + txt_Id_venta.Text);
+                    }
+
+                    string reporte = "BoletaVenta.rpt";
+                    string ruta = @"C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\RPT\";
+                    string rutaFinal = ruta + reporte;
+                    doc.Load(rutaFinal);
+                    doc.SetDataSource(dataset);
+                    try
+                    {
+                        string nombreDoc = "Documento_Venta" + cabecera + DateTime.Now.Millisecond + ".pdf";
+                        string rutaGuardar = @"C:\RPT\" + nombreDoc;
+                        doc.ExportToDisk(ExportFormatType.PortableDocFormat, rutaGuardar);
+                        Process.Start(rutaGuardar);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw ex;
+                    }
+
+                }
+            }
+        }
+
+        private void Btn_Nueva_Vta_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_Cancelar_Vta_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

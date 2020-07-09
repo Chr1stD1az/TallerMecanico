@@ -86,10 +86,15 @@
             </Rectangle>
             <Label x:Name="label2" Content="Informe de venta productos" Grid.Column="1" HorizontalAlignment="Left" Margin="515,406,0,-370" VerticalAlignment="Top" Width="299" FontWeight="Bold" FontSize="18" Height="34" Background="{x:Null}" Foreground="#FF2C7873" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="cmb_Tipo_Doc_info_vta" materialDesign:HintAssist.Hint="Tipo de Documento" materialDesign:HintAssist.IsFloating="True" Margin="302,431,343,-401" Height="40" Grid.Column="1" />
-            <ComboBox x:Name="cmb_Servicio_info_vta" materialDesign:HintAssist.Hint="Servicios" materialDesign:HintAssist.IsFloating="True" Margin="462,431,104,-401" Height="40" Grid.Column="1" />
+            <ComboBox x:Name="cmb_familiaProd_info_vta" materialDesign:HintAssist.Hint="Familia Producto" materialDesign:HintAssist.IsFloating="True" Margin="462,431,104,-401" Height="40" Grid.Column="1" />
             <DatePicker x:Name="txt_Fecha_ini_Venta" materialDesign:HintAssist.Hint="Fecha Inicial" Grid.Column="1" Margin="720,442,280,-400.6" Height="29" Grid.ColumnSpan="2" />
             <Label x:Name="label4" Content=" -" Grid.Column="2" HorizontalAlignment="Left" Margin="16.8,447,0,-400.6" VerticalAlignment="Top" RenderTransformOrigin="-0.458,6.637" Height="24" Width="18"/>
             <DatePicker x:Name="txt_Fecha_Final_Venta" materialDesign:HintAssist.Hint="Fecha Final" Grid.Column="2" Margin="39.8,442,176,-400.6" Height="29" />
+            <Grid Grid.Row="2">
+                <materialDesign:PackIcon Kind="Search" Height="34" Width="33" Margin="1041,436,-954,-400" />
+                <Button  x:Name="Btn_Busca_Vent_info" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="33" Height="33"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,436,-954,-400" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Btn_Busca_Vent_info_Click"/>
+
+            </Grid>
             <Grid Grid.Row="2">
                 <materialDesign:PackIcon Kind="MicrosoftExcel" Height="40" Width="40" Margin="1121,650,-1041,-619.6" Foreground="#FF188249" />
                 <Button  x:Name="Btn_Gene_Excel_Vta" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="40" Height="Auto"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,650,-1041,-619.6" BorderBrush="Black" HorizontalAlignment="Right" Click="Btn_Gene_Excel_Vta_Click"  >

@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Taller_Datos;
 
 namespace Taller_Negocio
 {
     public class Cliente_Negocio
     {
-
         public bool CrearCliente(string rut_cliente, string dv_cliente, string p_nombre_cliente, string s_nombre_cliente,
             string p_apellido_cliente, string s_apellido_cliente, string direccion_cliente, string numeracion_cliente, string dept_cliente,
             string fono_cliente, string correo_cliente, string fiado, string nombre_usu_cliente, string contrasena_cliente, string id_tipo_cliente,
@@ -89,6 +85,32 @@ namespace Taller_Negocio
             return dataTable;
         }
 
+        public List<Cliente_dto> ListarClienteCMB()
+        {
+            OracleComand exec = new OracleComand();
+
+            List<Cliente_dto> retorno = new List<Cliente_dto>();
+
+            try
+            {
+                var Parameters = new Dictionary<string, string>();
+                DataTable dataTable = new DataTable();
+                exec.ExecStoredProcedure("SP_DDL_LISTAR_CLIENTE", dataTable, Parameters);
+                foreach (DataRow rows in dataTable.Rows)
+                {
+                    Cliente_dto entidad = new Cliente_dto();
+                    entidad.id_cliente = int.Parse(rows["ID_CLIENTE"].ToString());
+                    entidad.nombre_cliente = rows["P_NOMBRE_CLIENTE"].ToString() + " " + rows["P_APELLIDO_CLIENTE"].ToString();
+                    retorno.Add(entidad);
+                    entidad = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
 
     }
 }

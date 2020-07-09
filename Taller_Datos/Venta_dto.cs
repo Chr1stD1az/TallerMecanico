@@ -8,6 +8,7 @@ namespace Taller_Datos
 {
     public class Venta_dto
     {
+        public string T { get; set; }
         public int ID { get; set; }
         public string SKU { get; set; }
         public string Descripción { get; set; }

@@ -48,12 +48,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cargo_dto.cs" />
+    <Compile Include="Cliente_dto.cs" />
     <Compile Include="Comuna_dto.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="DataSet\VentaHDR.cs">
+      <DependentUpon>VentaHDR.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet\VentaHDR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentaHDR.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Detalle_Pedido_dto.cs" />
     <Compile Include="empleado_dto.cs" />
     <Compile Include="Estado_Pedido_dto.cs" />
     <Compile Include="Familia_Prod_dto.cs" />
+    <Compile Include="Info_Venta_dto.cs" />
     <Compile Include="Inf_pedido_dto.cs" />
     <Compile Include="OracleComand.cs" />
     <Compile Include="Producto_dto.cs" />
@@ -69,6 +79,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DataSet\VentaHDR.xsc">
+      <DependentUpon>VentaHDR.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet\VentaHDR.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VentaHDR.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet\VentaHDR.xss">
+      <DependentUpon>VentaHDR.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

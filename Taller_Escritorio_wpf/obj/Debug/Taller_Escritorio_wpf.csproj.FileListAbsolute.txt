@@ -131,3 +131,5 @@ C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\bin\Debug\ShockwaveFlashObjects.dll
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\CrystalReport.g.cs
 C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\CrystalReport.baml
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloPagare.g.cs
+C:\Users\Diaz-Olivares\Documents\Proyectos\TallerMecanico\Taller_Escritorio_wpf\obj\Debug\ModuloPagare.baml

@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Detalle_Pedido_dto.cs" />
     <Compile Include="empleado_dto.cs" />
+    <Compile Include="EstadoDeuda_dto.cs" />
     <Compile Include="Estado_Pedido_dto.cs" />
     <Compile Include="Familia_Prod_dto.cs" />
     <Compile Include="Info_Venta_dto.cs" />

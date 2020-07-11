@@ -122,7 +122,7 @@
             <Button x:Name="Btn_Generar_venta" Content="GENERAR VENTA" Height="60" Background="#FF5AC1CB" Foreground="#DDFFFFFF" Click="Btn_Generar_venta_Click" />
         </StackPanel>
         <StackPanel Height="60" Margin="60,559.2,900,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.645,0.91" Grid.Row="2">
-            <Button x:Name="Btn_Cancelar_Vta" Content="Cancelar venta" Height="60" Background="#FFCB5A5A" Foreground="#DDFFFFFF" FontWeight="Bold" Click="Btn_Cancelar_Vta_Click" />
+            <Button x:Name="Btn_pagare_Vta" Content="Module Pagare" Height="60" Background="#FFCB5A5A" Foreground="#DDFFFFFF" FontWeight="Bold" Click="Btn_pagare_Vta_Click"  />
         </StackPanel>
         <StackPanel Height="59" Margin="60,480.2,904,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
             <Button x:Name="Btn_Nueva_Vta" Content="Nueva venta" Height="59" Background="#FF51B06D" Foreground="#DDFFFFFF" FontWeight="Bold" BorderBrush="#FF4CAF50" Click="Btn_Nueva_Vta_Click" Margin="0,0,-4,0" />

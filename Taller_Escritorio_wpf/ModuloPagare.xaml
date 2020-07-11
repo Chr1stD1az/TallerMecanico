@@ -1,0 +1,89 @@
+﻿<Window x:Class="Taller_Escritorio_wpf.ModuloPagare"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Taller_Escritorio_wpf"
+        mc:Ignorable="d"
+        Title="ModuloPagare" Height="800" Width="1200" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Grid>
+                <materialDesign:ColorZone Mode="Accent" Background="#FF004445">
+                    <StackPanel HorizontalAlignment="Right">
+                        <Button Width="30" Height="30" materialDesign:ShadowAssist.ShadowDepth="Depth3" Padding="0" Click="BotonCerrar_Click" OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" >
+                            <materialDesign:PackIcon Kind="WindowClose"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:ColorZone>
+                <Grid Grid.Row="2">
+                    <Button  x:Name="Btn_minimizar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  Height="30" Width="30" Margin="1136,0,34,0.4" Padding="0"   OpacityMask="White" BorderBrush="#FF609152" Background="#FF004445" Foreground="White" Click="Btn_minimizar_Click"  >
+                        <materialDesign:PackIcon Kind="WindowMinimize"   />
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="261*"/>
+                <ColumnDefinition Width="99*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone Mode="Accent" Foreground="Black" OpacityMask="Black" BorderBrush="Black" Background="#FF2C7873" Grid.ColumnSpan="3" Height="100">
+                <TextBlock FontSize="35" VerticalAlignment="Bottom" Margin="62,0,0,30" Foreground="White" FontWeight="Bold" Text="Modulo Fiados">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </materialDesign:ColorZone>
+            <Rectangle HorizontalAlignment="Left" Height="576" Margin="220,100,0,-606" Stroke="#FF232222" VerticalAlignment="Top" Width="838" Grid.Column="1" Grid.ColumnSpan="2">
+                <Rectangle.Effect>
+                    <BlurEffect/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Label x:Name="label1" Content="Ventas con pagare" Grid.Column="1" HorizontalAlignment="Left" Margin="518,125,0,-89" VerticalAlignment="Top" Width="242" FontWeight="Bold" FontSize="18" Height="34" Background="{x:Null}" Foreground="#FF2C7873"/>
+            <ComboBox x:Name="cmb_estado_deuda" materialDesign:HintAssist.Hint="Estado" materialDesign:HintAssist.IsFloating="True" Margin="600,290,61,-260" Height="40" Grid.Column="1" />
+            <Grid Grid.Row="2">
+                <materialDesign:PackIcon Kind="Search" Height="34" Width="33" Margin="560,296,-473,-260" RenderTransformOrigin="1.061,-0.956" />
+                <Button  x:Name="Btn_venta_deuda" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="" Width="34" Height="33"  FontWeight="Bold" Background="{x:Null}" FontSize="16"  Margin="0,296,-474,-260" BorderBrush="{x:Null}" HorizontalAlignment="Right" Click="Btn_venta_deuda_Click"   />
+            </Grid>
+
+            <StackPanel Height="62" Margin="793,561.2,158,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
+                <Button x:Name="Btn_Generar_Ped" Content="GENERAR PEDIDO" Height="58" Margin="10,0,-1.2,0" Background="#FF5AC1CB" Foreground="#DDFFFFFF" />
+            </StackPanel>
+            <TextBox x:Name="txt_idventa" materialDesign:HintAssist.Hint=" ID VENTA" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="340,288,363,-260" SpellCheck.IsEnabled="True" Grid.Column="1"/>
+            <TextBox x:Name="txt_id_fiado" materialDesign:HintAssist.Hint=" ID FIADO" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="340,228,363,-200" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+            <TextBox x:Name="txt_cliente" materialDesign:HintAssist.Hint=" CLIENTE" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="340,388,224,-360" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+            <TextBox x:Name="txt_rut" materialDesign:HintAssist.Hint=" RUT" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="580,388,103,-360" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+            <TextBox x:Name="txt_fono" materialDesign:HintAssist.Hint="FONO" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="580,449,104,-421" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False" RenderTransformOrigin="0.51,0.369"/>
+            <TextBox x:Name="txt_correo" materialDesign:HintAssist.Hint="CORREO" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="340,449,224,-421" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+
+            <TextBox x:Name="txt_fecha" materialDesign:HintAssist.Hint=" FECHA" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="500,288,203,-260" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False"/>
+            <TextBox x:Name="txt_monto" materialDesign:HintAssist.Hint=" MONTO DEUDA" materialDesign:HintAssist.IsFloating="True" CaretBrush="#FF609152" SelectionBrush="#FF609152" Margin="741,282,179,-260" SpellCheck.IsEnabled="True" Grid.Column="1" IsEnabled="False" Grid.ColumnSpan="2" Foreground="#FF08AC00" FontWeight="Bold" FontSize="16"/>
+        </Grid>
+        <Button  x:Name="Btn_Menu" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="  Menú Principal" Width="236" Height="Auto"  FontWeight="Bold" Background="#FFF0EAEA" FontSize="16" Margin="0,47,904,575" BorderBrush="{x:Null}" HorizontalAlignment="Right"  Grid.Row="2" Click="Btn_Menu_Click" />
+        <materialDesign:PackIcon Kind="Home" Height="58" Width="56" Margin="60,58,0,0" RenderTransformOrigin="0.764,0.471" Grid.Row="2" />
+
+        <StackPanel Height="62" Margin="650,471,300,0" VerticalAlignment="Top" Background="#FFFAFDFF"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
+            <Button x:Name="Btn_confirmar_cam" Content="CONFIRMAR PAGO" Height="58" Margin="10,0,-1,0" Background="#FF5AC1CB" Foreground="#DDFFFFFF" Click="Btn_confirmar_cam_Click" />
+        </StackPanel>
+
+
+
+        <Grid  HorizontalAlignment="Left" Height="30" Margin="0,660.2,0,0" VerticalAlignment="Top" Width="1100" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="  Taller Mecánico ServiExpress" FontSize="18" VerticalAlignment="Bottom"  Foreground="#FF858983" FontWeight="Bold" Background="#FFFFD800" Height="31" Margin="0,-1,-97,0"/>
+        </Grid>
+
+    </Grid>
+</Window>

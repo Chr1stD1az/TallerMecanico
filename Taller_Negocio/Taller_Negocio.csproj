@@ -45,6 +45,7 @@
     <Compile Include="Cliente_Negocio.cs" />
     <Compile Include="Compartido_Negocio.cs" />
     <Compile Include="Comuna_Negocio.cs" />
+    <Compile Include="Deuda_Negocio.cs" />
     <Compile Include="Empleado_Negocio.cs" />
     <Compile Include="Generar_Pedido_Negocio.cs" />
     <Compile Include="Info_Venta_Negocio.cs" />

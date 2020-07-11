@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Media3D;
 using Taller_Datos;
 using Taller_Datos.DataSet;
 using Taller_Escritorio_wpf.RPT;
@@ -775,6 +776,7 @@ namespace Taller_Escritorio_wpf
             bool restar = false;
             Producto_Negocio producto_Neg = new Producto_Negocio();
             Venta_Negocio Venta_Neg = new Venta_Negocio();
+            Deuda_Negocio deudaN = new Deuda_Negocio();
             if (cmb_Cliente_Vta.Text == "" || cmb_Documento_Vta.Text == "")
             {
                 if (cmb_Cliente_Vta.Text == "" && cmb_Documento_Vta.Text == "")
@@ -804,6 +806,11 @@ namespace Taller_Escritorio_wpf
                 else
                 {
                     cabecera = Venta_Neg.CrearVentaHDR(txt_Fecha_V.Text, txt_iva.Text, txt_total.Text, cmb_Cliente_Vta.SelectedValue.ToString(), cmb_Documento_Vta.SelectedValue.ToString(), cmb_taller_Vta.SelectedValue.ToString());
+                    if (cmb_Documento_Vta.Text == "Pagare")
+                    {
+                        string estadodeduda = "1";
+                        deudaN.CrearDeuda(txt_Fecha_V.Text, estadodeduda, txt_total.Text, cabecera, cmb_Cliente_Vta.SelectedValue.ToString());
+                    }
 
                     try
                     {
@@ -905,13 +912,16 @@ namespace Taller_Escritorio_wpf
 
         private void Btn_Nueva_Vta_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            ModuloVenta ventana = new ModuloVenta();
+            ventana.ShowDialog();
         }
 
-        private void Btn_Cancelar_Vta_Click(object sender, RoutedEventArgs e)
+        private void Btn_pagare_Vta_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            ModuloPagare ventana = new ModuloPagare();
+            ventana.ShowDialog();
         }
-
     }
 }

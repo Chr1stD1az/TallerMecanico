@@ -800,7 +800,7 @@ namespace Taller_Escritorio_wpf
                     string lastL = DateTime.Now.ToString("dd/MM/yyyy");
                     int superU = 0;
                     int staff = 0;
-                    int active = 0;
+                    int active = 1;
                     string datej = DateTime.Now.ToString("dd/MM/yyyy");
                     provNeg.CrearProveedorWEB(passw, lastL, string.Format(superU.ToString()), username, Txt_Giro.Text, Txt_Razon_S_.Text, Txt_Correo_P.Text, string.Format(staff.ToString()), string.Format(active.ToString()), datej);
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

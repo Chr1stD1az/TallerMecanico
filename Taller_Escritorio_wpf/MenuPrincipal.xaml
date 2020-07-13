@@ -45,6 +45,11 @@
             </materialDesign:ColorZone>
         </Grid>
         <Grid Grid.Row="2">
+            <Button  x:Name="BTN_CerrarSesion" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="   Cerrar Sesión" Width="157" Height="Auto"  FontWeight="Bold" Background="#FFDE6161" FontSize="16"  Margin="0,600,10,46" HorizontalAlignment="Right" Foreground="#DDFFFFFF" Click="BTN_CerrarSesion_Click" />
+            <materialDesign:PackIcon Kind="CloseCircle" Height="30" Width="32" Margin="1038,612,0,0" Foreground="#FFFFF8F8"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
             <Button  x:Name="BTN_Administrador" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="   Administrador" Width="259" Height="80"  FontWeight="Bold" Background="#FF6FB98F" FontSize="16" Click="BTN_Administrador_Click" Margin="0,61,878,559" HorizontalAlignment="Right" />
             <materialDesign:PackIcon Kind="AccountCog" Height="77" Width="58" Margin="82,61,0,0"/>
         </Grid>
@@ -63,11 +68,11 @@
             </Label.Effect>
         </Label>
         <Grid Grid.Row="4">
-            <Button  x:Name="BTN_modVenta" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="        Modulo de Venta" Width="260" Height="80"  FontWeight="Bold"  FontSize="16" Click="BTN_modVenta_Click" Margin="0,541,878,79" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  />
+            <Button  x:Name="BTN_modVenta" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content="        Módulo de Venta" Width="260" Height="80"  FontWeight="Bold"  FontSize="16" Click="BTN_modVenta_Click" Margin="0,541,878,79" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  />
             <materialDesign:PackIcon Kind="CashMultiple" Height="80" Width="60" Margin="79,541,0,0"/>
         </Grid>
         <Grid Grid.Row="4">
-            <Button  x:Name="BTN_Informes" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content=" Informes/Estadisticas" Width="260" Height="80"  FontWeight="Bold"  FontSize="16"  Margin="0,420,879,200" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Right" Background="#FF6FB98F" Click="BTN_Informes_Click"  >
+            <Button  x:Name="BTN_Informes" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  Content=" Informes" Width="260" Height="80"  FontWeight="Bold"  FontSize="16"  Margin="0,420,879,200" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" Background="#FF6FB98F" Click="BTN_Informes_Click"  >
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" ScaleX="1"/>

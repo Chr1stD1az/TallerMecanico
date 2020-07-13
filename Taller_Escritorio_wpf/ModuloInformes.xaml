@@ -124,9 +124,7 @@
         <StackPanel Height="58" Margin="60,561.2,901,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.649,0.76" Grid.Row="2">
             <Button x:Name="Btn_Mod_Informes" Content="MODULO INFORMES" Height="58" Background="#FF6FB98F" Foreground="#DDFFFFFF" FontWeight="Bold" Margin="0,0,0.2,0" />
         </StackPanel>
-        <StackPanel Height="60" Margin="60,480.2,901,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.494,0.541" Grid.Row="2">
-            <Button x:Name="Btn_Mod_Estadisticas" Content="MODULO ESTADISTICAS" Height="60" Background="#FF6FB98F" Foreground="#DDFFFFFF" FontWeight="Bold" Margin="0,0,0.2,0" />
-        </StackPanel>
+        <StackPanel Height="60" Margin="60,480.2,901,0" VerticalAlignment="Top" Background="#FFFFFCFA"  RenderTransformOrigin="0.494,0.541" Grid.Row="2"/>
 
         <Grid  HorizontalAlignment="Left" Height="30" Margin="0,660.2,0,0" VerticalAlignment="Top" Width="1100" Grid.Row="2">
             <Grid.ColumnDefinitions>

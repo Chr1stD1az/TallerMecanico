@@ -14,6 +14,5 @@ namespace Taller_Datos
         public string Nombre { get; set; }
         public int Cantidad { get; set; }
         public int Total { get; set; }
-
     }
 }

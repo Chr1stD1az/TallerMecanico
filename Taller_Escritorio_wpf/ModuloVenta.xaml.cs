@@ -29,6 +29,13 @@ namespace Taller_Escritorio_wpf
             cmb_taller_Vta.SelectedValue = 1;
             Application.Current.Properties["ListadoVenta"] = null;
             txt_Fecha_V.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            if (Application.Current.Properties["Perfil"].ToString() == "2")
+            {
+                Btn_Generar_venta.IsEnabled = false;
+
+
+            }
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -830,7 +837,7 @@ namespace Taller_Escritorio_wpf
                         row["rut"] =       "RUT: 78.598.553 - 9";
                         row["giro"] =      "GIRO: Venta Mantenimiento y Reparación de Vehiculos Y sus Partes Piezas Y Accesorios";
                         row["fono"] =      "FONO: 98758789";
-                        row["direccion"] = "DIRECCIÓN: Tristan Matta 458, San Miguel";
+                        row["direccion"] = "DIRECCIÓN: Alonso de Ovale 1586 , Santiago Centro";
 
                         row["idp_hdr"]=       "ID";
                         row["nombrep_hdr"] =  "Descripción";

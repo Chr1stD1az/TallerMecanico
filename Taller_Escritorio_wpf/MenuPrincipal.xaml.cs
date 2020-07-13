@@ -23,6 +23,12 @@ namespace Taller_Escritorio_wpf
         {
             InitializeComponent();
             lblSaludo.Content = "Bienvenid@ " + Application.Current.Properties["NombreUsuario"].ToString();
+            if (Application.Current.Properties["Perfil"].ToString() == "2")
+            {
+                BTN_Administrador.IsEnabled = false;
+                BTN_admPedido.IsEnabled = false;
+
+            }
         }
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -49,7 +55,9 @@ namespace Taller_Escritorio_wpf
 
         private void BTN_modReservas_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            ModuloReserva ventana = new ModuloReserva();
+            ventana.ShowDialog();
         }
 
         private void BTN_modVenta_Click(object sender, RoutedEventArgs e)
@@ -69,6 +77,13 @@ namespace Taller_Escritorio_wpf
         private void Btn_minimizar_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void BTN_CerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MainWindow ventana = new MainWindow();
+            ventana.ShowDialog();
         }
     }
 }

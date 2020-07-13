@@ -794,16 +794,6 @@ namespace Taller_Escritorio_wpf
 
                 if (resultado)
                 {
-                    //WEB//////////////////////////////////////////////////////////////////////////////////
-                    string passw = "pbkdf2_sha256$180000$H4OS2un2GD4E$+am++22Sn/Azd0V62FZ3M593/+R0njKTNeLl0PAoh8I=";
-                    string username = Txt_Rut_Proveedor.Text + "-" + Txt_Dv_Proveedor.Text;
-                    string lastL = DateTime.Now.ToString("dd/MM/yyyy");
-                    int superU = 0;
-                    int staff = 0;
-                    int active = 1;
-                    string datej = DateTime.Now.ToString("dd/MM/yyyy");
-                    provNeg.CrearProveedorWEB(passw, lastL, string.Format(superU.ToString()), username, Txt_Giro.Text, Txt_Razon_S_.Text, Txt_Correo_P.Text, string.Format(staff.ToString()), string.Format(active.ToString()), datej);
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     MessageBox.Show("Proveedor creado");
                    
                 }

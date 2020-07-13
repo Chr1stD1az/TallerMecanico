@@ -109,6 +109,9 @@
     <Compile Include="ModuloPagare.xaml.cs">
       <DependentUpon>ModuloPagare.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModuloReserva.xaml.cs">
+      <DependentUpon>ModuloReserva.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModuloVenta.xaml.cs">
       <DependentUpon>ModuloVenta.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModuloPedido.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuloReserva.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

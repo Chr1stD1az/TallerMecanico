@@ -87,39 +87,5 @@ namespace Taller_Negocio
             return dataTable;
         }
 
-        public bool CrearProveedorWEB( string PASSWORD, string LAST_LOGIN, string IS_SUPERUSER, string USERNAME, string FIRST_NAME,
-           string LAST_NAME, string EMAIL, string IS_STAFF, string IS_ACTIVE, string DATE_JOINED)
-        {
-
-            OracleComand exec = new OracleComand();
-            Compartido_Negocio compartido = new Compartido_Negocio();
-            bool respuesta = false;
-            var Parameters = new Dictionary<string, string>();
-            try
-            {
-                DateTime.Parse(LAST_LOGIN).ToString("dd/MM/yyyy");
-                DateTime.Parse(DATE_JOINED).ToString("dd/MM/yyyy");
-                Parameters.Add("v_PASSWORD", PASSWORD); 
-                Parameters.Add("v_LAST_LOGIN", LAST_LOGIN.ToString());
-                Parameters.Add("v_IS_SUPERUSER", IS_SUPERUSER.ToString()); 
-                Parameters.Add("v_USERNAME", USERNAME);
-                Parameters.Add("v_FIRST_NAME", FIRST_NAME);
-                Parameters.Add("v_LAST_NAME", LAST_NAME);
-                Parameters.Add("v_EMAIL", EMAIL);
-                Parameters.Add("v_IS_STAFF", IS_STAFF.ToString());
-                Parameters.Add("v_IS_ACTIVE", IS_ACTIVE.ToString());
-                Parameters.Add("v_DATE_JOINED", DATE_JOINED.ToString());
-                exec.ExecStoredProcedure("SP_CREAR_PROVEEDORWeb", Parameters);
-                respuesta = true;
-            }
-
-            catch (Exception e)
-            {
-                string mensaje = e.Message.ToString();
-                respuesta = false;
-            }
-            return respuesta;
-        }
-
     }
 }

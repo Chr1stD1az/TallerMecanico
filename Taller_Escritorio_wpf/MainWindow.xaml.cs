@@ -25,6 +25,8 @@ namespace Taller_Escritorio_wpf
         public MainWindow()
         {
             InitializeComponent();
+            Application.Current.Properties["NombreUsuario"] = null;
+            Application.Current.Properties["Perfil"] = null;
         }
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -50,6 +52,7 @@ namespace Taller_Escritorio_wpf
                 foreach (DataRow resp in item.Rows)
                 {
                     Application.Current.Properties["NombreUsuario"] = resp["p_nombre_empleado"].ToString() + " " + resp["p_apellido_empleado"].ToString();
+                    Application.Current.Properties["Perfil"] = resp["id_cargo"].ToString();
                 }
 
                 this.Hide();
